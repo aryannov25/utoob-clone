@@ -1,7 +1,16 @@
-import "./App.css";
+import "./index.css";
+import Head from "./components/Head";
+import Body from "./components/Body";
 
-function App() { 
-  return <div className="text-center font-bold">YOUTUBE CLONE</div>;
+function App() {
+  return (
+    <>
+      <div>
+        <Head />
+        <Body />
+      </div>
+    </>
+  );
 }
 
 export default App;
