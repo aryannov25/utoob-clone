@@ -11,7 +11,7 @@ function Head() {
       </div>
       <div className="col-span-10 text-center">
         <input className="w-1/2 p-1 border border-gray-400" type="text" />
-        <button className="p-1  border border-gray-400">Search</button>
+        <button className="p-1 px-2 border border-gray-400"><i class="fa fa-search"></i></button>
       </div>
       <div className="col-span-1">
         <img
