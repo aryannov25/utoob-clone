@@ -1,16 +1,14 @@
 import React from "react";
 
 const VideoCard = ({ info }) => {
-  console.log(info);
+    console.log(info);
 
   const { snippet, statistics } = info;
   const { channelTitle, title, thumbnails } = snippet;
 
   return (
-    <div className="flex">
-      <div>
-        <img src={thumbnails.default.url} alt="thumbnail" />
-      </div>
+    <div>
+      <img src={thumbnails.medium.url} alt="thumbnail" />
       <ul>
         <li>{title}</li>
         <li>{channelTitle}</li>
