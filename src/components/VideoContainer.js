@@ -16,14 +16,15 @@ const VideoContainer = () => {
     console.log(json.items);
     setVideos(json.items);
   };
-
+  
+//conditional rendering
   if (!videos.length) {
     return <div>Loading...</div>;
   }
 
   return (
     <div className="">
-      <VideoCard info={videos[2]} />
+      <VideoCard info={videos[1]} />
     </div>
   );
 };
