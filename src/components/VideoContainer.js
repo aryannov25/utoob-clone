@@ -16,9 +16,11 @@ const VideoContainer = () => {
     console.log(json.items);
     setVideos(json.items);
   };
+
   if (!videos.length) {
     return <div>Loading...</div>;
   }
+
   return (
     <div className="">
       <VideoCard info={videos[2]} />
