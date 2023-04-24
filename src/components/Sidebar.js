@@ -10,57 +10,57 @@ const Sidebar = () => {
       <ul>
         <Link to={"/"}>
           <li className="py-3 font-bold cursor-pointer">
-            <i class="fa fa-home mr-3" aria-hidden="true"></i> Home
+            <i className="fa fa-home mr-3" aria-hidden="true"></i> Home
           </li>
         </Link>
         <li className="py-3 cursor-pointer">
-          <i class="fa fa-play mr-3" aria-hidden="true"></i> Shorts
+          <i className="fa fa-play mr-3" aria-hidden="true"></i> Shorts
         </li>
         <li className="py-3 cursor-pointer">
-          <i class="fa fa-archive mr-3" aria-hidden="true"></i> Subscriptions
+          <i className="fa fa-archive mr-3" aria-hidden="true"></i> Subscriptions
         </li>
       </ul>
       <h1 className="mt-5 border border-slate-200"><hr/></h1>
       <ul>
         <li className="py-3 cursor-pointer">
-          <i class="fa fa-youtube-play mr-3" aria-hidden="true"></i> Library
+          <i className="fa fa-youtube-play mr-3" aria-hidden="true"></i> Library
         </li>
         <li className="py-3 cursor-pointer">
-          <i class="fa fa-history mr-3" aria-hidden="true"></i> History
+          <i className="fa fa-history mr-3" aria-hidden="true"></i> History
         </li>
         <li className="py-3 cursor-pointer">
-          <i class="fa fa-youtube mr-3" aria-hidden="true"></i> Your videos
+          <i className="fa fa-youtube mr-3" aria-hidden="true"></i> Your videos
         </li>
         <li className="py-3 cursor-pointer">
-          <i class="fa fa-clock-o mr-3" aria-hidden="true"></i> Watch later
+          <i className="fa fa-clock-o mr-3" aria-hidden="true"></i> Watch later
         </li>
         <li className="py-3 cursor-pointer">
-          <i class="fa fa-thumbs-up mr-3" aria-hidden="true"></i> Liked videos
+          <i className="fa fa-thumbs-up mr-3" aria-hidden="true"></i> Liked videos
         </li>
       </ul>
       <h1 className="mt-5 border border-slate-200"><hr/></h1>
       <h1 className="mt-3 font-semibold">Explore</h1>
       <ul>
         <li className="py-3 cursor-pointer">
-          <i class="fa fa-fire mr-3" aria-hidden="true"></i> Trending
+          <i className="fa fa-fire mr-3" aria-hidden="true"></i> Trending
         </li>
         <li className="py-3 cursor-pointer">
-          <i class="fa fa-shopping-bag mr-3" aria-hidden="true"></i> Shopping
+          <i className="fa fa-shopping-bag mr-3" aria-hidden="true"></i> Shopping
         </li>
         <li className="py-3 cursor-pointer">
-          <i class="fa fa-music mr-3" aria-hidden="true"></i> Music
+          <i className="fa fa-music mr-3" aria-hidden="true"></i> Music
         </li>
         <li className="py-3 cursor-pointer">
-          <i class="fa fa-film mr-3" aria-hidden="true"></i> Movies
+          <i className="fa fa-film mr-3" aria-hidden="true"></i> Movies
         </li>
         <li className="py-3 cursor-pointer">
-          <i class="fa fa-podcast mr-3" aria-hidden="true"></i> Live
+          <i className="fa fa-podcast mr-3" aria-hidden="true"></i> Live
         </li>
         <li className="py-3 cursor-pointer">
-          <i class="fa fa-gamepad mr-3" aria-hidden="true"></i> Gaming
+          <i className="fa fa-gamepad mr-3" aria-hidden="true"></i> Gaming
         </li>
         <li className="py-3 cursor-pointer">
-          <i class="fa fa-trophy mr-3" aria-hidden="true"></i> Sports
+          <i className="fa fa-trophy mr-3" aria-hidden="true"></i> Sports
         </li>
       </ul>
     </div>
