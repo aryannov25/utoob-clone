@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { YOUTUBE_API_KEY } from "./../utils/constants";
 import VideoCard from "./VideoCard";
+import { Link } from "react-router-dom";
 
 const VideoContainer = () => {
   const [videos, setVideos] = useState([]);
@@ -16,9 +17,9 @@ const VideoContainer = () => {
     setVideos(json.items);
   };
   return (
-    <div>
-      <VideoCard />
-    </div>
+    <div className=''>
+  <VideoCard info={videos[0]}/>
+  </div>
   );
 };
 
