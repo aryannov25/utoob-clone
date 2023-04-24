@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { YOUTUBE_API_KEY } from "./../utils/constants";
-import VideoCard from './VideoCard';
+import VideoCard from "./VideoCard";
 
 const VideoContainer = () => {
   const [videos, setVideos] = useState([]);
@@ -15,9 +15,11 @@ const VideoContainer = () => {
     console.log(json.items);
     setVideos(json.items);
   };
-  return <div>
-    <VideoCard/>
-  </div>;
+  return (
+    <div>
+      <VideoCard />
+    </div>
+  );
 };
 
 export default VideoContainer;
