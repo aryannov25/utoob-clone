@@ -26,6 +26,7 @@ function Head() {
         <input
           className="w-1/2 p-1 px-4 border border-gray-400 rounded-l-full"
           type="text"
+          placeholder="Search"
         />
         <button className="p-1 px-4 border bg-gray-200 border-gray-400 rounded-r-full">
           <i class="fa fa-search"></i>
