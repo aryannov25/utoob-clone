@@ -1,24 +1,40 @@
 import React from "react";
 import Button from "./Button";
+import { MdChevronLeft,MdChevronRight } from "react-icons/md"
 
 const ButtonList = () => {
+
+  const buttonlist= ["All","Games","Music","Live","Comedy","Movies","Gadgets","News","Musicals","Trending",
+  "Raftaar","Drama","Yo Yo Honey Singh","Theater","Cinema","Reality Shows","Accounting","Motivation","Hip-Hop","Laptops","Technology","New to you","Tailwindcss","Recently uploaded",
+"Leatures","Random Things","Javascript","Bella","Top 50"]
+
+const slideLeft=()=>{
+
+  var slider= document.getElementById("slider")
+  slider.scrollLeft = slider.scrollLeft-500
+
+}
+
+
+const slideRight=()=>{
+
+  var slider= document.getElementById("slider")
+  slider.scrollLeft = slider.scrollLeft+500
+
+}
+
+
   return (
-    <div className="flex ">
-      <Button name="All" />
-      <Button name="Games" />
-      <Button name="Music" />
-      <Button name="Live" />
-      <Button name="Comedy" />
-      <Button name="Gadgets" />
-      <Button name="Raftaar" />
-      <Button name="News" />
-      <Button name="Yo Yo Honey Singh" />
-      <Button name="Javascript" />
-      <Button name="Accounting" />
-      <Button name="Hip Hop" />
-      <Button name="New to you" />
-      <Button name="Recently uploaded" />
-      <Button name="Leatures" />
+    <div className="grid grid-flow-col ">
+      <MdChevronLeft class="hover:scale-150 my-auto opacity-50 " size={30} onClick={slideLeft} aria-hidden="true"/>
+         <div id="slider" className='flex m-3 h-18 overflow-hidden whitespace-nowrap  scrollbar-hide '>
+
+      {buttonlist.map((name)=>(
+        <Button name={name}/>
+      ))}
+      </div>
+      <MdChevronRight class="hover:scale-150 my-auto opacity-50 " size={30} onClick={slideRight} aria-hidden="true"/>
+
     </div>
   );
 };

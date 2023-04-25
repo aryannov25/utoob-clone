@@ -19,12 +19,16 @@ const VideoContainer = () => {
   
 //conditional rendering
   if (!videos.length) {
-    return <div>Loading...</div>;
+    return <div className="text-center">Loading...</div>;
   }
 
   return (
-    <div className="">
-      <VideoCard info={videos[1]} />
+    <div className="flex flex-wrap gap-4 justify-center">
+      {videos.map((video)=>(
+        <VideoCard info={video} />
+
+      ))}
+      
     </div>
   );
 };
