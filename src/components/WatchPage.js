@@ -1,9 +1,15 @@
-import React from 'react'
+import React from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 const WatchPage = () => {
-  return (
-    <div>WatchPage</div>
-  )
-}
+  const dispatch = useDispatch();
 
-export default WatchPage
+  useEffect(() => {
+    
+  }, []);
+
+  return <div>WatchPage</div>;
+};
+
+export default WatchPage;

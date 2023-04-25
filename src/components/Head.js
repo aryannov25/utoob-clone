@@ -24,7 +24,7 @@ function Head() {
           <img className="h-8 mx-2" alt="logo" src={Logo} />
         </a>
       </div>
-      <div className="col-span-10 text-center">
+      <div className="col-span-10 text-center mr-20">
         <input
           className="w-1/2 p-1 px-4 border border-gray-400 rounded-l-full"
           type="text"
@@ -34,7 +34,7 @@ function Head() {
           <i class="fa fa-search"></i>
         </button>
       </div>
-      <div className="col-span-1">
+      <div className="col-span-1 text-end">
         <img
           className="h-8"
           alt="user"
