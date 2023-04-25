@@ -20,7 +20,8 @@ function Head() {
           alt="menu"
           src={HamMenu}
         />
-        <img className="h-8 mx-2" alt="logo" src={Logo} />
+        <a href="/">
+        <img className="h-8 mx-2" alt="logo" src={Logo} /></a>
       </div>
       <div className="col-span-10 text-center">
         <input
