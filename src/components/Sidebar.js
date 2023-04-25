@@ -32,13 +32,13 @@ const Sidebar = () => {
             <i className="fa fa-history mr-3" aria-hidden="true"></i>History
           </li>
           <li className="py-3 cursor-pointer">
-            <i className="fa fa-youtube mr-3" aria-hidden="true"></i>Uploaded
+            <i className="fa fa-youtube mr-3" aria-hidden="true"></i>Your videos
           </li>
           <li className="py-3 cursor-pointer">
             <i className="fa fa-clock-o mr-3" aria-hidden="true"></i>Watch later
           </li>
           <li className="py-3 cursor-pointer">
-            <i className="fa fa-thumbs-up mr-3" aria-hidden="true"></i>Liked
+            <i className="fa fa-thumbs-up mr-3" aria-hidden="true"></i>Liked videos
           </li>
         </ul>
         <hr />
