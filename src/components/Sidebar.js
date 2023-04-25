@@ -6,7 +6,7 @@ const Sidebar = () => {
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
   if (!isMenuOpen) return null;
   return (
-    <div className="p-8  shadow-lg  w-60 bg-white">
+    <div className="p-8 shadow-lg w-full bg-white">
       <ul>
         <Link to={"/"}>
           <li className="py-3 font-bold cursor-pointer">

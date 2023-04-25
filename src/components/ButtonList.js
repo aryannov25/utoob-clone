@@ -27,7 +27,7 @@ const slideRight=()=>{
   return (
     <div className="grid grid-flow-col ">
       <MdChevronLeft class="hover:scale-150 my-auto opacity-50 " size={30} onClick={slideLeft} aria-hidden="true"/>
-         <div id="slider" className='flex m-3 h-18 overflow-hidden whitespace-nowrap  scrollbar-hide '>
+         <div id="slider" className='flex h-18 m-2 overflow-hidden whitespace-nowrap'>
 
       {buttonlist.map((name)=>(
         <Button name={name}/>

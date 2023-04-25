@@ -23,7 +23,7 @@ const VideoContainer = () => {
   }
 
   return (
-    <div className="flex flex-wrap gap-4 justify-center">
+    <div className="flex flex-wrap justify-center">
       {videos.map((video)=>(
         <VideoCard info={video} />
 
