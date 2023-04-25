@@ -15,7 +15,9 @@ const Sidebar = () => {
           <li className="py-3  ">Shorts</li>
           <li className="py-3 ">Subscriptions</li>
         </ul>
-        <h1 className="mt-5 border border-slate-200"></h1>
+        <h1 className="mt-5 border border-slate-200">
+          <hr />
+        </h1>{" "}
         <ul>
           <li className="py-3  ">Library</li>
           <li className="py-3 ">History</li>
@@ -23,7 +25,10 @@ const Sidebar = () => {
           <li className="py-3 ">Watch later</li>
           <li className="py-3 ">Liked videos</li>
         </ul>
-        <h1 className="mt-5 border border-slate-200"></h1>
+        <h1 className="mt-5 border border-slate-200">
+          <hr />
+        </h1>{" "}
+        <h1 className="mt-3 font-semibold">Explore</h1>{" "}
         <ul>
           <li className="py-3 ">Trending</li>
           <li className="py-3 ">Shopping</li>
