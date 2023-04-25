@@ -2,7 +2,7 @@ import React from "react";
 import Logo from "../img/logo.png";
 import HamMenu from "../img/menu.svg";
 import { useDispatch } from "react-redux";
-import { toggleMenu } from '../utils/appSlice'
+import { toggleMenu } from "../utils/appSlice";
 
 function Head() {
   const dispatch = useDispatch();
@@ -15,13 +15,14 @@ function Head() {
     <div className="grid grid-flow-col p-4 m-1 shadow-md">
       <div className="flex col-span-1">
         <img
-          onClick={()=>toggleMenuHandler()}
+          onClick={() => toggleMenuHandler()}
           className="h-8 cursor-pointer"
           alt="menu"
           src={HamMenu}
         />
         <a href="/">
-        <img className="h-8 mx-2" alt="logo" src={Logo} /></a>
+          <img className="h-8 mx-2" alt="logo" src={Logo} />
+        </a>
       </div>
       <div className="col-span-10 text-center">
         <input
