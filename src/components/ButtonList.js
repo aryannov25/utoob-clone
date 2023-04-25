@@ -48,21 +48,21 @@ const ButtonList = () => {
   return (
     <div className="grid grid-flow-col ">
       <MdChevronLeft
-        class="hover:scale-150 my-auto opacity-50 "
+        className="hover:scale-150 my-auto opacity-50 "
         size={30}
         onClick={slideLeft}
         aria-hidden="true"
       />
       <div
         id="slider"
-        className="flex h-18 m-2 overflow-hidden whitespace-nowrap"
+        className="flex h-18 m-2 overflow-hidden whitespace-nowrap scroll-smooth"
       >
         {buttonlist.map((name) => (
           <Button name={name} />
         ))}
       </div>
       <MdChevronRight
-        class="hover:scale-150 my-auto opacity-50 "
+        className="hover:scale-150 my-auto opacity-50 "
         size={30}
         onClick={slideRight}
         aria-hidden="true"
