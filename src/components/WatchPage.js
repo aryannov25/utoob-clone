@@ -14,6 +14,7 @@ const WatchPage = () => {
   });
 
   return (
+    <>
     <div className="p-5">
       <iframe
         width="1200"
@@ -25,6 +26,7 @@ const WatchPage = () => {
         allowFullScreen
       ></iframe>
     </div>
+    </>
   );
 };
 
