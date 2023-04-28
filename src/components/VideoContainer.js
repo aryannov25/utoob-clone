@@ -16,21 +16,19 @@ const VideoContainer = () => {
     console.log(json.items);
     setVideos(json.items);
   };
-  
-//conditional rendering
+
+  //conditional rendering
   if (!videos.length) {
     return <div className="text-center">Loading...</div>;
   }
 
   return (
     <div className="flex flex-wrap justify-around">
-      {videos.map((video)=>(
+      {videos.map((video) => (
         <Link to={"/watch?v=" + video.id}>
-        <VideoCard key={video.id} info={video} />
+          <VideoCard key={video.id} info={video} />
         </Link>
-
       ))}
-      
     </div>
   );
 };
