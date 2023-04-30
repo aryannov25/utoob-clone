@@ -1,10 +1,25 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Logo from "../img/logo.png";
 import HamMenu from "../img/menu.svg";
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
+import { YOUTUBE_SEARCH_API } from './../utils/constants';
 
 function Head() {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(()=>{ 
+    console.log(searchQuery)
+
+getSearchSuggestions();
+  },[searchQuery])
+
+  const getSearchSuggestions = async()=>{
+    const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
+    const json = await data.json();
+    console.log(json[1])
+  }
+
   const dispatch = useDispatch();
 
   const toggleMenuHandler = () => {
@@ -31,6 +46,8 @@ function Head() {
           className="w-1/2 p-1 px-4 border border-gray-400 rounded-l-full"
           type="text"
           placeholder="Search"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
         <button className="p-1 px-4 border bg-gray-200 border-gray-400 rounded-r-full">
           <i class="fa fa-search"></i>
