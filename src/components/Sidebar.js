@@ -38,7 +38,8 @@ const Sidebar = () => {
             <i className="fa fa-clock-o mr-3" aria-hidden="true"></i>Watch later
           </li>
           <li className="py-3 cursor-pointer">
-            <i className="fa fa-thumbs-up mr-3" aria-hidden="true"></i>Liked videos
+            <i className="fa fa-thumbs-up mr-3" aria-hidden="true"></i>Liked
+            videos
           </li>
         </ul>
         <hr />
