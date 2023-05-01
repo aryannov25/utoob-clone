@@ -12,6 +12,10 @@ function Head() {
     console.log(searchQuery);
 
     const timer = setTimeout(() => getSearchSuggestions(), 200);
+
+    return () => {
+      clearTimeout(timer);
+    };
   }, [searchQuery]);
 
   const getSearchSuggestions = async () => {
