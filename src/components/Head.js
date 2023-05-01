@@ -1,24 +1,24 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Logo from "../img/logo.png";
 import HamMenu from "../img/menu.svg";
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
-import { YOUTUBE_SEARCH_API } from './../utils/constants';
+import { YOUTUBE_SEARCH_API } from "./../utils/constants";
 
 function Head() {
   const [searchQuery, setSearchQuery] = useState("");
 
-  useEffect(()=>{ 
-    console.log(searchQuery)
+  useEffect(() => {
+    console.log(searchQuery);
 
-getSearchSuggestions();
-  },[searchQuery])
+    const timer = setTimeout(() => getSearchSuggestions(), 200);
+  }, [searchQuery]);
 
-  const getSearchSuggestions = async()=>{
+  const getSearchSuggestions = async () => {
     const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
     const json = await data.json();
-    console.log(json[1])
-  }
+    console.log(json[1]);
+  };
 
   const dispatch = useDispatch();
 
