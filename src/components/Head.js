@@ -11,7 +11,7 @@ function Head() {
   useEffect(() => {
     console.log(searchQuery);
 
-    const timer = setTimeout(() => getSearchSuggestions(), 200);
+    const timer = setTimeout(() => getSearchSuggestions(), 600);
 
     return () => {
       clearTimeout(timer);
