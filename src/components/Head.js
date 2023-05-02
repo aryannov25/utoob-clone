@@ -46,7 +46,7 @@ function Head() {
           <img className="h-8 mx-2" alt="logo" src={Logo} />
         </a>
       </div>
-      <div className="col-span-10 text-center mr-20">
+      <div className="col-span-10 text-center ">
         <div>
           <input
             className="w-1/2 p-1 px-4 border border-gray-400 rounded-l-full"
@@ -59,15 +59,15 @@ function Head() {
             <i class="fa fa-search"></i>
           </button>
         </div>
-        <div className="flex fixed bg-white  ml-80 shadow-lg ">
-          <ul className="w-[41.5rem] text-start">
+        <div className="fixed bg-white shadow-lg ">
+          <ul className="w-auto text-start">
             {suggestions.map((s) => (
               <li
                 key={s}
                 className="hover:bg-slate-100 rounded-lg shadow-sm border border-slate-50 px-5 py-1"
               >
                 <i class="fa fa-search"></i>
-                &nbsp; 
+                &nbsp;
                 {s}
               </li>
             ))}
