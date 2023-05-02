@@ -7,6 +7,7 @@ import { YOUTUBE_SEARCH_API } from "./../utils/constants";
 
 function Head() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {
     console.log(searchQuery);
@@ -21,7 +22,7 @@ function Head() {
   const getSearchSuggestions = async () => {
     const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
     const json = await data.json();
-    console.log(json[1]);
+    setSuggestions(json[1]);
   };
 
   const dispatch = useDispatch();
@@ -46,16 +47,32 @@ function Head() {
         </a>
       </div>
       <div className="col-span-10 text-center mr-20">
-        <input
-          className="w-1/2 p-1 px-4 border border-gray-400 rounded-l-full"
-          type="text"
-          placeholder="Search"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <button className="p-1 px-4 border bg-gray-200 border-gray-400 rounded-r-full">
-          <i class="fa fa-search"></i>
-        </button>
+        <div>
+          <input
+            className="w-1/2 p-1 px-4 border border-gray-400 rounded-l-full"
+            type="text"
+            placeholder="Search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <button className="p-1 px-4 border bg-gray-200 border-gray-400 rounded-r-full">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+        <div className="flex fixed bg-white  ml-80 shadow-lg ">
+          <ul className="w-[41.5rem] text-start">
+            {suggestions.map((s) => (
+              <li
+                key={s}
+                className="hover:bg-slate-100 rounded-lg shadow-sm border border-slate-50 px-5 py-1"
+              >
+                <i class="fa fa-search"></i>
+                &nbsp; 
+                {s}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
       <div className="col-span-1 text-end">
         <img
