@@ -46,28 +46,25 @@ function Head() {
           <img className="h-8 mx-2" alt="logo" src={Logo} />
         </a>
       </div>
-      <div className="col-span-10 text-center ">
-        <div>
-          <input
-            className="w-1/2 p-1 px-4 border border-gray-400 rounded-l-full"
-            type="text"
-            placeholder="Search"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <button className="p-1 px-4 border bg-gray-200 border-gray-400 rounded-r-full">
-            <i class="fa fa-search"></i>
-          </button>
-        </div>
-        <div className="fixed bg-white shadow-lg ">
-          <ul className="w-auto text-start">
+      <div className="col-span-10">
+        <input
+          className="px-5 py-1 h-9 ml-32 w-1/2 border border-gray-300 rounded-l-full "
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <button className="bg-gray-100 h-9 fixed border border-gray-300  w-16 rounded-r-full ">
+        <i class="fa fa-search"></i>
+        </button>
+        <div className="flex fixed bg-white  ml-32  ">
+          <ul className="w-72 ">
             {suggestions.map((s) => (
               <li
                 key={s}
                 className="hover:bg-slate-100 rounded-lg shadow-sm border border-slate-50 px-5 py-1"
               >
-                <i class="fa fa-search"></i>
-                &nbsp;
+                  <i class="fa fa-search"></i>
+                  &nbsp;&nbsp;
                 {s}
               </li>
             ))}
