@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { YOUTUBE_API_KEY } from "./../utils/constants";
 import VideoCard from "./VideoCard";
 import { Link } from "react-router-dom";
+import Shimmer from './Shimmer';
 
 const VideoContainer = () => {
   const [videos, setVideos] = useState([]);
@@ -19,7 +20,7 @@ const VideoContainer = () => {
 
   //conditional rendering
   if (!videos.length) {
-    return <div className="text-center">Loading...</div>;
+    return <Shimmer/>;
   }
 
   return (
