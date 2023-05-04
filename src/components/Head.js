@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Logo from "../img/logo.png";
-import HamMenu from "../img/menu.svg";
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { YOUTUBE_SEARCH_API } from "./../utils/constants";
@@ -17,6 +16,7 @@ function Head() {
     return () => {
       clearTimeout(timer);
     };
+    // eslint-disable-next-line
   }, [searchQuery]);
 
   const getSearchSuggestions = async () => {
@@ -116,7 +116,7 @@ function Head() {
           </button>
         </div>
         {
-          <div className="absolute bg-white w-[590px] border rounded-lg shadow-lg  font-semibold mx-1 my-[2px]">
+          <div className="absolute bg-white w-[550px] border rounded-lg shadow-lg  font-semibold mx-1 my-[2px]">
             <ul>
               {suggestions.map((sug, index) => (
                 <li key={index} className="py-1 px-6 hover:bg-gray-200">
