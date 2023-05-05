@@ -11,6 +11,10 @@ const VideoContainer = () => {
     getVideos();
   }, []);
 
+  console.log(process.env.REACT_APP_GOOGLE_API_KEY)
+
+
+
   const getVideos = async () => {
     const data = await fetch(YOUTUBE_API_KEY);
     const json = await data.json();
