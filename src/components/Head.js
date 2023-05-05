@@ -9,7 +9,7 @@ function Head() {
   const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {
-    console.log(searchQuery);
+    // console.log(searchQuery);
 
     const timer = setTimeout(() => getSearchSuggestions(), 600);
 
