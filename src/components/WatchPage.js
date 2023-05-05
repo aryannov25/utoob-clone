@@ -15,7 +15,7 @@ const WatchPage = () => {
 
   return (
     <>
-      <div className="p-5  start-0">
+      <div className="p-5 start-0">
         <iframe
           width="1200"
           height="600"
