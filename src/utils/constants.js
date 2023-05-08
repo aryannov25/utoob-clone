@@ -1,4 +1,4 @@
-// const GOOGLE_API_KEY = "AIzaSyAB2Tp4B26-K28nsWmdX9UwZkX-n2wpEt8";
+//const GOOGLE_API_KEY = "AIzaSyAB2Tp4B26-K28nsWmdX9UwZkX-n2wpEt8";
 //AIzaSyDWPq_w0_uVejy_MPuXReLG7VXXY4NuZpM
 
 export const YOUTUBE_API_KEY =
@@ -7,4 +7,4 @@ export const YOUTUBE_API_KEY =
 // GOOGLE_API_KEY;
 
 export const YOUTUBE_SEARCH_API =
-  "https://clients1.google.com/complete/search?client=firefox&ds=yt&q=";
+  "https://corsproxy.io/?https://clients1.google.com/complete/search?client=firefox&ds=yt&q=";

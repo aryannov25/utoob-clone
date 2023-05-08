@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { closeMenu } from "../utils/appSlice";
+import Comments from './Comments';
 
 const WatchPage = () => {
   const dispatch = useDispatch();
@@ -13,9 +14,21 @@ const WatchPage = () => {
     dispatch(closeMenu());
   });
 
+  const getComments = async () => {
+    const data = await fetch(
+      "https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&videoId=" +
+        searchParams.get("v") +
+        "&key=" +
+        process.env.REACT_APP_GOOGLE_API_KEY
+    );
+   const json = await data.json();
+    console.log("aa", json);
+  };
+
   return (
     <>
-      <div className="p-5 start-0">
+    <div className="flex">
+      <div className="p-5 start-0 ">
         <iframe
           width="1200"
           height="600"
@@ -30,13 +43,17 @@ const WatchPage = () => {
           allowFullScreen
         ></iframe>
       </div>
-      <div>
+      <div className="">
         <p>
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo,
           tempora hic dicta, velit cupiditate vel amet eligendi earum neque
           impedit atque? Illum, facilis modi laudantium porro fugiat non dolor
           et.
         </p>
+      </div>
+      <div className="flex">
+        <Comments/>
+      </div>
       </div>
     </>
   );
