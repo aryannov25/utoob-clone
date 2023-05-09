@@ -6,8 +6,8 @@ import showSearchSuggestionsSlice from "./showSearchSuggestionsSlice";
 const store = configureStore({
   reducer: {
     app: appSlice,
-    searchSuggestionCache : CacheSlice,
-    showSearchSuggestions : showSearchSuggestionsSlice
+    searchSuggestionCache: CacheSlice,
+    showSearchSuggestions: showSearchSuggestionsSlice,
   },
 });
 
