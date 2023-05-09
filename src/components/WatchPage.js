@@ -33,7 +33,7 @@ const WatchPage = () => {
       <div className="flex">
         <div className="p-5 start-0 ">
           <iframe
-            width="1200"
+            width="1000"
             height="600"
             src={
               "https://www.youtube.com/embed/" +
@@ -46,7 +46,7 @@ const WatchPage = () => {
             allowFullScreen
           ></iframe>
         </div>
-        <div className="p-4">
+        <div className="p-2 mt-4">
           <p>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo,
             tempora hic dicta, velit cupiditate vel amet eligendi earum neque
