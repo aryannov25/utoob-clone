@@ -47,16 +47,13 @@ const WatchPage = () => {
             allowFullScreen
           ></iframe>
         </div>
-        <div className="">
+        <div className="p-4">
           <p>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo,
             tempora hic dicta, velit cupiditate vel amet eligendi earum neque
             impedit atque? Illum, facilis modi laudantium porro fugiat non dolor
             et.
           </p>
-        </div>
-        <div className="">
-          <Comments />
         </div>
       </div>
     </>
