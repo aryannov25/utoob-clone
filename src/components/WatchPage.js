@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { closeMenu } from "../utils/appSlice";
-import Comments from "./Comments";
 
 const WatchPage = () => {
   const dispatch = useDispatch();

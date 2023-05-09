@@ -3,9 +3,12 @@ import Logo from "../img/logo.png";
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { YOUTUBE_SEARCH_API } from "./../utils/constants";
+import SearchBar from "./SearchBar";
 
 function Head() {
+  // eslint-disable-next-line
   const [searchQuery, setSearchQuery] = useState("");
+  // eslint-disable-next-line
   const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {
@@ -80,7 +83,7 @@ function Head() {
     //   </div>
     // </div>
 
-    <div className="flex bg-white justify-between">
+    <div className="flex bg-white justify-between mt-1">
       <div className="flex p-1 m-1 ml-3">
         <img
           onClick={() => toggleMenuHandler()}
@@ -92,41 +95,7 @@ function Head() {
           <img className="h-10 px-2 w-40" alt="logo" src={Logo} />
         </a>
       </div>
-      <form
-        className="font-medium mx-2 p-1"
-        onSubmit={(e) => {
-          e.preventDefault();
-          setSearchQuery("");
-        }}
-      >
-        <div className="flex h-10 mt-2 pt-[2px] pr-20">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="w-[550px] border rounded-s-full px-7 shadow-lg"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <button>
-            <img
-              className="h-[39px] py-2 px-5 border rounded-e-full hover:bg-gray-200 shadow-lg bg-gray-100"
-              alt="search"
-              src="https://cdn-icons-png.flaticon.com/512/3917/3917132.png"
-            />
-          </button>
-        </div>
-        {
-          <div className="absolute bg-white w-[550px] border rounded-lg shadow-lg  font-semibold mx-1 my-[2px]">
-            <ul>
-              {suggestions.map((sug, index) => (
-                <li key={index} className="py-1 px-6 hover:bg-gray-200">
-                  {sug}
-                </li>
-              ))}
-            </ul>
-          </div>
-        }
-      </form>
+      <SearchBar />
 
       <div className="w-20">
         <img

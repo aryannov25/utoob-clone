@@ -58,7 +58,9 @@ const ButtonList = () => {
         className="flex h-18 m-2 overflow-hidden whitespace-nowrap scroll-smooth"
       >
         {buttonlist.map((name) => (
-          <Button name={name} />
+          <a href={"/results?search_query={name}"}>
+            <Button name={name} />
+          </a>
         ))}
       </div>
       <MdChevronRight
