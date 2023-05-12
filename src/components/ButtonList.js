@@ -127,122 +127,101 @@ const ButtonList = () => {
             </button>
           </div>
         </a>
-        <a href={"/results?search_query=Games"}>
+        <a href={"/results?search_query=Reality+Shows"}>
           <div>
             <button className="bg-slate-100 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Games
+              Reality Shows
             </button>
           </div>
         </a>
-        <a href={"/results?search_query=Games"}>
+        <a href={"/results?search_query=Accounting"}>
           <div>
             <button className="bg-slate-100 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Games
+              Accounting
             </button>
           </div>
         </a>
-        <a href={"/results?search_query=Games"}>
+        <a href={"/results?search_query=Motivation"}>
           <div>
             <button className="bg-slate-100 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Games
+              Motivation
             </button>
           </div>
         </a>
-        <a href={"/results?search_query=Games"}>
+        <a href={"/results?search_query=Hip-Hop"}>
           <div>
             <button className="bg-slate-100 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Games
+              Hip-Hop
             </button>
           </div>
         </a>
-        <a href={"/results?search_query=Games"}>
+        <a href={"/results?search_query=Laptops"}>
           <div>
             <button className="bg-slate-100 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Games
+              Laptops
             </button>
           </div>
         </a>
-        <a href={"/results?search_query=Games"}>
+        <a href={"/results?search_query=Technology"}>
           <div>
             <button className="bg-slate-100 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Games
+              Technology
             </button>
           </div>
         </a>
-        <a href={"/results?search_query=Games"}>
+        <a href={"/results?search_query=New+to+you"}>
           <div>
             <button className="bg-slate-100 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Games
+              New to you
             </button>
           </div>
         </a>
-        <a href={"/results?search_query=Games"}>
+        <a href={"/results?search_query=Tailwindcss"}>
           <div>
             <button className="bg-slate-100 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Games
+              Tailwindcss
             </button>
           </div>
         </a>
-        <a href={"/results?search_query=Games"}>
+        <a href={"/results?search_query=Recently+uploaded"}>
           <div>
             <button className="bg-slate-100 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Games
+              Recently uploaded
             </button>
           </div>
         </a>
-        <a href={"/results?search_query=Games"}>
+        <a href={"/results?search_query=Leatures"}>
           <div>
             <button className="bg-slate-100 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Games
+              Leatures
             </button>
           </div>
         </a>
-        <a href={"/results?search_query=Games"}>
+        <a href={"/results?search_query=Random+Things"}>
           <div>
             <button className="bg-slate-100 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Games
+              Random Things
             </button>
           </div>
         </a>
-        <a href={"/results?search_query=Games"}>
+        <a href={"/results?search_query=Javascript"}>
           <div>
             <button className="bg-slate-100 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Games
+              Javascript
             </button>
           </div>
         </a>
-        <a href={"/results?search_query=Games"}>
+        <a href={"/results?search_query=Bella"}>
           <div>
             <button className="bg-slate-100 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Games
+              Bella
             </button>
           </div>
         </a>
-        <a href={"/results?search_query=Games"}>
+        <a href={"/results?search_query=Top+50"}>
           <div>
             <button className="bg-slate-100 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Games
-            </button>
-          </div>
-        </a>
-        <a href={"/results?search_query=Games"}>
-          <div>
-            <button className="bg-slate-100 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Games
-            </button>
-          </div>
-        </a>
-        <a href={"/results?search_query=Games"}>
-          <div>
-            <button className="bg-slate-100 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Games
-            </button>
-          </div>
-        </a>
-        <a href={"/results?search_query=Games"}>
-          <div>
-            <button className="bg-slate-100 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Games
+              Top 50
             </button>
           </div>
         </a>
