@@ -18,7 +18,6 @@ const ResultCard = ({ data }) => {
           <p className="text-xl font-bold mb-2 ">{snippet?.title}</p>
           <p className="text-md font-bold mb-2">{snippet?.channelTitle}</p>
           <p className="text-sm ">{snippet?.description}</p>
-          {/* <p className="text-sm ">{statistics.viewCount} views</p> */}
         </div>
       </div>
     </Link>
