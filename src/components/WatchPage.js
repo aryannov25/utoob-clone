@@ -1,17 +1,20 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { closeMenu } from "../utils/appSlice";
+import Comments from "./Comments";
 
 const WatchPage = () => {
   const dispatch = useDispatch();
+  const [comments, setComments] = useState([]);
+
   const [searchParams] = useSearchParams();
   console.log(searchParams.get("v"));
 
   useEffect(() => {
     dispatch(closeMenu());
-  });
+  }, []);
 
   const getComments = async () => {
     const data = await fetch(
@@ -21,21 +24,23 @@ const WatchPage = () => {
         process.env.REACT_APP_GOOGLE_API_KEY
     );
     const json = await data.json();
+    // console.log(json.items);
     console.log(json.items);
+    setComments(json.items);
   };
 
-  // useEffect(() => {
-  //   getComments();
-  // });
+  useEffect(() => {
+    getComments();
+  }, []);
 
-  getComments();
+  // getComments();
 
   return (
-    <>
+    <div className="flex flex-col">
       <div className="flex">
         <div className="p-5 start-0 ">
           <iframe
-            width="1000"
+            width="1200"
             height="600"
             src={
               "https://www.youtube.com/embed/" +
@@ -57,7 +62,8 @@ const WatchPage = () => {
           </p>
         </div>
       </div>
-    </>
+      <Comments />
+    </div>
   );
 };
 
