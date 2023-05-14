@@ -65,7 +65,7 @@ const WatchPage = () => {
         </div>
       </div>
       <div className="m-5 p-2">
-        <h1 className="font-extrabold">Comments : {}</h1>
+        <h1 className="font-extrabold">Comments : {comments.length}</h1>
         {comments.map((comment) => (
           <Comments
             imglink={
