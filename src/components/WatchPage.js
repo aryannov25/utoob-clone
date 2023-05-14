@@ -27,7 +27,6 @@ const WatchPage = () => {
         process.env.REACT_APP_GOOGLE_API_KEY
     );
     const json = await data.json();
-    // console.log(json.items);
     console.log(json.items);
     setComments(json.items);
   };
@@ -65,12 +64,18 @@ const WatchPage = () => {
           </p>
         </div>
       </div>
-      {comments.map((comment) => (
-        <Comments
-          name={comment?.snippet?.topLevelComment?.snippet?.authorDisplayName}
-          text={comment?.snippet?.topLevelComment?.snippet?.textDisplay}
-        />
-      ))}
+      <div className="m-5 p-2">
+        <h1 className="font-extrabold">Comments : {}</h1>
+        {comments.map((comment) => (
+          <Comments
+            imglink={
+              comment?.snippet?.topLevelComment?.snippet?.authorProfileImageUrl
+            }
+            name={comment?.snippet?.topLevelComment?.snippet?.authorDisplayName}
+            text={comment?.snippet?.topLevelComment?.snippet?.textDisplay}
+          />
+        ))}
+      </div>
     </div>
   );
 };
