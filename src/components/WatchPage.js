@@ -24,7 +24,11 @@ const WatchPage = () => {
     console.log(json.items);
   };
 
- getComments();
+  // useEffect(() => {
+  //   getComments();
+  // });
+
+  getComments();
 
   return (
     <>
