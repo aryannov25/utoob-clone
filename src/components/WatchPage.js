@@ -9,6 +9,9 @@ const WatchPage = () => {
   const dispatch = useDispatch();
   const [comments, setComments] = useState([]);
 
+  const authorDisplayName = "Aryan";
+  const textDisplay = "Comments";
+
   const [searchParams] = useSearchParams();
   console.log(searchParams.get("v"));
 
@@ -62,7 +65,7 @@ const WatchPage = () => {
           </p>
         </div>
       </div>
-      <Comments />
+      <Comments name={authorDisplayName} text={textDisplay}/>
     </div>
   );
 };
