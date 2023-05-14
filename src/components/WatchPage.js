@@ -65,7 +65,12 @@ const WatchPage = () => {
           </p>
         </div>
       </div>
-      <Comments name={authorDisplayName} text={textDisplay}/>
+      {comments.map((comment) => (
+        <Comments
+          name={comment?.snippet?.topLevelComment?.snippet?.authorDisplayName}
+          text={comment?.snippet?.topLevelComment?.snippet?.textDisplay}
+        />
+      ))}
     </div>
   );
 };
