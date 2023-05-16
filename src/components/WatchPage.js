@@ -9,12 +9,10 @@ const WatchPage = () => {
   const dispatch = useDispatch();
   const [comments, setComments] = useState([]);
 
-  const authorDisplayName = "Aryan";
-  const textDisplay = "Comments";
-
   const [searchParams] = useSearchParams();
   console.log(searchParams.get("v"));
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     dispatch(closeMenu());
   }, []);
@@ -31,6 +29,7 @@ const WatchPage = () => {
     setComments(json.items);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     getComments();
   }, []);
