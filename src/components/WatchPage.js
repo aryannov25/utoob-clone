@@ -64,17 +64,30 @@ const WatchPage = () => {
           </p>
         </div>
       </div>
-      <div className="m-5 p-2">
-        <h1 className="font-extrabold">Comments : {comments.length}</h1>
-        {comments.map((comment) => (
-          <Comments
-            imglink={
-              comment?.snippet?.topLevelComment?.snippet?.authorProfileImageUrl
-            }
-            name={comment?.snippet?.topLevelComment?.snippet?.authorDisplayName}
-            text={comment?.snippet?.topLevelComment?.snippet?.textDisplay}
-          />
-        ))}
+      <div className="flex">
+        <div className="m-5 p-2">
+          <h1 className="font-extrabold">Comments : {comments.length}</h1>
+          {comments.map((comment) => (
+            <Comments
+              imglink={
+                comment?.snippet?.topLevelComment?.snippet
+                  ?.authorProfileImageUrl
+              }
+              name={
+                comment?.snippet?.topLevelComment?.snippet?.authorDisplayName
+              }
+              text={comment?.snippet?.topLevelComment?.snippet?.textDisplay}
+            />
+          ))}
+        </div>
+        <div>
+          <p className="p-2 m-4">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores
+            voluptatem laudantium corrupti, vel illum obcaecati eos maxime ea
+            porro animi quae harum minima repellendus fuga quam magni officia
+            libero veniam?
+          </p>
+        </div>
       </div>
     </div>
   );
