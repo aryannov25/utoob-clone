@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { closeMenu } from "../utils/appSlice";
 import Comments from "./Comments";
+import WatchPageVideos from './WatchPageVideos';
 
 const WatchPage = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const WatchPage = () => {
         process.env.REACT_APP_GOOGLE_API_KEY
     );
     const json = await data.json();
-    console.log(json.items);
+    // console.log(json.items);
     setComments(json.items);
   };
 
@@ -34,10 +35,20 @@ const WatchPage = () => {
     // eslint-disable-next-line
   }, []);
 
-  // getComments();
+  const Suggestions = async () => {
+    const data = await fetch(
+      "https://youtube.googleapis.com/youtube/v3/videos?part=suggestions&id=" +
+        searchParams.get("v") +
+        "&key=" +
+        process.env.REACT_APP_GOOGLE_API_KEY
+    );
+    const json = await data.json();
+    console.log(json.items);
+  };
+   Suggestions();
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-full">
       <div className="flex">
         <div className="p-5 start-0 ">
           <iframe
@@ -54,7 +65,7 @@ const WatchPage = () => {
             allowFullScreen
           ></iframe>
         </div>
-        <div className="p-2 mt-4 block">
+        <div className="w-full pt-3">
           <p>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo,
             tempora hic dicta, velit cupiditate vel amet eligendi earum neque
@@ -80,12 +91,7 @@ const WatchPage = () => {
           ))}
         </div>
         <div className="p-2 mt-4 col-span-2">
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo,
-            tempora hic dicta, velit cupiditate vel amet eligendi earum neque
-            impedit atque? Illum, facilis modi laudantium porro fugiat non dolor
-            et.
-          </p>
+          <WatchPageVideos/>
         </div>
       </div>
     </div>
