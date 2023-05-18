@@ -7,7 +7,9 @@ export const YOUTUBE_API_KEY =
 // GOOGLE_API_KEY;
 
 export const YOUTUBE_SEARCH_API =
-'https://corsproxy.io/?' + encodeURIComponent('https://clients1.google.com/complete/search?client=firefox&ds=yt&q=');
+  "https://clients1.google.com/complete/search?client=firefox&ds=yt&q=";
 
   // CORS Proxy
   // https://proxy.cors.sh/
+
+  //  https://clients1.google.com/complete/search?client=firefox&ds=yt&q=
