@@ -54,7 +54,7 @@ const WatchPage = () => {
             allowFullScreen
           ></iframe>
         </div>
-        <div className="p-2 mt-4">
+        <div className="p-2 mt-4 block">
           <p>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo,
             tempora hic dicta, velit cupiditate vel amet eligendi earum neque
@@ -63,8 +63,8 @@ const WatchPage = () => {
           </p>
         </div>
       </div>
-      <div className="flex">
-        <div className="m-5 p-2">
+      <div className="grid grid-flow-col">
+        <div className="p-5 start-0 col-span-6">
           <h1 className="font-extrabold">Comments : {comments.length}</h1>
           {comments.map((comment) => (
             <Comments
@@ -79,12 +79,12 @@ const WatchPage = () => {
             />
           ))}
         </div>
-        <div>
-          <p className="p-2 m-4">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores
-            voluptatem laudantium corrupti, vel illum obcaecati eos maxime ea
-            porro animi quae harum minima repellendus fuga quam magni officia
-            libero veniam?
+        <div className="p-2 mt-4 col-span-2">
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo,
+            tempora hic dicta, velit cupiditate vel amet eligendi earum neque
+            impedit atque? Illum, facilis modi laudantium porro fugiat non dolor
+            et.
           </p>
         </div>
       </div>
