@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { YOUTUBE_SEARCH_API } from "../utils/constants";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCache } from "../utils/CacheSlice";
-import SuggestionContainer from "./SuggestionContainer";
+import ResultsSuggestionContainer from "./ResultsSuggestionContainer";
 import { showSuggestionsContainer } from "../utils/showSearchSuggestionsSlice";
 
 const SearchBar = () => {
@@ -47,7 +47,7 @@ const SearchBar = () => {
 
   if (searchQuery !== "" && !suggestions) return null;
 
-  // console.log(suggestions)
+  console.log(suggestions)
 
   if (!suggestions) return null;
 
@@ -82,7 +82,7 @@ const SearchBar = () => {
             {" "}
             {suggestions.map((suggestion) => {
               return (
-                <SuggestionContainer suggestion={suggestion} key={suggestion} />
+                <ResultsSuggestionContainer suggestion={suggestion} key={suggestion} />
               );
             })}
           </div>

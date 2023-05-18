@@ -1,7 +1,7 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
 
-const SuggestionContainer = ({ suggestion }) => {
+const ResultsSuggestionContainer = ({ suggestion }) => {
   if (!suggestion) return null;
   return (
     <div>
@@ -18,4 +18,4 @@ const SuggestionContainer = ({ suggestion }) => {
   );
 };
 
-export default SuggestionContainer;
+export default ResultsSuggestionContainer;

@@ -5,6 +5,8 @@ const VideoCard = ({ info }) => {
 
   const { snippet, statistics } = info;
   const { channelTitle, title, thumbnails } = snippet;
+  const views = statistics.viewCount;
+
   function prettifyNumber(views) { 
     var thousand = 1000; 
     var million = 1000000; 

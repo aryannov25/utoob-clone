@@ -1,15 +1,15 @@
 import React from "react";
 import useVideo from "../utils/useVideo";
-import SuggestionsCard from "./SuggestionsCard";
+import VideoSuggestionsCard from "./VideoSuggestionsCard";
 import { Link } from "react-router-dom";
 
 const WatchPageVideos = () => {
   const watchPageVideo = useVideo();
   return (
-    <div className="ml-6 mt-4 mr-6 w-[400px]">
+    <div className="ml-6 mt-4 mr-6 w-[450px]">
       {watchPageVideo.map((v) => (
         <Link to={"/watch?v=" + v.id} key={v.id}>
-          <SuggestionsCard info={v} />
+          <VideoSuggestionsCard info={v} />
         </Link>
       ))}
     </div>
