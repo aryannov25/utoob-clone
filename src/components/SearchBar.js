@@ -47,7 +47,7 @@ const SearchBar = () => {
 
   if (searchQuery !== "" && !suggestions) return null;
 
-  console.log(suggestions)
+  console.log(suggestions);
 
   if (!suggestions) return null;
 
@@ -82,7 +82,10 @@ const SearchBar = () => {
             {" "}
             {suggestions.map((suggestion) => {
               return (
-                <ResultsSuggestionContainer suggestion={suggestion} key={suggestion} />
+                <ResultsSuggestionContainer
+                  suggestion={suggestion}
+                  key={suggestion}
+                />
               );
             })}
           </div>
