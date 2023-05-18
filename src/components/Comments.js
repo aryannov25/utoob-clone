@@ -6,7 +6,7 @@ const Comments = ({ name, text, imglink }) => {
     <div className="m-5 p-2 shadow-md rounded-lg">
       <div className="flex">
         <div>
-          <img className="rounded-full" src={imglink} />
+          <img className="rounded-full" alt="img" src={imglink} />
         </div>
         <div className="px-3">
           <h2 className="font-bold">{name}</h2>

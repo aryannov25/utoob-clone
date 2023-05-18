@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-
 const useVideo = () => {
   const [videos, setVideos] = useState([]);
   const [searchParams] = useSearchParams();
@@ -13,6 +12,7 @@ const useVideo = () => {
 
   useEffect(() => {
     Suggestions();
+    // eslint-disable-next-line
   }, []);
 
   async function Suggestions() {
