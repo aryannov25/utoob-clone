@@ -92,6 +92,7 @@ const WatchPage = () => {
         </div>
         <div className="w-[30%]">
           <div className="ml-5">
+            <h1 className=" font-extrabold">Related Videos </h1>
             <WatchPageVideos />
           </div>
         </div>
