@@ -86,7 +86,7 @@ const WatchPage = () => {
           <WatchPageVideos />
         </div>
       </div> */}
-      <div className="flex flex-row m-5 h-[30vh] w-full justify-between">
+      <div className="flex flex-row m-5 h-[30vh]  justify-between">
         <div className="flex flex-col w-[70%]">
           <VideoInfo />
         </div>
