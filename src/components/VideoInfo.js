@@ -4,7 +4,6 @@ import { publishedAt as publishedAtFunc } from "../utils/publisedAt";
 import { VIDEO_INFO_URL } from "../utils/constants";
 import { prettifyNumber } from "./../utils/number";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
-import Profile from "./../img/profile.svg";
 
 const VideoInfo = () => {
   const [videoInfo, setVideoInfo] = useState(null);
@@ -15,7 +14,7 @@ const VideoInfo = () => {
     const getVideoInfo = async () => {
       const res = await fetch(VIDEO_INFO_URL + videoID);
       const json = await res.json();
-        console.log(json);
+      // console.log(json);
       setVideoInfo(json);
     };
     getVideoInfo();
@@ -28,7 +27,12 @@ const VideoInfo = () => {
       </h1>
       <div className="flex justify-between items-center">
         <div className="flex mt-2">
-          <img className="h-12 w-12" src={Profile} alt="channelIcon" />
+          <img
+            className="h-12 w-12 object-cover rounded-full"
+            src={videoInfo?.items[0]?.snippet?.thumbnails.medium.url}
+            alt="channelIcon"
+          />
+
           <div className="flex-col">
             <h2 className="font-semibold ml-2">
               {videoInfo?.items[0]?.snippet?.channelTitle}
@@ -75,7 +79,7 @@ const VideoInfo = () => {
             {publishedAtFunc(videoInfo?.items[0]?.snippet?.publishedAt)}
           </h2>
         </div>
-        <div className="h-[150px] text-ellipsist overflow-y-scroll scrollbar-hide">
+        <div className="h-[150px] text-ellipsist overflow-y-scroll whitespace-pre-line  scroll-hide">
           {videoInfo?.items[0]?.snippet?.description}
         </div>
       </div>

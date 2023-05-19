@@ -96,8 +96,8 @@ const WatchPage = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-row h-[70vh] w-full justify-between">
-        <div className="w-[70%]">
+      <div className="flex flex-row h-[70vh] w-[70%] justify-between">
+        <div className="w-full">
           <h1 className="p-5 font-extrabold">Comments : {comments.length}</h1>
           {comments.map((comment) => (
             <Comments
@@ -113,7 +113,6 @@ const WatchPage = () => {
           ))}
         </div>
       </div>
-      <div></div>
     </div>
   );
 };

@@ -3,17 +3,17 @@ import React from "react";
 import { Link } from 'react-router-dom';
 
 const VideoSuggestionsCard = ({ info }) => {
-   console.log(info);
+  //  console.log(info);
   // const { snippet, statistics } = info;
   const { snippet } = info;
   const { channelTitle, title, thumbnails } = snippet;
   // const views = statistics.viewCount;
 
   return (
-    <Link to={"/watch?v=" + info.id.videoId} key={info.id.videoId}>
+    <a href={"/watch?v=" + info.id.videoId} key={info.id.videoId}>
     <div className="flex flex-row rounded-lg mt-2 ">
       <img
-        class="rounded-lg w-[180px] "
+        className="rounded-lg w-[180px] "
         alt="thumbnail"
         src={thumbnails.medium.url}
       />
@@ -25,7 +25,7 @@ const VideoSuggestionsCard = ({ info }) => {
         </li>
       </ul>
     </div>
-    </Link>
+    </a>
   );
 };
 

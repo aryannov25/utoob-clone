@@ -10,12 +10,12 @@ const WatchPageVideos = () => {
 
   const getRelatedVideos = () => {
     fetch(
-      `https://youtube.googleapis.com/youtube/v3/search?part=snippet%2CcontentDetails&maxResults=30&relatedToVideoId=${videoId}&type=video&key=${process.env.REACT_APP_GOOGLE_API_KEY}`
-      )
+      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=30&relatedToVideoId=${videoId}&type=video&key=${process.env.REACT_APP_GOOGLE_API_KEY}`
+    )
       .then((res) => res.json())
       .then((data) => {
-        console.log("-----------------");
-        console.log(data);
+        // console.log("-----------------");
+        // console.log(data);
         setRelatedVideoData(data.items);
       })
       .catch((err) => console.log(err));

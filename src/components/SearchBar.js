@@ -47,7 +47,7 @@ const SearchBar = () => {
 
   if (searchQuery !== "" && !suggestions) return null;
 
-  console.log(suggestions);
+  // console.log(suggestions);
 
   if (!suggestions) return null;
 
