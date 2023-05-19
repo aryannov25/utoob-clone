@@ -4,7 +4,8 @@ import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { closeMenu } from "../utils/appSlice";
 import Comments from "./Comments";
-import WatchPageVideos from './WatchPageVideos';
+import WatchPageVideos from "./WatchPageVideos";
+import VideoInfo from "./VideoInfo";
 
 const WatchPage = () => {
   const dispatch = useDispatch();
@@ -35,18 +36,6 @@ const WatchPage = () => {
     // eslint-disable-next-line
   }, []);
 
-  const Suggestions = async () => {
-    const data = await fetch(
-      "https://youtube.googleapis.com/youtube/v3/videos?part=suggestions&id=" +
-        searchParams.get("v") +
-        "&key=" +
-        process.env.REACT_APP_GOOGLE_API_KEY
-    );
-    const json = await data.json();
-    console.log(json.items);
-  };
-   Suggestions();
-
   return (
     <div className="flex flex-col w-full">
       <div className="flex">
@@ -65,7 +54,7 @@ const WatchPage = () => {
             allowFullScreen
           ></iframe>
         </div>
-        <div className="w-full pt-3">
+        <div className="w-[30%] pt-3">
           <p>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo,
             tempora hic dicta, velit cupiditate vel amet eligendi earum neque
@@ -73,6 +62,9 @@ const WatchPage = () => {
             et.
           </p>
         </div>
+      </div>
+      {/* <div className="flex flex-col w-[70%]">
+        <VideoInfo />
       </div>
       <div className="grid grid-flow-col">
         <div className="p-5 start-0 col-span-6">
@@ -90,10 +82,38 @@ const WatchPage = () => {
             />
           ))}
         </div>
-        <div className="p-2 mt-4 col-span-2">
-          <WatchPageVideos/>
+        <div className="p-2 mt-4 ml-10 col-span-1">
+          <WatchPageVideos />
+        </div>
+      </div> */}
+      <div className="flex flex-row m-5 h-[30vh] w-full justify-between">
+        <div className="flex flex-col w-[70%]">
+          <VideoInfo />
+        </div>
+        <div className="w-[30%]">
+          <div className="ml-5">
+            <WatchPageVideos />
+          </div>
         </div>
       </div>
+      <div className="flex flex-row h-[70vh] w-full justify-between">
+        <div className="w-[70%]">
+          <h1 className="p-5 font-extrabold">Comments : {comments.length}</h1>
+          {comments.map((comment) => (
+            <Comments
+              imglink={
+                comment?.snippet?.topLevelComment?.snippet
+                  ?.authorProfileImageUrl
+              }
+              name={
+                comment?.snippet?.topLevelComment?.snippet?.authorDisplayName
+              }
+              text={comment?.snippet?.topLevelComment?.snippet?.textDisplay}
+            />
+          ))}
+        </div>
+      </div>
+      <div></div>
     </div>
   );
 };
