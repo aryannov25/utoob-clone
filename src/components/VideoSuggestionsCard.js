@@ -1,6 +1,5 @@
 import React from "react";
 // import { prettifyNumber } from "./../utils/number";
-import { Link } from "react-router-dom";
 
 const VideoSuggestionsCard = ({ info }) => {
   //  console.log(info);
@@ -17,12 +16,16 @@ const VideoSuggestionsCard = ({ info }) => {
           alt="thumbnail"
           src={thumbnails.medium.url}
         />
-        <ul>
-          <li className="p-1 text-sm font-bold">{title}</li>
-          <li className="px-1 text-xs text-stone-500">{channelTitle}</li>
-          <li className="px-1 text-xs text-stone-500">
-            {/* {prettifyNumber(views)} views */}
+        <ul key="list">
+          <li key="title" className="p-1 text-sm font-bold">
+            {title}
           </li>
+          <li key="channelTitle" className="px-1 text-xs text-stone-500">
+            {channelTitle}
+          </li>
+          {/* <li className="px-1 text-xs text-stone-500">
+            {prettifyNumber(views)} views
+          </li> */}
         </ul>
       </div>
     </a>
