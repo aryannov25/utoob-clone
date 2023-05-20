@@ -4,6 +4,7 @@ import { publishedAt as publishedAtFunc } from "../utils/publisedAt";
 import { VIDEO_INFO_URL } from "../utils/constants";
 import { prettifyNumber } from "./../utils/number";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
+import ScrollToTop from "./../utils/scrollToTop";
 
 const VideoInfo = () => {
   const [videoInfo, setVideoInfo] = useState(null);
@@ -21,7 +22,7 @@ const VideoInfo = () => {
     getVideoInfo();
   }, [videoID]);
 
-  console.log(videoInfo);
+  // console.log(videoInfo);
 
   const description = videoInfo?.items[0]?.snippet?.description || "";
 
@@ -86,13 +87,13 @@ const VideoInfo = () => {
         </div>
         <div className=" whitespace-pre-line  scroll-hide">
           {/* {videoInfo?.items[0]?.snippet?.description} */}
-          {moreEnabled ? description : description.slice(0, 100)}
-          <span
+          {moreEnabled ? description : description.slice(0, 150)}
+          <h1
             className="cursor-pointer text-blue-600"
             onClick={() => setMoreEnabled((bool) => !bool)}
           >
-            {moreEnabled ? " ...show less" : " ...see more"}
-          </span>
+            {moreEnabled ? " ...Show Less" : "...Show More"}
+          </h1>
         </div>
       </div>
     </div>
