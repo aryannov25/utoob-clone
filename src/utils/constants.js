@@ -11,7 +11,12 @@ export const YOUTUBE_SEARCH_API =
 
 export const VIDEO_INFO_URL =
   "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&key=" +
-  process.env.REACT_APP_GOOGLE_API_KEY + "&id=";
+  process.env.REACT_APP_GOOGLE_API_KEY +
+  "&id=";
+
+export const COMMENTS_THREAD_URL =
+  `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&maxResults=100&key=` +
+  process.env.REACT_APP_API_KEY;
 
 // CORS Proxy
 // https://proxy.cors.sh/

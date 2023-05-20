@@ -7,6 +7,7 @@ import Comments from "./Comments";
 import WatchPageVideos from "./WatchPageVideos";
 import VideoInfo from "./VideoInfo";
 import ScrollToTop from "./../utils/scrollToTop";
+import CommentsThread from "./CommentsThread";
 
 const WatchPage = () => {
   const dispatch = useDispatch();
@@ -75,10 +76,8 @@ const WatchPage = () => {
               <VideoInfo />
               <div className="flex flex-row h-[70vh] w-[100%] justify-between">
                 <div className="w-full">
-                  <h1 className="p-5 font-extrabold">
-                    Comments : {comments.length}
-                  </h1>
-                  {comments.map((comment) => (
+                  <h1 className="p-5 font-extrabold">Comments</h1>
+                  {/* {comments.map((comment) => (
                     <Comments
                       imglink={
                         comment?.snippet?.topLevelComment?.snippet
@@ -92,7 +91,8 @@ const WatchPage = () => {
                         comment?.snippet?.topLevelComment?.snippet?.textDisplay
                       }
                     />
-                  ))}
+                  ))} */}
+                  <CommentsThread videoID={searchParams.get("v")} />{" "}
                 </div>
               </div>
             </div>

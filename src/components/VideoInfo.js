@@ -4,7 +4,6 @@ import { publishedAt as publishedAtFunc } from "../utils/publisedAt";
 import { VIDEO_INFO_URL } from "../utils/constants";
 import { prettifyNumber } from "./../utils/number";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
-import ScrollToTop from "./../utils/scrollToTop";
 
 const VideoInfo = () => {
   const [videoInfo, setVideoInfo] = useState(null);
