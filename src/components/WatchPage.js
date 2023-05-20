@@ -70,29 +70,6 @@ const WatchPage = () => {
               </p>
             </div>
           </div>
-          {/* <div className="flex flex-col w-[70%]">
-        <VideoInfo />
-      </div>
-      <div className="grid grid-flow-col">
-        <div className="p-5 start-0 col-span-6">
-          <h1 className="font-extrabold">Comments : {comments.length}</h1>
-          {comments.map((comment) => (
-            <Comments
-              imglink={
-                comment?.snippet?.topLevelComment?.snippet
-                  ?.authorProfileImageUrl
-              }
-              name={
-                comment?.snippet?.topLevelComment?.snippet?.authorDisplayName
-              }
-              text={comment?.snippet?.topLevelComment?.snippet?.textDisplay}
-            />
-          ))}
-        </div>
-        <div className="p-2 mt-4 ml-10 col-span-1">
-          <WatchPageVideos />
-        </div>
-      </div> */}
           <div className="flex flex-row m-5 h-[30vh]  justify-between">
             <div className="flex flex-col w-[70%]">
               <VideoInfo />
