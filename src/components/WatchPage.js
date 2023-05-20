@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { closeMenu } from "../utils/appSlice";
-import Comments from "./Comments";
+// import Comments from "./Comments";
 import WatchPageVideos from "./WatchPageVideos";
 import VideoInfo from "./VideoInfo";
 import ScrollToTop from "./../utils/scrollToTop";
@@ -11,7 +11,7 @@ import CommentsThread from "./CommentsThread";
 
 const WatchPage = () => {
   const dispatch = useDispatch();
-  const [comments, setComments] = useState([]);
+  // const [comments, setComments] = useState([]);
 
   const [searchParams] = useSearchParams();
   // console.log(searchParams.get("v"));
@@ -21,26 +21,26 @@ const WatchPage = () => {
     // eslint-disable-next-line
   }, []);
 
-  const getComments = async () => {
-    const data = await fetch(
-      "https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&videoId=" +
-        searchParams.get("v") +
-        "&key=" +
-        process.env.REACT_APP_GOOGLE_API_KEY
-    );
-    const json = await data.json();
-    // console.log(json.items);
-    setComments(json.items);
-  };
+  // const getComments = async () => {
+  //   const data = await fetch(
+  //     "https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&videoId=" +
+  //       searchParams.get("v") +
+  //       "&key=" +
+  //       process.env.REACT_APP_GOOGLE_API_KEY
+  //   );
+  //   const json = await data.json();
+  //   // console.log(json.items);
+  //   setComments(json.items);
+  // };
 
-  useEffect(() => {
-    getComments();
-    // eslint-disable-next-line
-  }, []);
+  // useEffect(() => {
+  //   getComments();
+  //   // eslint-disable-next-line
+  // }, []);
 
   return (
     <div>
-      {!getComments ? (
+      {!searchParams ? (
         <>
           <ScrollToTop />
         </>
