@@ -9,6 +9,7 @@ const VideoInfo = () => {
   const [videoInfo, setVideoInfo] = useState(null);
   const [searchParams] = useSearchParams();
   const videoID = searchParams.get("v");
+  const [moreEnabled, setMoreEnabled] = useState(false);
 
   useEffect(() => {
     const getVideoInfo = async () => {
@@ -19,6 +20,10 @@ const VideoInfo = () => {
     };
     getVideoInfo();
   }, [videoID]);
+
+  console.log(videoInfo);
+
+  const description = videoInfo?.items[0]?.snippet?.description || "";
 
   return (
     <div className="flex flex-col">
@@ -79,8 +84,15 @@ const VideoInfo = () => {
             {publishedAtFunc(videoInfo?.items[0]?.snippet?.publishedAt)}
           </h2>
         </div>
-        <div className="h-[150px] text-ellipsist overflow-y-scroll whitespace-pre-line  scroll-hide">
-          {videoInfo?.items[0]?.snippet?.description}
+        <div className=" whitespace-pre-line  scroll-hide">
+          {/* {videoInfo?.items[0]?.snippet?.description} */}
+          {moreEnabled ? description : description.slice(0, 100)}
+          <span
+            className="cursor-pointer text-blue-600"
+            onClick={() => setMoreEnabled((bool) => !bool)}
+          >
+            {moreEnabled ? " ...show less" : " ...see more"}
+          </span>
         </div>
       </div>
     </div>
