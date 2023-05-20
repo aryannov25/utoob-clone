@@ -70,8 +70,8 @@ const WatchPage = () => {
               </p>
             </div>
           </div>
-          <div className="flex flex-row m-5 h-[30vh]  justify-between">
-            <div className="flex flex-col w-[70%]">
+          <div className="flex flex-row m-5 h-[30vh] justify-between">
+            <div className="flex flex-col w-[70%] mt-[-1.75rem]">
               <VideoInfo />
               <div className="flex flex-row h-[70vh] w-[100%] justify-between">
                 <div className="w-full">
