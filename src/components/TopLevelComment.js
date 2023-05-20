@@ -20,7 +20,7 @@ const TopLevelComment = ({
           alt="commentAuthor"
         />
         <div className="flex flex-col ml-3 justify-start">
-          <h2 className="text-black-400 font-semibold text-md">
+          <h2 className="font-bold">
             {authorDisplayName}
             <span className="ml-2 text-gray-600 text-sm">
               {publishedAtFunc(publishedAt)}
