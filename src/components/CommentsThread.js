@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import TopLevelComment from "./TopLevelComment";
+import Comment from "./Comment";
 import CommentReply from "./CommentReply";
 
 const CommentsThread = ({ videoID }) => {
@@ -38,7 +38,7 @@ const CommentsThread = ({ videoID }) => {
       {commentThread.map((item) => {
         return (
           <div key={item.id} className="m-5 p-2 shadow-md rounded-lg">
-            <TopLevelComment
+            <Comment
               item={item}
               repliesQty={item?.replies?.comments?.length}
               visibleSection={visibleSection}

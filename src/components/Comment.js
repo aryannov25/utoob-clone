@@ -3,7 +3,7 @@ import { publishedAt as publishedAtFunc } from "../utils/publisedAt";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
 import { BiDownArrow, BiUpArrow } from "react-icons/bi";
 
-const TopLevelComment = ({
+const Comment = ({
   item,
   repliesQty,
   setVisibleSection,
@@ -11,6 +11,7 @@ const TopLevelComment = ({
 }) => {
   const { authorProfileImageUrl, authorDisplayName, publishedAt, textDisplay } =
     item.snippet?.topLevelComment?.snippet;
+
   return (
     <div className="flex flex-col">
       <div className="flex flex-row items-start mb-3 font-roboto">
@@ -66,4 +67,4 @@ const TopLevelComment = ({
   );
 };
 
-export default TopLevelComment;
+export default Comment;
