@@ -13,7 +13,7 @@ const CommentsThread = ({ videoID }) => {
         process.env.REACT_APP_GOOGLE_API_KEY
     );
     const json = await data.json();
-    // console.log(json.items);
+    console.log(json.items);
     setCommentThread(json.items);
   };
 
