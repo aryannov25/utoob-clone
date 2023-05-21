@@ -92,7 +92,7 @@ const WatchPage = () => {
                       }
                     />
                   ))} */}
-                  <CommentsThread videoID={searchParams.get("v")} />{" "}
+                  <CommentsThread videoID={searchParams.get("v")} />
                 </div>
               </div>
             </div>
