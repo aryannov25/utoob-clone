@@ -3,12 +3,7 @@ import { publishedAt as publishedAtFunc } from "../utils/publisedAt";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
 import { BiDownArrow, BiUpArrow } from "react-icons/bi";
 
-const Comment = ({
-  item,
-  repliesQty,
-  setVisibleSection,
-  visibleSection,
-}) => {
+const Comment = ({ item, repliesQty, setVisibleSection, visibleSection }) => {
   const { authorProfileImageUrl, authorDisplayName, publishedAt, textDisplay } =
     item.snippet?.topLevelComment?.snippet;
 
