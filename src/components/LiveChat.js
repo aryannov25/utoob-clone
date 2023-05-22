@@ -21,14 +21,14 @@ const LiveChat = () => {
           profile: generateProfileImage(),
         })
       );
-    }, 2000);
+    }, 500);
     return () => clearInterval(i);
   }, []);
   return (
     <div>
-      <div className="w-full p-2 border border-black bg-slate-100 rounded-lg ">
-        <h1 className="font-bold border-b-2 border-black">Live Chat</h1>
-        <div className="space-y-2 overflow-y-scroll flex flex-col-reverse h-[550px]">
+      <div className="w-full border h-[600px] border-black bg-slate-100 rounded-lg ">
+        <h1 className="font-bold border-b-2 border-black p-2">Live Chat</h1>
+        <div className="space-y-2 overflow-y-scroll p-2 flex flex-col-reverse h-[550px]">
           {chatMessages.map((c, i) => (
             <ChatMessage
               key={i}

@@ -28,7 +28,6 @@ var nameList = [
   "Zero",
   "Memory",
   "Trooper",
-  "XX",
   "Bandit",
   "Fear",
   "Light",
