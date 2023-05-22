@@ -14,6 +14,11 @@ export const VIDEO_INFO_URL =
   process.env.REACT_APP_GOOGLE_API_KEY +
   "&id=";
 
+export const CHANNEL_INFO_URL =
+  "https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&key=" +
+  process.env.REACT_APP_GOOGLE_API_KEY +
+  "&id=";
+
 // CORS Proxy
 // https://proxy.cors.sh/
 
