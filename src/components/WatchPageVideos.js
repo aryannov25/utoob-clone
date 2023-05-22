@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import VideoSuggestionsCard from "./VideoSuggestionsCard";
 import { useSearchParams } from "react-router-dom";
-import ScrollToTop from "./../utils/scrollToTop";
 
 const WatchPageVideos = () => {
   const [searchParams] = useSearchParams();

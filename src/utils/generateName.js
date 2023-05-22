@@ -175,5 +175,5 @@ var nameList = [
   "Paradox",
 ];
 export function generate() {
-  nameList[Math.floor(Math.random() * nameList.length)];
+  return nameList[Math.floor(Math.random() * nameList.length)];
 }
