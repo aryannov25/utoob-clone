@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { publishedAt as publishedAtFunc } from "../utils/publisedAt";
-import { VIDEO_INFO_URL } from "../utils/constants";
+import { VIDEO_INFO_URL, CHANNEL_INFO_URL } from "../utils/constants";
 import { prettifyNumber } from "./../utils/number";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
 
 const VideoInfo = () => {
   const [videoInfo, setVideoInfo] = useState(null);
+  const [channelId, setChannelID] = useState();
+  const [channelInfo, setChannelInfo] = useState();
   const [searchParams] = useSearchParams();
   const videoID = searchParams.get("v");
   const [moreEnabled, setMoreEnabled] = useState(false);
@@ -15,11 +17,25 @@ const VideoInfo = () => {
     const getVideoInfo = async () => {
       const res = await fetch(VIDEO_INFO_URL + videoID);
       const json = await res.json();
-      // console.log(json);
       setVideoInfo(json);
+      setChannelID(json?.items[0]?.snippet?.channelId);
+
+      // console.log(json?.items[0]?.snippet?.channelId);
     };
     getVideoInfo();
   }, [videoID]);
+
+  // console.log(channelId);
+
+  useEffect(() => {
+    const getChannel = async () => {
+      const res = await fetch(CHANNEL_INFO_URL + channelId);
+      const json = await res.json();
+      console.log(json);
+      setChannelInfo(json);
+    };
+    getChannel();
+  }, [channelId]);
 
   // console.log(videoInfo);
 
@@ -34,7 +50,7 @@ const VideoInfo = () => {
         <div className="flex mt-2">
           <img
             className="h-12 w-12 object-cover rounded-full"
-            src={videoInfo?.items[0]?.snippet?.thumbnails.medium.url}
+            src={channelInfo?.items[0]?.snippet?.thumbnails.medium.url}
             alt="channelIcon"
           />
 
@@ -42,7 +58,12 @@ const VideoInfo = () => {
             <h2 className="font-semibold ml-2">
               {videoInfo?.items[0]?.snippet?.channelTitle}
             </h2>
-            <h5 className="ml-2 font-semibold text-sm text-gray-400">1.36M</h5>
+            <h5 className="ml-2 font-semibold text-sm text-gray-400">
+              {prettifyNumber(
+                channelInfo?.items[0]?.statistics?.subscriberCount
+              )}{" "}
+              subscribers
+            </h5>
           </div>
           <button className="ml-8 h-9 bg-black text-white rounded-full px-4 py-0">
             Subscribe
