@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { closeMenu } from "../utils/appSlice";
@@ -8,6 +8,7 @@ import WatchPageVideos from "./WatchPageVideos";
 import VideoInfo from "./VideoInfo";
 import ScrollToTop from "./../utils/scrollToTop";
 import CommentsThread from "./CommentsThread";
+import LiveChat from './LiveChat';
 
 const WatchPage = () => {
   const dispatch = useDispatch();
@@ -47,9 +48,9 @@ const WatchPage = () => {
       ) : (
         <div className="flex flex-col w-full">
           <div className="flex">
-            <div className="p-5 start-0 ">
+            <div className="pt-5 pl-5 start-0 w-[70%]">
               <iframe
-                width="1200"
+              width="100%"
                 height="600"
                 src={
                   "https://www.youtube.com/embed/" +
@@ -62,13 +63,14 @@ const WatchPage = () => {
                 allowFullScreen
               ></iframe>
             </div>
-            <div className="w-[30%] pt-3">
-              <p>
+            <div className="w-[30%] p-5">
+              {/* <p>
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo,
                 tempora hic dicta, velit cupiditate vel amet eligendi earum
                 neque impedit atque? Illum, facilis modi laudantium porro fugiat
                 non dolor et.
-              </p>
+              </p> */}
+              <LiveChat/>
             </div>
           </div>
           <div className="flex flex-row m-5 h-[30vh] justify-between">
