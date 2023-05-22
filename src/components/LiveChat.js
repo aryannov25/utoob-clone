@@ -4,7 +4,7 @@ import ChatMessage from "./ChatMessage";
 const LiveChat = () => {
   useEffect(() => {
     const i = setInterval(() => {
-    //   console.log("abc");
+      //   console.log("abc");
     }, 2000);
     return () => clearInterval(i);
   }, []);
