@@ -8,7 +8,7 @@ import WatchPageVideos from "./WatchPageVideos";
 import VideoInfo from "./VideoInfo";
 import ScrollToTop from "./../utils/scrollToTop";
 import CommentsThread from "./CommentsThread";
-import LiveChat from './LiveChat';
+import LiveChat from "./LiveChat";
 
 const WatchPage = () => {
   const dispatch = useDispatch();
@@ -50,7 +50,7 @@ const WatchPage = () => {
           <div className="flex">
             <div className="pt-5 pl-5 start-0 w-[70%]">
               <iframe
-              width="100%"
+                width="100%"
                 height="600"
                 src={
                   "https://www.youtube.com/embed/" +
@@ -64,13 +64,7 @@ const WatchPage = () => {
               ></iframe>
             </div>
             <div className="w-[30%] p-5">
-              {/* <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo,
-                tempora hic dicta, velit cupiditate vel amet eligendi earum
-                neque impedit atque? Illum, facilis modi laudantium porro fugiat
-                non dolor et.
-              </p> */}
-              <LiveChat/>
+              <LiveChat />
             </div>
           </div>
           <div className="flex flex-row m-5 h-[30vh] justify-between">
