@@ -41,7 +41,7 @@ const WatchPage = () => {
 
   return (
     <div>
-      <ScrollToTop/>
+      <ScrollToTop />
 
       <div className="flex flex-col w-full">
         <div className="flex">
