@@ -7,7 +7,7 @@ import { AiFillLike, AiFillDislike } from "react-icons/ai";
 
 const VideoInfo = () => {
   const [videoInfo, setVideoInfo] = useState(null);
-  const [channelId, setChannelID] = useState();
+  const [channelID, setChannelID] = useState();
   const [channelInfo, setChannelInfo] = useState();
   const [searchParams] = useSearchParams();
   const videoID = searchParams.get("v");
@@ -18,49 +18,49 @@ const VideoInfo = () => {
       const res = await fetch(VIDEO_INFO_URL + videoID);
       const json = await res.json();
       setVideoInfo(json);
-      setChannelID(json?.items[0]?.snippet?.channelId);
+      setChannelID(json?.items?.[0]?.snippet?.channelId);
 
       // console.log(json?.items[0]?.snippet?.channelId);
     };
     getVideoInfo();
   }, [videoID]);
 
-  // console.log(channelId);
+  console.log(channelID);
 
   useEffect(() => {
     const getChannel = async () => {
-      const res = await fetch(CHANNEL_INFO_URL + channelId);
+      const res = await fetch(CHANNEL_INFO_URL + channelID);
       const json = await res.json();
       console.log(json);
       setChannelInfo(json);
     };
     getChannel();
-  }, [channelId]);
+  }, [channelID]);
 
   // console.log(videoInfo);
 
-  const description = videoInfo?.items[0]?.snippet?.description || "";
+  const description = videoInfo?.items?.[0]?.snippet?.description || "";
 
   return (
     <div className="flex flex-col">
       <h1 className="font-bold text-xl">
-        {videoInfo?.items[0]?.snippet?.title}
+        {videoInfo?.items?.[0]?.snippet?.title}
       </h1>
       <div className="flex justify-between items-center">
         <div className="flex mt-2">
           <img
             className="h-12 w-12 object-cover rounded-full"
-            src={channelInfo?.items[0]?.snippet?.thumbnails.medium.url}
+            src={channelInfo?.items?.[0]?.snippet?.thumbnails.default.url}
             alt="channelIcon"
           />
 
           <div className="flex-col">
             <h2 className="font-semibold ml-2">
-              {videoInfo?.items[0]?.snippet?.channelTitle}
+              {videoInfo?.items?.[0]?.snippet?.channelTitle}
             </h2>
             <h5 className="ml-2 font-semibold text-sm text-gray-400">
               {prettifyNumber(
-                channelInfo?.items[0]?.statistics?.subscriberCount
+                channelInfo?.items?.[0]?.statistics?.subscriberCount
               )}{" "}
               subscribers
             </h5>
@@ -76,7 +76,7 @@ const VideoInfo = () => {
                 <AiFillLike />
               </span>
               <span className="mr-2">
-                {prettifyNumber(videoInfo?.items[0]?.statistics?.likeCount)}
+                {prettifyNumber(videoInfo?.items?.[0]?.statistics?.likeCount)}
               </span>
               <span className="mr-2">|</span>
               <span className="h-5 w-5 mt-1">
@@ -99,10 +99,10 @@ const VideoInfo = () => {
         <div className="flex font-semibold">
           <h2>
             {" "}
-            {prettifyNumber(videoInfo?.items[0]?.statistics?.viewCount)} views
+            {prettifyNumber(videoInfo?.items?.[0]?.statistics?.viewCount)} views
           </h2>
           <h2 className="ml-4">
-            {publishedAtFunc(videoInfo?.items[0]?.snippet?.publishedAt)}
+            {publishedAtFunc(videoInfo?.items?.[0]?.snippet?.publishedAt)}
           </h2>
         </div>
         <div className=" whitespace-pre-line  scroll-hide">
