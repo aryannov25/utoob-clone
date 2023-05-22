@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import VideoSuggestionsCard from "./VideoSuggestionsCard";
 import { useSearchParams } from "react-router-dom";
+import ScrollToTop from './../utils/scrollToTop';
 
 const WatchPageVideos = () => {
   const [searchParams] = useSearchParams();
@@ -31,11 +32,14 @@ const WatchPageVideos = () => {
   }
 
   return (
+    <>
+    {/* <ScrollToTop/> */}
     <div className="ml-6 mt-4 mr-6 py-2 w-[450px]">
       {relatedVideoData.map((v) => (
         <VideoSuggestionsCard info={v} />
       ))}
     </div>
+    </>
   );
 };
 

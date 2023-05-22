@@ -41,39 +41,36 @@ const WatchPage = () => {
 
   return (
     <div>
-      {!searchParams ? (
-        <>
-          <ScrollToTop />
-        </>
-      ) : (
-        <div className="flex flex-col w-full">
-          <div className="flex">
-            <div className="pt-5 pl-5 start-0 w-[70%]">
-              <iframe
-                width="100%"
-                height="600"
-                src={
-                  "https://www.youtube.com/embed/" +
-                  searchParams.get("v") +
-                  "?autoplay=1"
-                }
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              ></iframe>
-            </div>
-            <div className="w-[30%] p-5">
-              <LiveChat />
-            </div>
+      <ScrollToTop/>
+
+      <div className="flex flex-col w-full">
+        <div className="flex">
+          <div className="pt-5 pl-5 start-0 w-[70%]">
+            <iframe
+              width="100%"
+              height="600"
+              src={
+                "https://www.youtube.com/embed/" +
+                searchParams.get("v") +
+                "?autoplay=1"
+              }
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
           </div>
-          <div className="flex flex-row m-5 h-[30vh] justify-between">
-            <div className="flex flex-col w-[70%] mt-[-1.75rem]">
-              <VideoInfo />
-              <div className="flex flex-row h-[70vh] w-[100%] justify-between">
-                <div className="w-full">
-                  <h1 className="p-5 font-extrabold">Comments</h1>
-                  {/* {comments.map((comment) => (
+          <div className="w-[30%] p-5">
+            <LiveChat />
+          </div>
+        </div>
+        <div className="flex flex-row m-5 h-[30vh] justify-between">
+          <div className="flex flex-col w-[70%] mt-[-1.75rem]">
+            <VideoInfo />
+            <div className="flex flex-row h-[70vh] w-[100%] justify-between">
+              <div className="w-full">
+                <h1 className="p-5 font-extrabold">Comments</h1>
+                {/* {comments.map((comment) => (
                     <Comments
                       imglink={
                         comment?.snippet?.topLevelComment?.snippet
@@ -88,19 +85,18 @@ const WatchPage = () => {
                       }
                     />
                   ))} */}
-                  <CommentsThread videoID={searchParams.get("v")} />
-                </div>
-              </div>
-            </div>
-            <div className="w-[30%]">
-              <div className="ml-5">
-                <h1 className="font-extrabold">Related Videos</h1>
-                <WatchPageVideos />
+                <CommentsThread videoID={searchParams.get("v")} />
               </div>
             </div>
           </div>
+          <div className="w-[30%]">
+            <div className="ml-5">
+              <h1 className="font-extrabold">Related Videos</h1>
+              <WatchPageVideos />
+            </div>
+          </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };
