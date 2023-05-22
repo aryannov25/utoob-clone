@@ -41,13 +41,11 @@ const WatchPage = () => {
 
   return (
     <div>
-      <ScrollToTop />
-
-      <div className="flex flex-col ">
+      <div className="flex flex-col w-full">
         <div className="flex">
           <div className="pt-5 pl-5 start-0 w-[70%]">
             <iframe
-              width="1200"
+              width="100%"
               height="600"
               src={
                 "https://www.youtube.com/embed/" +
