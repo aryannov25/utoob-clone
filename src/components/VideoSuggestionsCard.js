@@ -1,7 +1,7 @@
 import React from "react";
 // import { prettifyNumber } from "./../utils/number";
 import { Link } from "react-router-dom";
-import ScrollToTop from './../utils/scrollToTop';
+import ScrollToTop from "./../utils/scrollToTop";
 
 const VideoSuggestionsCard = ({ info }) => {
   //  console.log(info);
@@ -12,7 +12,7 @@ const VideoSuggestionsCard = ({ info }) => {
 
   return (
     <Link to={"/watch?v=" + info.id.videoId} key={info.id.videoId}>
-      <ScrollToTop/>
+      <ScrollToTop />
       <div className="flex flex-row rounded-lg mt-2 ">
         <img
           className="rounded-lg w-[180px] "
