@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addToCache } from "../utils/CacheSlice";
 import ResultsSuggestionContainer from "./ResultsSuggestionContainer";
 import { showSuggestionsContainer } from "../utils/showSearchSuggestionsSlice";
+import { Link } from "react-router-dom";
 
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -57,7 +58,6 @@ const SearchBar = () => {
         className="font-medium mx-2 p-1"
         onSubmit={(e) => {
           e.preventDefault();
-          setSearchQuery("");
         }}
       >
         <div className="flex h-10 mt-2 pt-[2px] pr-20">
@@ -69,13 +69,14 @@ const SearchBar = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             onFocus={() => dispatch(showSuggestionsContainer(true))}
           />
-          <button>
+
+          <Link to={`/results?search_query=${searchQuery}`}>
             <img
               className="h-[39px] py-2 px-5 border rounded-e-full hover:bg-gray-200 shadow-lg bg-gray-100"
               alt="search"
               src="https://cdn-icons-png.flaticon.com/512/3917/3917132.png"
             />
-          </button>
+          </Link>
         </div>
         {showSuggestions && suggestions.length > 0 && (
           <div className="absolute bg-white w-[550px] border rounded-lg shadow-lg  font-semibold mx-1 my-[2px]">

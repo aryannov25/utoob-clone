@@ -1,5 +1,4 @@
 import "./App.css";
-import Head from "./components/Head";
 import Body from "./components/Body";
 import store from "./utils/store";
 import { Provider } from "react-redux";
@@ -31,7 +30,6 @@ const appRouter = createBrowserRouter([
 function App() {
   return (
     <Provider store={store}>
-      <Head />
       <RouterProvider router={appRouter}></RouterProvider>
     </Provider>
   );
