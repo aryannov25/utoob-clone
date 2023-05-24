@@ -19,6 +19,9 @@ export const CHANNEL_INFO_URL =
   process.env.REACT_APP_GOOGLE_API_KEY +
   "&id=";
 
+   export const OFFSET_LIVE_CHAT = 20 
+
+
 // CORS Proxy
 // https://proxy.cors.sh/
 
