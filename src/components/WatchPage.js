@@ -6,7 +6,6 @@ import { closeMenu } from "../utils/appSlice";
 // import Comments from "./Comments";
 import WatchPageVideos from "./WatchPageVideos";
 import VideoInfo from "./VideoInfo";
-import ScrollToTop from "./../utils/scrollToTop";
 import CommentsThread from "./CommentsThread";
 import LiveChat from "./LiveChat";
 
