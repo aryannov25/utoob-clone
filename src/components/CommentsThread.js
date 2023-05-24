@@ -33,7 +33,7 @@ const CommentsThread = ({ videoID }) => {
   }
   return (
     <>
-      <h1 className="p-5 font-extrabold">Comments : {commentThread?.length}</h1>
+      <h1 className="p-5 font-extrabold">Comments</h1>
       {commentThread.map((item) => {
         return (
           <div key={item.id} className="m-5 p-2 shadow-md rounded-lg">
