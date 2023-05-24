@@ -11,7 +11,6 @@ const SearchResults = () => {
   const [searchResults, setSearchResults] = useState([]);
   const dispatch = useDispatch();
   const query = searchParams.get("search_query");
-  const capquery = capitalizeTheFirstLetterOfEachWord(query);
 
   useEffect(() => {
     const SEARCH_RESULTS_URL =
@@ -36,9 +35,12 @@ const SearchResults = () => {
   ) : (
     <>
       <div className="w-10/12">
-        <h1 className="p-5  font-bold">
+        <h1 className="p-5  font-bold text-center">
           Here are the search results for:{" "}
-          <span className="font-extrabold  "> {capquery}</span>
+          <span className="font-extrabold text-xl ">
+            {" "}
+            {capitalizeTheFirstLetterOfEachWord(query)}
+          </span>
         </h1>
         {searchResults.map((result) => (
           <ResultCard
