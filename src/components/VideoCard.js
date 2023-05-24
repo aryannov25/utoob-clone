@@ -1,5 +1,5 @@
 import React from "react";
-import { prettifyNumber } from './../utils/number';
+import { prettifyNumber } from "./../utils/number";
 
 const VideoCard = ({ info }) => {
   // console.log(info);
