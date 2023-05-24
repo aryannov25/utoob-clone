@@ -8,7 +8,7 @@ const ResultCard = ({ data }) => {
   const { snippet, id } = data;
   return (
     <Link to={`/watch?v=${id.videoId}`}>
-      <div className="flex scroll-smooth m-1 mt-4 justify-around my-2 p-2 rounded-lg shadow-xl transition duration-400 ease-in-out hover:scale-[1.02] hover:shadow-slate-400">
+      <div className="flex ml-[10%] w-[100%] scroll-smooth m mt-4 justify-around my-2 p-2 rounded-lg shadow-xl transition duration-400 ease-in-out hover:scale-[1.02] hover:shadow-slate-400">
         <img
           className="h-44 w-96 shadow-lg rounded-lg"
           src={snippet?.thumbnails?.medium?.url}
