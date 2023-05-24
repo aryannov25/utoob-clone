@@ -66,7 +66,6 @@ const WatchPage = () => {
             <VideoInfo />
             <div className="flex flex-row h-[70vh] w-[100%] justify-between">
               <div className="w-full">
-                <h1 className="p-5 font-extrabold">Comments</h1>
                 {/* {comments.map((comment) => (
                     <Comments
                       imglink={

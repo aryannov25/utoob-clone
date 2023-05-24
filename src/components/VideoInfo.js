@@ -25,13 +25,13 @@ const VideoInfo = () => {
     getVideoInfo();
   }, [videoID]);
 
-  console.log(channelID);
+  // console.log(channelID);
 
   useEffect(() => {
     const getChannel = async () => {
       const res = await fetch(CHANNEL_INFO_URL + channelID);
       const json = await res.json();
-      console.log(json);
+      // console.log(json);
       setChannelInfo(json);
     };
     getChannel();
