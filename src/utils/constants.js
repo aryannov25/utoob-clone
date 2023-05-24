@@ -19,10 +19,18 @@ export const CHANNEL_INFO_URL =
   process.env.REACT_APP_GOOGLE_API_KEY +
   "&id=";
 
-   export const OFFSET_LIVE_CHAT = 20 
-
+export const OFFSET_LIVE_CHAT = 20;
 
 // CORS Proxy
 // https://proxy.cors.sh/
 
 //  https://clients1.google.com/complete/search?client=firefox&ds=yt&q=
+
+export function capitalizeTheFirstLetterOfEachWord(words) {
+  var separateWord = words.toLowerCase().split(" ");
+  for (var i = 0; i < separateWord.length; i++) {
+    separateWord[i] =
+      separateWord[i].charAt(0).toUpperCase() + separateWord[i].substring(1);
+  }
+  return separateWord.join(" ");
+}
