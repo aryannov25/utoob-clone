@@ -4,12 +4,14 @@ import ResultCard from "./ResultCard";
 import { useDispatch } from "react-redux";
 import { showSuggestionsContainer } from "../utils/showSearchSuggestionsSlice";
 import Shimmer from "./Shimmer";
+import { capitalizeTheFirstLetterOfEachWord } from "../utils/constants";
 
 const SearchResults = () => {
   const [searchParams] = useSearchParams();
   const [searchResults, setSearchResults] = useState([]);
   const dispatch = useDispatch();
   const query = searchParams.get("search_query");
+  const capquery = capitalizeTheFirstLetterOfEachWord(query);
 
   useEffect(() => {
     const SEARCH_RESULTS_URL =
@@ -32,17 +34,23 @@ const SearchResults = () => {
   return searchResults.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="w-10/12">
-      {searchResults.map((result) => (
-        <ResultCard
-          key={
-            result?.id?.videoId ? result?.id?.videoId : result?.id?.channelId
-          }
-          data={result}
-          isChannel={result?.id?.kind === "youtube#channel" ? true : false}
-        />
-      ))}
-    </div>
+    <>
+      <div className="w-10/12">
+        <h1 className="p-5  font-bold">
+          Here are the search results for:{" "}
+          <span className="font-extrabold  "> {capquery}</span>
+        </h1>
+        {searchResults.map((result) => (
+          <ResultCard
+            key={
+              result?.id?.videoId ? result?.id?.videoId : result?.id?.channelId
+            }
+            data={result}
+            isChannel={result?.id?.kind === "youtube#channel" ? true : false}
+          />
+        ))}
+      </div>
+    </>
   );
 };
 
