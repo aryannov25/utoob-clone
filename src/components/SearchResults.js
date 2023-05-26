@@ -18,6 +18,7 @@ const SearchResults = () => {
       process.env.REACT_APP_GOOGLE_API_KEY;
     fetchSearchResults(SEARCH_RESULTS_URL);
     window.scrollTo(0, 0);
+    // eslint-disable-next-line
   }, [query]);
 
   const fetchSearchResults = async (SEARCH_RESULTS_URL) => {
