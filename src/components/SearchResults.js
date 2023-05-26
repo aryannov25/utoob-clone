@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import ResultCard from "./ResultCard";
 import { useDispatch } from "react-redux";
 import { showSuggestionsContainer } from "../utils/showSearchSuggestionsSlice";
-import Shimmer from "./Shimmer";
+import { CardShimmer } from "./Shimmer";
 import { capitalizeTheFirstLetterOfEachWord } from "../utils/constants";
 
 const SearchResults = () => {
@@ -31,7 +31,7 @@ const SearchResults = () => {
   //early return
   if (!searchResults) return null;
   return searchResults.length === 0 ? (
-    <Shimmer />
+    <CardShimmer />
   ) : (
     <>
       <div className="w-10/12">

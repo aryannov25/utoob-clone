@@ -35,3 +35,32 @@ const Shimmer = () => {
 };
 
 export default Shimmer;
+
+export const CardShimmer = () => {
+  const shimmer_card_unit = 15;
+  return (
+    <div className="restaurant-menu">
+      <div className="restaurant-menu-content">
+        <div className="menu-items-container">
+          <div className="menu-items-list">
+            {Array(shimmer_card_unit)
+              .fill("")
+              .map((element, index) => (
+                <div className="shimmer-menu-card" key={index}>
+                  <div className="shimmer-img-wrapper">
+                    <p className="shimmer-img stroke animate" />
+                    <div className="shimmer-btn stroke animate"> </div>
+                  </div>
+                  <div className="shimmer-item-details">
+                    <p className="shimmer-w40  stroke animate"></p>
+                    <p className="shimmer-w20  stroke animate"> </p>
+                    <p className="shimmer-w60  stroke animate"></p>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
