@@ -25,6 +25,7 @@ const SearchResults = () => {
     const data = await fetch(SEARCH_RESULTS_URL);
     const jsonData = await data.json();
     setSearchResults(jsonData?.items);
+    // console.log(jsonData?.items)
     dispatch(showSuggestionsContainer(false));
   };
 
