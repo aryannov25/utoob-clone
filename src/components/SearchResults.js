@@ -38,7 +38,7 @@ const SearchResults = () => {
       <div className="w-10/12">
         <h1 className="p-5 text-xl font-bold">
           Here are the search results for:
-          <span className="font-extrabold text-xl ">
+          <span className="font-extrabold text-xl">
             {" "}
             {capitalizeTheFirstLetterOfEachWord(query)}
           </span>
