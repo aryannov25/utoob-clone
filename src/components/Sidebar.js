@@ -7,7 +7,7 @@ const Sidebar = () => {
   if (!isMenuOpen) return null;
   return (
     <>
-      <div className="p-8 pt-3 shadow-lg w-60 bg-white relative">
+      <div className="p-8 pt-3 shadow-lg w-60 bg-white relative dark:bg-zinc-900">
         <ul className="mb-3">
           <Link to={"/"}>
             <li className="py-3 font-bold cursor-pointer">

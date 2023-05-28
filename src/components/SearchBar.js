@@ -60,11 +60,11 @@ const SearchBar = () => {
           e.preventDefault();
         }}
       >
-        <div className="flex h-10 mt-2 pt-[2px] pr-20">
+        <div className="flex h-10 mt-2 pt-[2px] pr-20 ">
           <input
             type="text"
             placeholder="Search..."
-            className="w-[550px] border rounded-s-full px-7 shadow-lg"
+            className="w-[550px] border rounded-s-full px-7 shadow-lg dark:bg-zinc-800"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onFocus={() => dispatch(showSuggestionsContainer(true))}
@@ -72,7 +72,7 @@ const SearchBar = () => {
 
           <Link to={`/results?search_query=${searchQuery}`}>
             <img
-              className="h-[39px] py-2 px-5 border rounded-e-full hover:bg-gray-200 shadow-lg bg-gray-100"
+              className="h-[39px] py-2 px-5 border rounded-e-full hover:bg-gray-200 shadow-lg bg-gray-100 dark:bg-zinc-700"
               alt="search"
               src="https://cdn-icons-png.flaticon.com/512/3917/3917132.png"
             />

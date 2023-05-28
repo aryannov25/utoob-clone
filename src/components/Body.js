@@ -6,10 +6,12 @@ import Head from "./Head";
 const Body = () => {
   return (
     <>
-      <Head />
-      <div className="grid grid-flow-col">
-        <Sidebar />
-        <Outlet />
+      <div className="dark:bg-zinc-900 dark:text-white">
+        <Head />
+        <div className="grid grid-flow-col ">
+          <Sidebar />
+          <Outlet />
+        </div>
       </div>
     </>
   );

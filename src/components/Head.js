@@ -38,11 +38,11 @@ function Head() {
   //https://clients1.google.com/complete/search?client=youtube&gs_ri=youtube&ds=yt&q=faded
 
   return (
-    <div className="flex bg-white justify-between mt-1">
+    <div className="flex bg-white justify-between dark:bg-zinc-900">
       <div className="flex p-1 m-1 ml-3">
         <img
           onClick={() => toggleMenuHandler()}
-          className="h-8 w-11 px-3 pt-4 cursor-pointer"
+          className="h-8 w-11 px-3 pt-4 cursor-pointer "
           alt="side bar"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyFGZmFfQWrVXrdtp54fXbrvWy26g5G7LRol7MYwL2DMPv4LmFzZME_4lQRLT_fIqSTTU&usqp=CAU"
         />
@@ -64,3 +64,5 @@ function Head() {
 }
 
 export default Head;
+
+//dark:bg-black
