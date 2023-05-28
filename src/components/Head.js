@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Logo from "../img/logo.png";
+import Logo from "../img/YouTube-Logo.svg";
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { YOUTUBE_SEARCH_API } from "./../utils/constants";
@@ -47,7 +47,7 @@ function Head() {
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyFGZmFfQWrVXrdtp54fXbrvWy26g5G7LRol7MYwL2DMPv4LmFzZME_4lQRLT_fIqSTTU&usqp=CAU"
         />
         <a href="/">
-          <img className="h-10 px-2 w-40" alt="logo" src={Logo} />
+          <img className="h-12 px-2 w-40 " alt="logo" src={Logo} />
         </a>
       </div>
       <SearchBar />

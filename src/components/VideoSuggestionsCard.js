@@ -13,7 +13,7 @@ const VideoSuggestionsCard = ({ info }) => {
   return (
     <Link to={"/watch?v=" + info.id.videoId} key={info.id.videoId}>
       <ScrollToTop />
-      <div className="flex flex-row rounded-lg mt-2 ">
+      <div className="flex flex-row rounded-lg mt-2 dark:bg-zinc-900">
         <img
           className="rounded-lg w-[180px] "
           alt="thumbnail"

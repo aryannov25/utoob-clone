@@ -39,8 +39,8 @@ const WatchPage = () => {
   // }, []);
 
   return (
-    <div>
-      <div className="flex flex-col w-full">
+    <div className="dark:bg-zinc-900 h-[550%]">
+      <div className="flex flex-col w-full ">
         <div className="flex">
           <div className="pt-5 pl-5 start-0 w-[70%]">
             <iframe
@@ -61,11 +61,11 @@ const WatchPage = () => {
             <LiveChat />
           </div>
         </div>
-        <div className="flex flex-row m-5 h-[30vh] justify-between">
-          <div className="flex flex-col w-[70%] mt-[-1.75rem]">
+        <div className="flex flex-row m-5 h-[30vh] justify-between dark:bg-zinc-900 ">
+          <div className="flex flex-col w-[70%] mt-[-1.75rem] dark:bg-zinc-900 ">
             <VideoInfo />
-            <div className="flex flex-row h-[70vh] w-[100%] justify-between">
-              <div className="w-full">
+            <div className="flex flex-row h-[70vh] w-[100%] justify-between dark:bg-zinc-900">
+              <div className="w-full dark:bg-zinc-900">
                 {/* {comments.map((comment) => (
                     <Comments
                       imglink={

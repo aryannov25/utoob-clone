@@ -42,7 +42,7 @@ const VideoInfo = () => {
   const description = videoInfo?.items?.[0]?.snippet?.description || "";
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col ">
       <h1 className="font-bold text-xl">
         {videoInfo?.items?.[0]?.snippet?.title}
       </h1>
@@ -95,7 +95,7 @@ const VideoInfo = () => {
           </h2>
         </div>
       </div>
-      <div className="flex flex-col bg-gray-100 rounded-lg p-4 mt-3">
+      <div className="flex flex-col bg-gray-100 rounded-lg p-4 mt-3 dark:bg-zinc-700">
         <div className="flex font-semibold">
           <h2>
             {" "}

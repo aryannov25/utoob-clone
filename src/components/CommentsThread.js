@@ -14,7 +14,7 @@ const CommentsThread = ({ videoID }) => {
           process.env.REACT_APP_GOOGLE_API_KEY
       );
       const json = await data.json();
-      console.log(json.items);
+      // console.log(json.items);
       setCommentThread(json.items);
     };
 
@@ -25,7 +25,7 @@ const CommentsThread = ({ videoID }) => {
   if (!commentThread?.length) {
     return (
       <>
-        <h2 className="flex justify-center items-center mb-56 p-4">
+        <h2 className="flex justify-center items-center mb-56 p-4 dark:bg-zinc-900">
           Comments are turned off.{" "}
         </h2>
       </>
@@ -36,7 +36,7 @@ const CommentsThread = ({ videoID }) => {
       <h1 className="p-5 font-extrabold">Comments</h1>
       {commentThread.map((item) => {
         return (
-          <div key={item.id} className="m-5 p-2 shadow-md rounded-lg">
+          <div key={item.id} className="m-7 shadow-md rounded-lg dark:bg-zinc-900">
             <Comment
               item={item}
               repliesQty={item?.replies?.comments?.length}

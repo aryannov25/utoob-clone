@@ -3,7 +3,7 @@ import React from "react";
 const Comments = ({ name, text, imglink }) => {
   // console.log(imglink)
   return (
-    <div className="m-5 p-2 shadow-md rounded-lg">
+    <div className="m-5 p-2 shadow-md rounded-lg ">
       <div className="flex">
         <div>
           <img className="rounded-full" alt="img" src={imglink} />
