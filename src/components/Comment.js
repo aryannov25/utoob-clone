@@ -8,7 +8,7 @@ const Comment = ({ item, repliesQty, setVisibleSection, visibleSection }) => {
     item.snippet?.topLevelComment?.snippet;
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col m-2">
       <div className="flex flex-row items-start mb-3 font-roboto">
         <img
           className="rounded-full"
