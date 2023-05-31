@@ -32,7 +32,7 @@ const WatchPageVideos = () => {
 
   return (
     <>
-      {/* <ScrollToTop/> */}
+
       <div className="ml-6 mt-4 mr-6 py-2 w-[450px] dark:bg-zinc-900">
         {relatedVideoData.map((v) => (
           <VideoSuggestionsCard info={v} />
