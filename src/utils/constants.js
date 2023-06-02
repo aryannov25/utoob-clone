@@ -23,6 +23,7 @@ export const OFFSET_LIVE_CHAT = 20;
 
 // CORS Proxy
 // https://proxy.cors.sh/
+// https://corsproxy.io/?
 
 //  https://clients1.google.com/complete/search?client=firefox&ds=yt&q=
 
