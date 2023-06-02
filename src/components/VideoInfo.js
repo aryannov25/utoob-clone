@@ -37,7 +37,7 @@ const VideoInfo = () => {
     getChannel();
   }, [channelID]);
 
-  // console.log(videoInfo);
+  console.log(videoInfo);
 
   const description = videoInfo?.items?.[0]?.snippet?.description || "";
 
