@@ -19,7 +19,7 @@ const VideoInfo = () => {
       const json = await res.json();
       setVideoInfo(json);
       setChannelID(json?.items?.[0]?.snippet?.channelId);
-      console.log(json);
+      // console.log(json);
       // console.log(json?.items[0]?.snippet?.channelId);
     };
     getVideoInfo();
