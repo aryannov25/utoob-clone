@@ -20,6 +20,7 @@ const VideoInfo = () => {
       setVideoInfo(json);
       setChannelID(json?.items?.[0]?.snippet?.channelId);
 
+      console.log(json)
       // console.log(json?.items[0]?.snippet?.channelId);
     };
     getVideoInfo();
@@ -39,6 +40,8 @@ const VideoInfo = () => {
 
   // console.log(videoInfo);
 
+
+  // "|| returns true if one or both expressions are true, otherwise it returns false."
   const description = videoInfo?.items?.[0]?.snippet?.description || "";
 
   return (
