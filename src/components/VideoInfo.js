@@ -23,7 +23,6 @@ const VideoInfo = () => {
     };
     getVideoInfo();
   }, [videoID]);
-
   // console.log(channelID);
 
   useEffect(() => {
