@@ -25,7 +25,7 @@ export const OFFSET_LIVE_CHAT = 20;
 // https://proxy.cors.sh/
 // https://corsproxy.io/?
 
-// Search Ulr
+// Search Url
 //  https://clients1.google.com/complete/search?client=firefox&ds=yt&q=
 
 export function capitalizeTheFirstLetterOfEachWord(words) {
