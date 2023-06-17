@@ -27,6 +27,7 @@ export const OFFSET_LIVE_CHAT = 20;
 
 // Search Url
 //  https://clients1.google.com/complete/search?client=firefox&ds=yt&q=
+//  http://suggestqueries.google.com/complete/search?client=youtube&ds=yt&q=
 
 export function capitalizeTheFirstLetterOfEachWord(words) {
   var separateWord = words.toLowerCase().split(" ");
