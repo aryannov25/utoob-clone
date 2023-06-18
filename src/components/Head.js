@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { YOUTUBE_SEARCH_API } from "./../utils/constants";
 import SearchBar from "./SearchBar";
+import { Link } from "react-router-dom";
 
 function Head() {
   // eslint-disable-next-line
@@ -46,9 +47,9 @@ function Head() {
           alt="side bar"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyFGZmFfQWrVXrdtp54fXbrvWy26g5G7LRol7MYwL2DMPv4LmFzZME_4lQRLT_fIqSTTU&usqp=CAU"
         />
-        <a href="/">
+        <Link to="/">
           <img className="h-12 px-2 w-40 " alt="logo" src={Logo} />
-        </a>
+        </Link>
       </div>
       <SearchBar />
 
