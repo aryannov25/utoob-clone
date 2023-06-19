@@ -43,7 +43,7 @@ const WatchPage = () => {
       <div className="flex flex-col w-full ">
         <div className="flex">
           <div className="pt-5 pl-5 start-0 w-[70%]">
-            <iframe
+            {/* <iframe
               width="100%"
               height="600"
               src={
@@ -51,6 +51,16 @@ const WatchPage = () => {
                 searchParams.get("v") +
                 "?autoplay=1"
               }
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe> */}
+
+            <iframe
+              width="1100"
+              height="600"
+              src={"https://www.youtube.com/embed/" + searchParams.get("v")}
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
