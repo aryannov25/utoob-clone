@@ -11,4 +11,3 @@ root.render(
   <App />
 );
 
-//React.StrictMode causes double console logs
