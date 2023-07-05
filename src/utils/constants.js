@@ -21,14 +21,6 @@ export const CHANNEL_INFO_URL =
 
 export const OFFSET_LIVE_CHAT = 20;
 
-// CORS Proxy
-// https://proxy.cors.sh/
-// https://corsproxy.io/?
-
-// Search Url
-//  https://clients1.google.com/complete/search?client=firefox&ds=yt&q=
-//  http://suggestqueries.google.com/complete/search?client=youtube&ds=yt&q=
-
 export function capitalizeTheFirstLetterOfEachWord(words) {
   var separateWord = words.toLowerCase().split(" ");
   for (var i = 0; i < separateWord.length; i++) {
@@ -37,3 +29,12 @@ export function capitalizeTheFirstLetterOfEachWord(words) {
   }
   return separateWord.join(" ");
 }
+
+// CORS Proxy
+// https://proxy.cors.sh/
+// https://corsproxy.io/?
+
+// Search Url
+//  https://clients1.google.com/complete/search?client=firefox&ds=yt&q=
+//  http://suggestqueries.google.com/complete/search?client=youtube&ds=yt&q=
+
