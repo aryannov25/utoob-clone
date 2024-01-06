@@ -7,7 +7,7 @@ export const YOUTUBE_API_KEY =
 // GOOGLE_API_KEY;
 
 export const YOUTUBE_SEARCH_API =
-  "https://corsproxy.org/?http://suggestqueries.google.com/complete/search?client=youtube&ds=yt&q=";
+  "http://suggestqueries.google.com/complete/search?client=youtube&ds=yt&q=";
 
 export const VIDEO_INFO_URL =
   "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&key=" +
