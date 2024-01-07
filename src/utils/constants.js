@@ -7,7 +7,10 @@ export const YOUTUBE_API_KEY =
 // GOOGLE_API_KEY;
 
 export const YOUTUBE_SEARCH_API =
-  "http://suggestqueries.google.com/complete/search?client=youtube&ds=yt&q=";
+  "https://corsproxy.org/?" +
+  encodeURIComponent(
+    "https://clients1.google.com/complete/search?client=firefox&ds=yt&q="
+  );
 
 export const VIDEO_INFO_URL =
   "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&key=" +
@@ -31,7 +34,6 @@ export function capitalizeTheFirstLetterOfEachWord(words) {
 }
 
 // CORS Proxy
-// https://proxy.cors.sh/
 // https://corsproxy.org/?
 
 // Search Url
