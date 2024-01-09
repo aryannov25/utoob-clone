@@ -3,7 +3,6 @@ import { YOUTUBE_SEARCH_API } from "../utils/constants";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCache } from "../utils/CacheSlice";
 import ResultsSuggestionContainer from "./ResultsSuggestionContainer";
-import { showSuggestionsContainer } from "../utils/showSearchSuggestionsSlice";
 import { Link } from "react-router-dom";
 import ClickAwayListener from "react-click-away-listener";
 
@@ -14,9 +13,6 @@ const SearchBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const cache = useSelector((store) => store.searchSuggestionCache.cache);
-  const showSuggestions = useSelector(
-    (store) => store.showSearchSuggestions.show
-  );
 
   const handleClickAway = () => {
     // alert("Maybe close the popup");
@@ -76,8 +72,6 @@ const SearchBar = () => {
               className="w-[550px] border rounded-s-full px-7 shadow-lg dark:bg-zinc-800"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              // onFocus={() => dispatch(showSuggestionsContainer(true))}
-              // onBlur={() => showSuggestionsContainer(false)}
               onFocus={setMenuOpen}
             />
 
@@ -90,7 +84,7 @@ const SearchBar = () => {
             </Link>
           </div>
         </ClickAwayListener>
-        {menuOpen &&  (
+        {menuOpen && (
           <div className="z-[9] absolute bg-white w-[550px] border rounded-lg shadow-lg  font-semibold mx-1 my-[2px]">
             {suggestions.map((suggestion) => {
               return (
