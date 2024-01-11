@@ -37,6 +37,8 @@ const SearchBar = () => {
     } else {
       const data = await fetch(`${YOUTUBE_SEARCH_API}${searchQuery}`);
       const jsonData = await data.json();
+      console.log(jsonData[1]);
+
       setSuggestions(jsonData[1]);
 
       //add to cache
@@ -63,6 +65,7 @@ const SearchBar = () => {
         onSubmit={(e) => {
           e.preventDefault();
         }}
+        onClickAway={handleClickAway}
       >
         <ClickAwayListener onClickAway={handleClickAway}>
           <div className="flex h-10 mt-2 pt-[2px] pr-20 ">
@@ -71,7 +74,11 @@ const SearchBar = () => {
               placeholder="Search..."
               className="w-[550px] border rounded-s-full px-7 shadow-lg dark:bg-zinc-800"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              // onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => (
+                setSearchQuery(e.target.value),
+                e.target.value === "" ? setMenuOpen(false) : null
+              )}
               onFocus={setMenuOpen}
             />
 
@@ -82,20 +89,28 @@ const SearchBar = () => {
                 src="https://cdn-icons-png.flaticon.com/512/3917/3917132.png"
               />
             </Link>
-          </div>
-        </ClickAwayListener>
-        {menuOpen && (
-          <div className="z-[9] absolute bg-white w-[550px] border rounded-lg shadow-lg  font-semibold mx-1 my-[2px]">
+            {menuOpen && (
+          <div
+            className="z-[9] absolute mt-10 bg-white w-[550px] border rounded-lg shadow-lg  font-semibold mx-1 my-[2px]"
+            onClickAway={handleClickAway}
+          >
             {suggestions.map((suggestion) => {
               return (
                 <ResultsSuggestionContainer
                   suggestion={suggestion}
                   key={suggestion}
+                  handleClickAway={() => handleClickAway()}
                 />
               );
             })}
           </div>
         )}
+
+          </div>
+          
+        </ClickAwayListener>
+
+        
       </form>
     </div>
   );
