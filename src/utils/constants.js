@@ -7,7 +7,7 @@ export const YOUTUBE_API_KEY =
 // GOOGLE_API_KEY;
 
 export const YOUTUBE_SEARCH_API =
-  "https://corsproxy.org/?" +
+  "https://thingproxy.freeboard.io/fetch/" +
   encodeURIComponent(
     "https://clients1.google.com/complete/search?client=firefox&ds=yt&q="
   );
@@ -35,6 +35,7 @@ export function capitalizeTheFirstLetterOfEachWord(words) {
 
 // CORS Proxy
 // https://corsproxy.org/?
+//"https://thingproxy.freeboard.io/fetch/"
 
 // Search Url
 //  https://clients1.google.com/complete/search?client=firefox&ds=yt&q=
