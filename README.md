@@ -1,70 +1,82 @@
-# Getting Started with Create React App
+# UToob
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A YouTube clone built with React. Streams real data from the YouTube Data API v3 via a server-side proxy so the API key is never exposed in the browser.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Home feed** — trending videos with infinite pagination (Load More)
+- **Watch page** — video player with likes, share, save, theater mode
+- **Shorts** — TikTok-style vertical scroll with auto-play and comments drawer
+- **Search** — results with channel avatars and decoded HTML entities
+- **Channel page** — banner, avatar, subscriber count, videos tab, about tab
+- **Explore / Category pages** — Trending, Music, Gaming, Sports, Movies, Live
+- **Live chat** — real-time polling for videos that have an active live chat
+- **Comments** — top comments sorted by relevance, with like counts and reply threads
+- **Watch History** — auto-saved to localStorage, clearable
+- **Watch Later** — save/unsave from any video card or watch page
+- **Dark / Light mode** — toggle in header, persisted across sessions
+- **Mobile responsive** — works on all screen sizes
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- React 18 (Create React App)
+- Redux Toolkit
+- React Router v6
+- Tailwind CSS
+- YouTube Data API v3
+- Netlify Functions (production API proxy)
+- http-proxy-middleware (dev API proxy)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Getting Started
 
-### `npm test`
+### 1. Clone and install
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+git clone <repo-url>
+cd utoob-clone
+npm install
+```
 
-### `npm run build`
+### 2. Add your YouTube API key
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Create a `.env` file in the project root:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+YOUTUBE_API_KEY=your_api_key_here
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Get a key from [Google Cloud Console](https://console.cloud.google.com/) — enable the **YouTube Data API v3**.
 
-### `npm run eject`
+### 3. Run locally
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+npm start
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Opens at [http://localhost:3000](http://localhost:3000). The dev server proxies all `/api/youtube/*` requests through `setupProxy.js`, appending the API key server-side.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Deployment (Netlify)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The `netlify.toml` config handles everything:
 
-## Learn More
+- `npm run build` builds the React app
+- `/api/youtube/*` requests are rewritten to `/.netlify/functions/youtube`
+- The Netlify Function reads `YOUTUBE_API_KEY` from environment variables
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Set `YOUTUBE_API_KEY` in your Netlify site's environment variables — the key never touches the client bundle.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Project Structure
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+src/
+  components/       React components
+  utils/
+    constants.js    API base URLs
+    localStore.js   localStorage helpers (history, watch later)
+    formatDuration  ISO 8601 → mm:ss
+    relativeTime    "2 days ago" formatter
+  setupProxy.js     Dev server API proxy
+netlify/
+  functions/
+    youtube.js      Production serverless proxy
+```
