@@ -7,31 +7,43 @@ const CommentReply = ({ commentStructure }) => {
     commentStructure?.snippet;
 
   return (
-    <div>
-      <div className="ml-10 mb-3 flex flex-rowitems-start">
-        <img
-          className="mt-2 h-9 w-9 rounded-[50%]"
-          src={authorProfileImageUrl}
-          alt="commentAuthor"
-        />
-        <div className="flex flex-col ml-3 justify-start">
-          <h2 className="text-black-400 font-semibold text-md">
+    <div className="flex gap-3 ml-12 mt-4">
+      {/* Avatar */}
+      <img
+        className="w-8 h-8 rounded-full flex-shrink-0 object-cover"
+        src={authorProfileImageUrl}
+        alt={authorDisplayName}
+      />
+
+      <div className="flex flex-col gap-1 flex-1 min-w-0">
+        {/* Author + date */}
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-[#f1f1f1] text-sm font-semibold">
             {authorDisplayName}
-            <span className="ml-2 text-gray-600 text-sm">
-              {publishedAtFunc(publishedAt)}
-            </span>
-          </h2>
-          <h3 className="text-sm mt-1">{textDisplay}</h3>
+          </span>
+          <span className="text-[#aaaaaa] text-xs">
+            {publishedAtFunc(publishedAt)}
+          </span>
         </div>
-      </div>
-      <div className="flex flex-row mr-3 items-center ml-14 mb-2">
-        <button className="w-5 h-5 mr-2 ml-8 hover:bg-gray-300 hover:rounded-full">
-          <AiFillLike />
-        </button>
-        <button className="w-5 h-5 mr-2 hover:bg-gray-300 hover:rounded-full">
-          <AiFillDislike />
-        </button>
-        <span className="">Reply</span>
+
+        {/* Reply text */}
+        <p
+          className="text-[#f1f1f1] text-sm leading-relaxed"
+          dangerouslySetInnerHTML={{ __html: textDisplay }}
+        />
+
+        {/* Action row */}
+        <div className="flex items-center gap-4 mt-1">
+          <button className="flex items-center gap-1.5 text-[#aaaaaa] hover:text-[#f1f1f1] transition-colors">
+            <AiFillLike className="w-4 h-4" />
+          </button>
+          <button className="flex items-center gap-1.5 text-[#aaaaaa] hover:text-[#f1f1f1] transition-colors">
+            <AiFillDislike className="w-4 h-4" />
+          </button>
+          <button className="text-[#aaaaaa] text-xs font-semibold hover:text-[#f1f1f1] transition-colors">
+            Reply
+          </button>
+        </div>
       </div>
     </div>
   );

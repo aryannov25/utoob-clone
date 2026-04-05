@@ -1,238 +1,136 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-import { Link } from "react-router-dom";
+
+const CATEGORIES = [
+  { label: "All", query: null },
+  { label: "Gaming", query: "Games" },
+  { label: "Music", query: "Music" },
+  { label: "Live", query: "Live" },
+  { label: "Comedy", query: "Comedy" },
+  { label: "Movies", query: "Movies" },
+  { label: "Tech", query: "Technology" },
+  { label: "News", query: "News" },
+  { label: "Gadgets", query: "Gadgets" },
+  { label: "Hip-Hop", query: "Hip-Hop" },
+  { label: "Motivation", query: "Motivation" },
+  { label: "Trending", query: "Trending" },
+  { label: "Drama", query: "Drama" },
+  { label: "Reality Shows", query: "Reality+Shows" },
+  { label: "Lectures", query: "Lectures" },
+  { label: "JavaScript", query: "Javascript" },
+  { label: "Tailwind CSS", query: "Tailwindcss" },
+];
 
 const ButtonList = () => {
-  const slideLeft = () => {
-    var slider = document.getElementById("slider");
-    slider.scrollLeft = slider.scrollLeft - 500;
+  const sliderRef = useRef(null);
+  const [canLeft, setCanLeft] = useState(false);
+  const [canRight, setCanRight] = useState(true);
+  const [searchParams] = useSearchParams();
+  const currentQuery = searchParams.get("search_query");
+
+  const updateFades = () => {
+    const el = sliderRef.current;
+    if (!el) return;
+    setCanLeft(el.scrollLeft > 4);
+    setCanRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
   };
 
-  const slideRight = () => {
-    var slider = document.getElementById("slider");
-    slider.scrollLeft = slider.scrollLeft + 500;
-  };
+  useEffect(() => {
+    updateFades();
+    const el = sliderRef.current;
+    const onWheel = (e) => {
+      if (e.deltaY === 0) return;
+      e.preventDefault();
+      el.scrollBy({ left: e.deltaY, behavior: "auto" });
+    };
+    el?.addEventListener("scroll", updateFades, { passive: true });
+    el?.addEventListener("wheel", onWheel, { passive: false });
+    window.addEventListener("resize", updateFades);
+    return () => {
+      el?.removeEventListener("scroll", updateFades);
+      el?.removeEventListener("wheel", onWheel);
+      window.removeEventListener("resize", updateFades);
+    };
+  }, []);
+
+  const slide = (dir) =>
+    sliderRef.current?.scrollBy({ left: dir * 400, behavior: "smooth" });
 
   return (
-    <div className="grid grid-flow-col dark:bg-zinc-900">
-      <MdChevronLeft
-        className="hover:scale-150 my-auto opacity-50 "
-        size={30}
-        onClick={slideLeft}
-        aria-hidden="true"
-      />
-      <div
-        id="slider"
-        className="flex h-18 m-2 overflow-hidden whitespace-nowrap scroll-smooth"
+    <div className="bg-[#0f0f0f] border-b border-[#303030] sticky top-14 z-40 flex items-center">
+      {/* Left arrow — zero width when hidden so it doesn't shift layout */}
+      <button
+        onClick={() => slide(-1)}
+        aria-label="Scroll left"
+        className={`flex-shrink-0 rounded-full transition-all duration-200 overflow-hidden text-[#f1f1f1] hover:bg-[#272727] ${
+          canLeft
+            ? "w-7 h-7 opacity-100 mx-1"
+            : "w-0 h-7 opacity-0 pointer-events-none"
+        }`}
       >
-        <div>
-          <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-            All
-          </button>
+        <MdChevronLeft size={22} />
+      </button>
+
+      {/* Pill row in its own overflow-hidden wrapper — fades are clipped here */}
+      <div className="relative flex-1 overflow-hidden">
+        {/* Left fade — inside the pill wrapper so it clips correctly */}
+        <div
+          className="pointer-events-none absolute left-0 top-0 h-full w-12 z-10 transition-opacity duration-200"
+          style={{
+            background: "linear-gradient(to right, #0f0f0f 40%, transparent)",
+            opacity: canLeft ? 1 : 0,
+          }}
+        />
+
+        <div
+          ref={sliderRef}
+          className="flex gap-2 overflow-x-auto px-3 py-1.5 scrollbar-hide"
+          style={{ WebkitOverflowScrolling: "touch" }}
+        >
+          {CATEGORIES.map(({ label, query }) => {
+            const isActive =
+              query === null ? !currentQuery : currentQuery === query;
+            const to = query ? `/results?search_query=${query}` : "/";
+
+            return (
+              <Link key={label} to={to} className="flex-shrink-0">
+                <span
+                  className={`inline-block text-sm font-medium rounded-lg px-3 py-1.5 whitespace-nowrap transition-colors cursor-pointer ${
+                    isActive
+                      ? "bg-[#f1f1f1] text-[#0f0f0f]"
+                      : "bg-[#272727] text-[#f1f1f1] hover:bg-[#3f3f3f]"
+                  }`}
+                >
+                  {label}
+                </span>
+              </Link>
+            );
+          })}
         </div>
-        <Link to={"/results?search_query=Games"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Games
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=Music"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Music
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=Live"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Live
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=Comedy"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Comedy
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=Movies"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Movies
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=Gadgets"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Gadgets
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=News"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              News
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=Musicals"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Musicals
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=Trending"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Trending
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=Raftaar"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Raftaar
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=Drama"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Drama
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=Yo+Yo+Honey+Singh"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Yo Yo Honey Singh
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=Theater"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Theater
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=Cinema"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Cinema
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=Reality+Shows"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Reality Shows
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=Accounting"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Accounting
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=Motivation"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Motivation
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=Hip-Hop"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Hip-Hop
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=Laptops"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Laptops
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=Technology"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Technology
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=New+to+you"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              New to you
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=Tailwindcss"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Tailwindcss
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=Recently+uploaded"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Recently uploaded
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=Leatures"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Leatures
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=Random+Things"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Random Things
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=Javascript"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Javascript
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=Bella"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Bella
-            </button>
-          </div>
-        </Link>
-        <Link to={"/results?search_query=Top+50"}>
-          <div>
-            <button className="bg-slate-100 dark:bg-zinc-500 rounded-full shadow-md hover:scale-110 inline-block font-normal m-2 py-1 px-3">
-              Top 50
-            </button>
-          </div>
-        </Link>
+
+        {/* Right fade */}
+        <div
+          className="pointer-events-none absolute right-0 top-0 h-full w-12 z-10 transition-opacity duration-200"
+          style={{
+            background: "linear-gradient(to left, #0f0f0f 40%, transparent)",
+            opacity: canRight ? 1 : 0,
+          }}
+        />
       </div>
-      <MdChevronRight
-        className="hover:scale-150 my-auto opacity-50 "
-        size={30}
-        onClick={slideRight}
-        aria-hidden="true"
-      />
+
+      {/* Right arrow */}
+      <button
+        onClick={() => slide(1)}
+        aria-label="Scroll right"
+        className={`flex-shrink-0 rounded-full transition-all duration-200 overflow-hidden text-[#f1f1f1] hover:bg-[#272727] ${
+          canRight
+            ? "w-7 h-7 opacity-100 mx-1"
+            : "w-0 h-7 opacity-0 pointer-events-none"
+        }`}
+      >
+        <MdChevronRight size={22} />
+      </button>
     </div>
   );
 };

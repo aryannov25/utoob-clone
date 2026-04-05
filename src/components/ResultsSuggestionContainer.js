@@ -1,23 +1,17 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
 const ResultsSuggestionContainer = ({ suggestion, handleClickAway }) => {
   if (!suggestion) return null;
-  // console.log(suggestion)
+
   return (
     <a
       href={`/results?search_query=${suggestion}`}
       onClick={() => handleClickAway()}
     >
-      <div className="dark:bg-zinc-900">
-        <p
-          className="p-1 px-2 hover:bg-gray-700 
-             cursor-pointer"
-        >
-          <FaSearch className="inline mr-2 font-thin text-sm text-gray-600" />
-          {suggestion}
-        </p>
+      <div className="flex items-center gap-3 px-4 py-2.5 hover:bg-[#272727] cursor-pointer transition-colors">
+        <FaSearch className="flex-shrink-0 text-[#aaaaaa] text-sm" />
+        <span className="text-[#f1f1f1] text-sm">{suggestion}</span>
       </div>
     </a>
   );

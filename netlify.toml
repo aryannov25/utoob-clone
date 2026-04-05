@@ -1,3 +1,13 @@
+[build]
+  command = "npm run build"
+  publish = "build"
+
+[[redirects]]
+  from = "/api/youtube/*"
+  to = "/.netlify/functions/youtube"
+  status = 200
+  force = true
+
 [[redirects]]
   from = "/*"
   to = "/index.html"

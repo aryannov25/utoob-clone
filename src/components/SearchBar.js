@@ -15,7 +15,6 @@ const SearchBar = () => {
   const cache = useSelector((store) => store.searchSuggestionCache.cache);
 
   const handleClickAway = () => {
-    // alert("Maybe close the popup");
     setMenuOpen(false);
   };
 
@@ -38,79 +37,78 @@ const SearchBar = () => {
       const data = await fetch(`${YOUTUBE_SEARCH_API}${searchQuery}`);
       const jsonData = await data.json();
       console.log(jsonData[1]);
-
       setSuggestions(jsonData[1]);
 
-      //add to cache
-      const obj = {};
-      obj[searchQuery] = jsonData[1];
       dispatch(
         addToCache({
           [searchQuery]: jsonData[1],
-        })
+        }),
       );
     }
   };
 
   if (searchQuery !== "" && !suggestions) return null;
-
-  // console.log(suggestions);
-
   if (!suggestions) return null;
 
   return (
-    <div className="relative">
+    <div className="relative w-full max-w-[600px]">
       <form
-        className="font-medium mx-2 p-1"
         onSubmit={(e) => {
           e.preventDefault();
         }}
-        onClickAway={handleClickAway}
       >
         <ClickAwayListener onClickAway={handleClickAway}>
-          <div className="flex h-10 mt-2 pt-[2px] pr-20 ">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="w-[550px] border rounded-s-full px-7 shadow-lg dark:bg-zinc-800"
-              value={searchQuery}
-              // onChange={(e) => setSearchQuery(e.target.value)}
-              onChange={(e) => (
-                setSearchQuery(e.target.value),
-                e.target.value === "" ? setMenuOpen(false) : null
-              )}
-              onFocus={setMenuOpen}
-            />
-
-            <Link to={`/results?search_query=${searchQuery}`}>
-              <img
-                className="h-[39px] py-2 px-5 border rounded-e-full hover:bg-gray-200 shadow-lg bg-gray-100 dark:bg-zinc-700"
-                alt="search"
-                src="https://cdn-icons-png.flaticon.com/512/3917/3917132.png"
+          <div className="relative">
+            {/* Input + search button row */}
+            <div className="flex h-10">
+              <input
+                type="text"
+                placeholder="Search"
+                className="w-full flex-1 bg-[#121212] border border-[#303030] border-r-0 rounded-l-full px-5 text-[#f1f1f1] placeholder-[#aaaaaa] text-sm focus:outline-none focus:border-[#3ea6ff] transition-colors"
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  if (e.target.value === "") setMenuOpen(false);
+                }}
+                onFocus={() => setMenuOpen(true)}
               />
-            </Link>
-            {menuOpen && (
-          <div
-            className="z-[9] absolute mt-10 bg-white w-[550px] border rounded-lg shadow-lg  font-semibold mx-1 my-[2px]"
-            onClickAway={handleClickAway}
-          >
-            {suggestions.map((suggestion) => {
-              return (
-                <ResultsSuggestionContainer
-                  suggestion={suggestion}
-                  key={suggestion}
-                  handleClickAway={() => handleClickAway()}
-                />
-              );
-            })}
-          </div>
-        )}
+              <Link to={`/results?search_query=${searchQuery}`}>
+                <button
+                  type="button"
+                  className="h-10 px-5 bg-[#272727] border border-[#303030] rounded-r-full hover:bg-[#3f3f3f] transition-colors flex items-center justify-center"
+                  aria-label="Search"
+                >
+                  <svg
+                    className="w-5 h-5 text-[#f1f1f1]"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.5 4.5a7.5 7.5 0 0012.15 12.15z"
+                    />
+                  </svg>
+                </button>
+              </Link>
+            </div>
 
+            {/* Suggestions dropdown */}
+            {menuOpen && suggestions && suggestions.length > 0 && (
+              <div className="absolute top-full left-0 z-50 mt-1 w-full bg-[#212121] border border-[#303030] rounded-xl shadow-2xl overflow-hidden">
+                {suggestions.map((suggestion) => (
+                  <ResultsSuggestionContainer
+                    suggestion={suggestion}
+                    key={suggestion}
+                    handleClickAway={() => handleClickAway()}
+                  />
+                ))}
+              </div>
+            )}
           </div>
-          
         </ClickAwayListener>
-
-        
       </form>
     </div>
   );

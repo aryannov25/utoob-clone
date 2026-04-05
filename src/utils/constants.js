@@ -1,26 +1,17 @@
-//const GOOGLE_API_KEY = "AIzaSyAB2Tp4B26-K28nsWmdX9UwZkX-n2wpEt8";
-//AIzaSyDWPq_w0_uVejy_MPuXReLG7VXXY4NuZpM
+// All YouTube API calls go through /api/youtube/* proxy (key added server-side)
+export const YT_API = "/api/youtube";
 
-export const YOUTUBE_API_KEY =
-  "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&key=" +
-  process.env.REACT_APP_GOOGLE_API_KEY;
-// GOOGLE_API_KEY;
+export const YOUTUBE_API_KEY = `${YT_API}/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN`;
 
 export const YOUTUBE_SEARCH_API =
-  "https://thingproxy.freeboard.io/fetch/" +
+  "https://corsproxy.io/?" +
   encodeURIComponent(
-    "https://clients1.google.com/complete/search?client=firefox&ds=yt&q="
+    "https://clients1.google.com/complete/search?client=firefox&ds=yt&q=",
   );
 
-export const VIDEO_INFO_URL =
-  "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&key=" +
-  process.env.REACT_APP_GOOGLE_API_KEY +
-  "&id=";
+export const VIDEO_INFO_URL = `${YT_API}/videos?part=snippet%2CcontentDetails%2Cstatistics&id=`;
 
-export const CHANNEL_INFO_URL =
-  "https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&key=" +
-  process.env.REACT_APP_GOOGLE_API_KEY +
-  "&id=";
+export const CHANNEL_INFO_URL = `${YT_API}/channels?part=snippet%2CcontentDetails%2Cstatistics&id=`;
 
 export const OFFSET_LIVE_CHAT = 20;
 
@@ -32,11 +23,3 @@ export function capitalizeTheFirstLetterOfEachWord(words) {
   }
   return separateWord.join(" ");
 }
-
-// CORS Proxy
-// https://corsproxy.org/?
-//"https://thingproxy.freeboard.io/fetch/"
-
-// Search Url
-//  https://clients1.google.com/complete/search?client=firefox&ds=yt&q=
-//  http://suggestqueries.google.com/complete/search?client=youtube&ds=yt&q=

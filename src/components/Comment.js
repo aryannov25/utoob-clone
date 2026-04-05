@@ -4,60 +4,79 @@ import { AiFillLike, AiFillDislike } from "react-icons/ai";
 import { BiDownArrow, BiUpArrow } from "react-icons/bi";
 
 const Comment = ({ item, repliesQty, setVisibleSection, visibleSection }) => {
-  const { authorProfileImageUrl, authorDisplayName, publishedAt, textDisplay } =
-    item.snippet?.topLevelComment?.snippet;
+  const {
+    authorProfileImageUrl,
+    authorDisplayName,
+    publishedAt,
+    textDisplay,
+    likeCount,
+  } = item.snippet?.topLevelComment?.snippet;
 
   return (
-    <div className="flex flex-col m-2">
-      <div className="flex flex-row items-start mb-3 font-roboto">
-        <img
-          className="rounded-full"
-          src={authorProfileImageUrl}
-          alt="commentAuthor"
-        />
-        <div className="flex flex-col ml-3 justify-start">
-          <h2 className="font-bold">
+    <div className="flex gap-3">
+      {/* Avatar */}
+      <img
+        className="w-10 h-10 rounded-full flex-shrink-0 object-cover"
+        src={authorProfileImageUrl}
+        alt={authorDisplayName}
+      />
+
+      <div className="flex flex-col gap-1 flex-1 min-w-0">
+        {/* Author + date */}
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-[#f1f1f1] text-sm font-semibold">
             {authorDisplayName}
-            <span className="ml-2 text-gray-600 text-sm">
-              {publishedAtFunc(publishedAt)}
-            </span>
-          </h2>
-          <h3 className="text-sm mt-1">{textDisplay}</h3>
-        </div>
-      </div>
-      <div className="flex flex-row mr-3 items-center ml-12 mb-2">
-        <span className="w-5 h-5 mr-2 hover:bg-gray-300 hover:rounded-full">
-          <AiFillLike />
-        </span>
-        <span className="w-5 h-5 mr-2 hover:bg-gray-300 hover:rounded-full">
-          <AiFillDislike />
-        </span>
-        <span className="">Reply</span>
-      </div>
-      {repliesQty && (
-        <div
-          className="flex flex-row mr-3 items-center ml-12 mb-2 cursor-pointer"
-          onClick={
-            item.id !== visibleSection
-              ? () => setVisibleSection(item.id)
-              : () => setVisibleSection(null)
-          }
-        >
-          {item.id === visibleSection ? (
-            <span className="w-3 h-3 mr-2 hover:bg-gray-300 hover:rounded-full">
-              <BiUpArrow />
-            </span>
-          ) : (
-            <span className="w-3 h-3 mr-2 hover:bg-gray-300 hover:rounded-full">
-              <BiDownArrow />
-            </span>
-          )}
-          <span className="text-blue-900 font-semibold">
-            {" "}
-            {repliesQty} Reply
+          </span>
+          <span className="text-[#aaaaaa] text-xs">
+            {publishedAtFunc(publishedAt)}
           </span>
         </div>
-      )}
+
+        {/* Comment text — textDisplay contains HTML entities and <br> tags */}
+        <p
+          className="text-[#f1f1f1] text-sm leading-relaxed"
+          dangerouslySetInnerHTML={{ __html: textDisplay }}
+        />
+
+        {/* Like / dislike / reply row */}
+        <div className="flex items-center gap-4 mt-1">
+          <button className="flex items-center gap-1.5 text-[#aaaaaa] hover:text-[#f1f1f1] transition-colors">
+            <AiFillLike className="w-4 h-4" />
+            {likeCount > 0 && (
+              <span className="text-xs">
+                {likeCount >= 1000
+                  ? `${(likeCount / 1000).toFixed(1)}K`
+                  : likeCount}
+              </span>
+            )}
+          </button>
+          <button className="flex items-center gap-1.5 text-[#aaaaaa] hover:text-[#f1f1f1] transition-colors">
+            <AiFillDislike className="w-4 h-4" />
+          </button>
+          <button className="text-[#aaaaaa] text-xs font-semibold hover:text-[#f1f1f1] transition-colors">
+            Reply
+          </button>
+        </div>
+
+        {/* Expand replies */}
+        {repliesQty && (
+          <button
+            className="flex items-center gap-2 mt-1 text-[#3ea6ff] text-sm font-semibold hover:bg-[#263850] rounded-full px-2 py-1 w-fit transition-colors"
+            onClick={
+              item.id !== visibleSection
+                ? () => setVisibleSection(item.id)
+                : () => setVisibleSection(null)
+            }
+          >
+            {item.id === visibleSection ? (
+              <BiUpArrow className="w-3 h-3" />
+            ) : (
+              <BiDownArrow className="w-3 h-3" />
+            )}
+            {repliesQty} {repliesQty === 1 ? "reply" : "replies"}
+          </button>
+        )}
+      </div>
     </div>
   );
 };

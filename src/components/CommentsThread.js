@@ -7,39 +7,40 @@ const CommentsThread = ({ videoID }) => {
   const [visibleSection, setVisibleSection] = useState(null);
 
   useEffect(() => {
+    if (!videoID) return;
+    setCommentThread([]);
     const getComments = async () => {
-      const data = await fetch(
-        `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&maxResults=30&videoId=${videoID}` +
-          "&key=" +
-          process.env.REACT_APP_GOOGLE_API_KEY
-      );
-      const json = await data.json();
-      // console.log(json.items);
-      setCommentThread(json.items);
+      try {
+        const data = await fetch(
+          `/api/youtube/commentThreads?part=snippet%2Creplies&maxResults=30&order=relevance&videoId=${videoID}`,
+        );
+        if (!data.ok) return;
+        const json = await data.json();
+        if (json.items) setCommentThread(json.items);
+      } catch (e) {
+        // comments unavailable — leave empty
+      }
     };
-
     getComments();
   }, [videoID]);
 
-  // console.log(commentThread?.length);
   if (!commentThread?.length) {
     return (
-      <>
-        <h2 className="flex justify-center items-center mb-56 p-4 dark:bg-zinc-900">
-          Comments are turned off.{" "}
-        </h2>
-      </>
+      <div className="flex items-center justify-center py-16 text-[#aaaaaa] text-sm">
+        Comments are turned off.
+      </div>
     );
   }
+
   return (
-    <>
-      <h1 className="p-5 font-extrabold">Comments</h1>
-      {commentThread.map((item) => {
-        return (
-          <div
-            key={item.id}
-            className="m-7 shadow-md rounded-lg dark:bg-zinc-900"
-          >
+    <div className="pb-10">
+      <h2 className="text-[#f1f1f1] text-xl font-semibold mb-6">
+        {commentThread.length} Comments
+      </h2>
+
+      <div className="flex flex-col gap-6">
+        {commentThread.map((item) => (
+          <div key={item.id}>
             <Comment
               item={item}
               repliesQty={item?.replies?.comments?.length}
@@ -47,21 +48,19 @@ const CommentsThread = ({ videoID }) => {
               setVisibleSection={setVisibleSection}
             />
             {visibleSection === item.id &&
-              item?.replies?.comments?.map((commentStructure) => {
-                return (
-                  <CommentReply
-                    key={
-                      commentStructure?.snippet?.parentId +
-                      commentStructure?.snippet?.textOriginal
-                    }
-                    commentStructure={commentStructure}
-                  />
-                );
-              })}
+              item?.replies?.comments?.map((commentStructure) => (
+                <CommentReply
+                  key={
+                    commentStructure?.snippet?.parentId +
+                    commentStructure?.snippet?.textOriginal
+                  }
+                  commentStructure={commentStructure}
+                />
+              ))}
           </div>
-        );
-      })}
-    </>
+        ))}
+      </div>
+    </div>
   );
 };
 

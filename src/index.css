@@ -2,3 +2,20 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Light mode: invert the whole page, then re-invert media so it stays natural */
+html.light-mode {
+  filter: invert(1) hue-rotate(180deg);
+}
+html.light-mode img,
+html.light-mode iframe,
+html.light-mode video {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}

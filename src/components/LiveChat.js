@@ -1,74 +1,117 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ChatMessage from "./ChatMessage";
-import { useDispatch, useSelector } from "react-redux";
-import { addMessage } from "../utils/chatSlice";
-import { generate } from "../utils/generateName";
-import { generateMessage } from "./../utils/generateMessage";
-import { generateProfileImage } from "./../utils/generateProfileImages";
 
-const LiveChat = () => {
+const LiveChat = ({ liveChatId }) => {
+  const [messages, setMessages] = useState([]);
   const [liveMessage, setLiveMessage] = useState("");
+  const [nextPageToken, setNextPageToken] = useState(null);
+  const listRef = useRef(null);
 
-  const dispatch = useDispatch();
+  const fetchMessages = async (pageToken) => {
+    const params = new URLSearchParams({
+      liveChatId,
+      part: "snippet,authorDetails",
+      maxResults: "200",
+    });
+    if (pageToken) params.set("pageToken", pageToken);
 
-  const chatMessages = useSelector((store) => store.chat.messages);
+    const res = await fetch(`/api/youtube/liveChat/messages?${params}`);
+    const json = await res.json();
+    if (!json.items)
+      return { items: [], pollingInterval: 10000, nextPageToken: null };
+    return {
+      items: json.items,
+      pollingInterval: json.pollingIntervalMillis || 5000,
+      nextPageToken: json.nextPageToken || null,
+    };
+  };
 
   useEffect(() => {
-    const i = setInterval(() => {
-      //   console.log("abc");
-      dispatch(
-        addMessage({
-          name: generate(),
-          message: generateMessage(),
-          profile: generateProfileImage(),
-        })
-      );
-    }, 2000);
-    return () => clearInterval(i);
+    if (!liveChatId) return;
+    let timeoutId;
+
+    const poll = async (pageToken) => {
+      const {
+        items,
+        pollingInterval,
+        nextPageToken: next,
+      } = await fetchMessages(pageToken);
+      if (items.length > 0) {
+        setMessages((prev) => {
+          const newMsgs = items.map((item) => ({
+            id: item.id,
+            name: item.authorDetails?.displayName,
+            message: item.snippet?.displayMessage,
+            profile: item.authorDetails?.profileImageUrl,
+          }));
+          // Keep last 200
+          return [...prev, ...newMsgs].slice(-200);
+        });
+        setNextPageToken(next);
+      }
+      timeoutId = setTimeout(() => poll(next), pollingInterval);
+    };
+
+    poll(null);
+    return () => clearTimeout(timeoutId);
     // eslint-disable-next-line
-  }, []);
+  }, [liveChatId]);
+
+  // Auto-scroll to bottom on new messages
+  useEffect(() => {
+    if (listRef.current) {
+      listRef.current.scrollTop = listRef.current.scrollHeight;
+    }
+  }, [messages]);
+
   return (
-    <div className="h-[600px] dark:bg-zinc-900">
-      <div className="w-full border  border-black bg-slate-100 rounded-t-lg dark:bg-zinc-900">
-        <h1 className="font-bold border-b-2 border-black p-2">Live Chat</h1>
-        <div className="space-y-2 overflow-y-scroll p-2 flex flex-col-reverse h-[515px]">
-          {chatMessages.map((c, i) => (
+    <div className="flex flex-col bg-[#212121] rounded-xl border border-[#303030] overflow-hidden">
+      {/* Header */}
+      <div className="flex items-center gap-2 px-4 py-3 border-b border-[#303030]">
+        <span className="w-2 h-2 rounded-full bg-[#ff0000] animate-pulse" />
+        <h2 className="text-[#f1f1f1] font-semibold text-sm">Live chat</h2>
+      </div>
+
+      {/* Messages */}
+      <div
+        ref={listRef}
+        className="flex flex-col overflow-y-auto h-64 md:h-[480px] px-3 py-2 gap-1 scrollbar-hide"
+      >
+        {messages.length === 0 ? (
+          <p className="text-[#aaaaaa] text-xs text-center mt-4">
+            Waiting for messages…
+          </p>
+        ) : (
+          messages.map((c) => (
             <ChatMessage
-              key={i}
+              key={c.id}
               name={c.name}
               message={c.message}
               profile={c.profile}
             />
-          ))}
-        </div>
+          ))
+        )}
       </div>
+
+      {/* Input */}
       <form
-        className="w-full p-1 border border-black rounded-b-lg"
+        className="flex items-center gap-2 px-3 py-3 border-t border-[#303030]"
         onSubmit={(e) => {
           e.preventDefault();
-          dispatch(
-            addMessage({
-              name: "Aryan",
-              message: liveMessage,
-              profile:
-                "https://yt3.ggpht.com/ytc/AGIKgqMvrx-VsRxtYBr-OdVCl4HjNPvscRJpvkEQCQ84UA=s88-c-k-c0x00ffffff-no-rj-mo",
-            })
-          );
+          // Sending to live chat requires OAuth — show placeholder
           setLiveMessage("");
         }}
       >
         <input
           type="text"
-          className="w-[80%] border border-black rounded-lg py-1 px-2 dark:bg-zinc-700"
+          className="flex-1 bg-[#121212] border border-[#303030] rounded-full px-4 py-2 text-[#f1f1f1] placeholder-[#aaaaaa] text-sm focus:outline-none focus:border-[#3ea6ff] transition-colors"
           value={liveMessage}
-          onChange={(e) => {
-            setLiveMessage(e.target.value);
-          }}
-          placeholder="Write your comment here"
+          onChange={(e) => setLiveMessage(e.target.value)}
+          placeholder="Send a message..."
         />
         <button
           type="submit"
-          className="px-4 mx-2 bg-green-200 justify-center rounded-3xl py-1 dark:bg-green-900"
+          className="flex-shrink-0 bg-[#3ea6ff] text-[#0f0f0f] text-sm font-semibold rounded-full px-4 py-2 hover:bg-[#65b8ff] transition-colors"
         >
           Send
         </button>

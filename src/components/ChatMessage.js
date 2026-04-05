@@ -2,10 +2,18 @@ import React from "react";
 
 const ChatMessage = ({ name, message, profile }) => {
   return (
-    <div className="flex items-center p-2 shadow-md rounded-md dark:bg-zinc-900">
-      <img className="h-8 rounded-full " alt="user icon" src={profile} />
-      <span className="font-bold px-2">{name}</span>
-      <span>{message}</span>
+    <div className="flex items-start gap-2 py-1.5">
+      <img
+        className="w-7 h-7 rounded-full flex-shrink-0 object-cover"
+        alt={name}
+        src={profile}
+      />
+      <div className="flex flex-wrap items-baseline gap-1.5 min-w-0">
+        <span className="text-[#3ea6ff] text-xs font-bold flex-shrink-0">
+          {name}
+        </span>
+        <span className="text-[#f1f1f1] text-xs break-words">{message}</span>
+      </div>
     </div>
   );
 };

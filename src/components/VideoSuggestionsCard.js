@@ -1,37 +1,63 @@
 import React from "react";
-// import { prettifyNumber } from "./../utils/number";
 import { Link } from "react-router-dom";
-import ScrollToTop from "./../utils/scrollToTop";
 
-const VideoSuggestionsCard = ({ info }) => {
-  //  console.log(info);
-  // const { snippet, statistics } = info;
+const VideoSuggestionsCard = ({ info, isPlaying = false }) => {
   const { snippet } = info;
   const { channelTitle, title, thumbnails } = snippet;
-  // const views = statistics.viewCount;
 
   return (
-    <Link to={"/watch?v=" + info.id.videoId} key={info.id.videoId}>
-      <ScrollToTop />
-      <div className="flex flex-row rounded-lg mt-2 dark:bg-zinc-900 transition duration-400 ease-in-out hover:scale-[1.02] hover:shadow-slate-400">
+    <div
+      className={`flex gap-2 p-2 rounded-xl transition-colors cursor-pointer group ${isPlaying ? "bg-[#272727]" : "hover:bg-[#272727]"}`}
+    >
+      {/* Thumbnail */}
+      <Link
+        to={"/watch?v=" + info.id.videoId}
+        className="flex-shrink-0 w-[168px] h-[94px] overflow-hidden rounded-xl relative"
+      >
+        {isPlaying && (
+          <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-10 rounded-xl">
+            {/* Animated bars */}
+            <div className="flex items-end gap-[3px] h-5">
+              {[1, 2, 3].map((n) => (
+                <div
+                  key={n}
+                  className="w-[3px] bg-[#ff0000] rounded-sm"
+                  style={{
+                    animation: `playingBar${n} 0.8s ease-in-out infinite alternate`,
+                    height: n === 2 ? "100%" : "60%",
+                  }}
+                />
+              ))}
+            </div>
+            <style>{`
+              @keyframes playingBar1 { from { height: 30% } to { height: 100% } }
+              @keyframes playingBar2 { from { height: 100% } to { height: 40% } }
+              @keyframes playingBar3 { from { height: 50% } to { height: 100% } }
+            `}</style>
+          </div>
+        )}
         <img
-          className="rounded-lg w-[180px] "
-          alt="thumbnail"
+          className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105"
+          alt={title}
           src={thumbnails.medium.url}
         />
-        <ul key="list">
-          <li key="title" className="p-1 text-sm font-bold">
+      </Link>
+
+      {/* Metadata */}
+      <div className="flex flex-col gap-1 min-w-0 py-0.5">
+        <Link to={"/watch?v=" + info.id.videoId}>
+          <p className="text-[#f1f1f1] text-xs font-semibold leading-snug line-clamp-2 hover:underline">
             {title}
-          </li>
-          <li key="channelTitle" className="px-1 text-xs text-stone-500">
-            {channelTitle}
-          </li>
-          {/* <li className="px-1 text-xs text-stone-500">
-            {prettifyNumber(views)} views
-          </li> */}
-        </ul>
+          </p>
+        </Link>
+        <Link
+          to={`/channel/${snippet.channelId}`}
+          className="text-[#aaaaaa] text-xs hover:text-[#f1f1f1] transition-colors w-fit"
+        >
+          {channelTitle}
+        </Link>
       </div>
-    </Link>
+    </div>
   );
 };
 
