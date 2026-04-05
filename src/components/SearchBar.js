@@ -47,9 +47,6 @@ const SearchBar = () => {
     }
   };
 
-  if (searchQuery !== "" && !suggestions) return null;
-  if (!suggestions) return null;
-
   return (
     <div className="relative w-full max-w-[600px]">
       <form
