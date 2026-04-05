@@ -3,11 +3,7 @@ export const YT_API = "/api/youtube";
 
 export const YOUTUBE_API_KEY = `${YT_API}/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN`;
 
-export const YOUTUBE_SEARCH_API =
-  "https://corsproxy.io/?" +
-  encodeURIComponent(
-    "https://clients1.google.com/complete/search?client=firefox&ds=yt&q=",
-  );
+export const YOUTUBE_SEARCH_API = "/api/suggestions?q=";
 
 export const VIDEO_INFO_URL = `${YT_API}/videos?part=snippet%2CcontentDetails%2Cstatistics&id=`;
 
