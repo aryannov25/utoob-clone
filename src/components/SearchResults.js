@@ -38,7 +38,11 @@ const SearchResults = () => {
 
       const videoItems = items.filter((i) => i.id?.kind === "youtube#video");
       const videoIds = videoItems.map((i) => i.id.videoId).filter(Boolean);
-      const channelIds = [...new Set(videoItems.map((i) => i.snippet?.channelId).filter(Boolean))];
+      // Include both video channel IDs and direct channel result IDs
+      const channelIds = [...new Set([
+        ...videoItems.map((i) => i.snippet?.channelId),
+        ...items.filter((i) => i.id?.kind === "youtube#channel").map((i) => i.id?.channelId),
+      ].filter(Boolean))];
 
       // Parallel: channel thumbs + video durations
       const [chRes, vRes] = await Promise.all([
@@ -88,7 +92,7 @@ const SearchResults = () => {
               key={result?.id?.videoId || result?.id?.channelId}
               data={result}
               isChannel={result?.id?.kind === "youtube#channel"}
-              channelThumb={channelThumbs[result?.snippet?.channelId]}
+              channelThumb={channelThumbs[result?.snippet?.channelId] || channelThumbs[result?.id?.channelId]}
               duration={durations[result?.id?.videoId]}
               decodeHtml={decodeHtml}
             />

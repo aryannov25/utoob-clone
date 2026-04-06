@@ -12,12 +12,11 @@ const ResultCard = ({ data, isChannel, channelThumb, duration, decodeHtml = (s) 
 
   // Channel result
   if (isChannel) {
-    const avatar = snippet?.thumbnails?.medium?.url || snippet?.thumbnails?.default?.url;
     return (
       <Link to={`/channel/${id.channelId}`}>
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 p-5 rounded-2xl hover:bg-[#272727] transition-colors">
-          {avatar ? (
-            <img src={avatar} alt={title} className="w-24 h-24 rounded-full object-cover flex-shrink-0" />
+          {channelThumb ? (
+            <img src={channelThumb} alt={title} className="w-24 h-24 rounded-full object-cover flex-shrink-0" />
           ) : (
             <div className="w-24 h-24 rounded-full bg-[#3ea6ff] flex items-center justify-center text-black font-bold text-3xl flex-shrink-0">
               {title[0]}
