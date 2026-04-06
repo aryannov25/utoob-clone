@@ -3,11 +3,12 @@ import { YOUTUBE_SEARCH_API } from "../utils/constants";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCache } from "../utils/CacheSlice";
 import ResultsSuggestionContainer from "./ResultsSuggestionContainer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ClickAwayListener from "react-click-away-listener";
 
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
   const [suggestions, setSuggestions] = useState();
   const dispatch = useDispatch();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -52,6 +53,10 @@ const SearchBar = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
+          if (searchQuery.trim()) {
+            setMenuOpen(false);
+            navigate(`/results?search_query=${encodeURIComponent(searchQuery.trim())}`);
+          }
         }}
       >
         <ClickAwayListener onClickAway={handleClickAway}>
