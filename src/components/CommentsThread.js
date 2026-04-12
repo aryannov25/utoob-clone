@@ -26,7 +26,7 @@ const CommentsThread = ({ videoID }) => {
 
   if (!commentThread?.length) {
     return (
-      <div className="flex items-center justify-center py-16 text-[#aaaaaa] text-sm">
+      <div className="flex items-center justify-center py-16 text-[#71717a] text-sm">
         Comments are turned off.
       </div>
     );
@@ -34,11 +34,11 @@ const CommentsThread = ({ videoID }) => {
 
   return (
     <div className="pb-10">
-      <h2 className="text-[#f1f1f1] text-xl font-semibold mb-6">
+      <h2 className="text-[#f4f4f5] text-xl font-bold mb-6 tracking-tight">
         {commentThread.length} Comments
       </h2>
 
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-7">
         {commentThread.map((item) => (
           <div key={item.id}>
             <Comment

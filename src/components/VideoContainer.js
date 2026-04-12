@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import VideoCard from "./VideoCard";
 import { useNavigate } from "react-router-dom";
 import Shimmer from "./Shimmer";
+import { bestChannelThumb } from "../utils/thumbnail";
 
 const CHUNK_SIZE = 25;
 const BASE_URL =
@@ -24,7 +25,7 @@ const fetchChannelThumbs = async (items) => {
   results.forEach((r) => {
     if (r.status === "fulfilled" && r.value?.items)
       r.value.items.forEach((ch) => {
-        map[ch.id] = ch.snippet?.thumbnails?.default?.url;
+        map[ch.id] = bestChannelThumb(ch.snippet?.thumbnails);
       });
   });
   return map;
@@ -62,8 +63,8 @@ const VideoContainer = () => {
   if (!videos.length) return <Shimmer />;
 
   return (
-    <div className="bg-[#0f0f0f] px-4 py-5">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8">
+    <div className="px-5 py-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-5 gap-y-10">
         {videos.map((video) => (
           <div
             key={video.id}
@@ -78,21 +79,21 @@ const VideoContainer = () => {
         ))}
       </div>
 
-      <div className="flex justify-center mt-10">
+      <div className="flex justify-center mt-12">
         {loading ? (
-          <div className="flex items-center gap-2 text-[#aaaaaa] text-sm">
-            <div className="w-5 h-5 border-2 border-[#aaaaaa] border-t-transparent rounded-full animate-spin" />
-            Loading...
+          <div className="flex items-center gap-2 text-[#a1a1aa] text-sm">
+            <div className="w-5 h-5 border-2 border-[#ff2e4d] border-t-transparent rounded-full animate-spin" />
+            Loading more videos…
           </div>
         ) : nextPageToken ? (
           <button
             onClick={() => fetchPage(nextPageToken)}
-            className="bg-[#272727] hover:bg-[#3f3f3f] text-[#f1f1f1] text-sm font-medium px-6 py-2.5 rounded-full transition-colors"
+            className="press bg-gradient-to-br from-[#ff2e4d] to-[#ff5d7a] text-white text-sm font-semibold px-7 py-3 rounded-full shadow-[0_10px_30px_-12px_rgba(255,46,77,0.6)] hover:shadow-[0_14px_36px_-12px_rgba(255,46,77,0.8)] transition-shadow"
           >
             Load more
           </button>
         ) : (
-          <p className="text-[#717171] text-sm">You're all caught up</p>
+          <p className="text-[#52525b] text-sm">You're all caught up ✨</p>
         )}
       </div>
     </div>

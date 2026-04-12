@@ -6,6 +6,8 @@ const WatchPageVideos = () => {
   const [searchParams] = useSearchParams();
   const videoId = searchParams.get("v");
   const [relatedVideoData, setRelatedVideoData] = useState([]);
+  const [durations, setDurations] = useState({});
+  const [viewCounts, setViewCounts] = useState({});
 
   useEffect(() => {
     if (!videoId) return;
@@ -24,14 +26,38 @@ const WatchPageVideos = () => {
           `/api/youtube/search?part=snippet&maxResults=20&q=${encodeURIComponent(title)}&type=video`,
         );
         const searchData = await searchRes.json();
-        if (!cancelled && searchData.items) {
-          setRelatedVideoData(searchData.items);
-        }
+        if (cancelled || !searchData.items) return;
+
+        setRelatedVideoData(searchData.items);
+
+        // Enrich with contentDetails (duration) + statistics (views)
+        const ids = searchData.items
+          .map((v) => v.id?.videoId)
+          .filter(Boolean)
+          .join(",");
+        if (!ids) return;
+
+        const detailsRes = await fetch(
+          `/api/youtube/videos?part=contentDetails,statistics&id=${ids}`,
+        );
+        const detailsData = await detailsRes.json();
+        if (cancelled || !detailsData.items) return;
+
+        const dMap = {};
+        const vMap = {};
+        detailsData.items.forEach((it) => {
+          if (it.contentDetails?.duration) dMap[it.id] = it.contentDetails.duration;
+          if (it.statistics?.viewCount) vMap[it.id] = it.statistics.viewCount;
+        });
+        setDurations(dMap);
+        setViewCounts(vMap);
       } catch {
         // swallow — related videos are non-critical
       }
     };
 
+    setDurations({});
+    setViewCounts({});
     getRelatedVideos();
     return () => {
       cancelled = true;
@@ -49,18 +75,28 @@ const WatchPageVideos = () => {
     <div className="flex flex-col gap-2">
       {currentVideo && (
         <>
-          <p className="text-[#aaaaaa] text-xs font-semibold uppercase tracking-wider px-2 pb-1">
+          <p className="text-[#71717a] text-[11px] font-semibold uppercase tracking-[0.08em] px-2 pb-1">
             Now Playing
           </p>
-          <VideoSuggestionsCard info={currentVideo} isPlaying />
-          <div className="border-t border-[#272727] my-1" />
-          <p className="text-[#aaaaaa] text-xs font-semibold uppercase tracking-wider px-2 pb-1">
+          <VideoSuggestionsCard
+            info={currentVideo}
+            duration={durations[currentVideo.id?.videoId]}
+            viewCount={viewCounts[currentVideo.id?.videoId]}
+            isPlaying
+          />
+          <div className="border-t border-white/5 my-1" />
+          <p className="text-[#71717a] text-[11px] font-semibold uppercase tracking-[0.08em] px-2 pb-1">
             Up Next
           </p>
         </>
       )}
       {related.map((v) => (
-        <VideoSuggestionsCard key={v.id?.videoId} info={v} />
+        <VideoSuggestionsCard
+          key={v.id?.videoId}
+          info={v}
+          duration={durations[v.id?.videoId]}
+          viewCount={viewCounts[v.id?.videoId]}
+        />
       ))}
     </div>
   );

@@ -16,9 +16,10 @@ const CommentReply = ({ commentStructure }) => {
     <div className="flex gap-3 ml-12 mt-4">
       {/* Avatar */}
       <img
-        className="w-8 h-8 rounded-full flex-shrink-0 object-cover"
+        className="w-8 h-8 rounded-full flex-shrink-0 object-cover ring-1 ring-white/10"
         src={authorProfileImageUrl}
         alt={authorDisplayName}
+        referrerPolicy="no-referrer"
       />
 
       <div className="flex flex-col gap-1 flex-1 min-w-0">

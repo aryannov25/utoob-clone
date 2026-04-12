@@ -79,20 +79,23 @@ const LiveChat = ({ liveChatId }) => {
   }, [messages]);
 
   return (
-    <div className="flex flex-col bg-[#212121] rounded-xl border border-[#303030] overflow-hidden">
-      {/* Header */}
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-[#303030]">
-        <span className="w-2 h-2 rounded-full bg-[#ff0000] animate-pulse" />
-        <h2 className="text-[#f1f1f1] font-semibold text-sm">Live chat</h2>
+    <div className="flex flex-col bg-white/5 backdrop-blur rounded-2xl border border-white/10 overflow-hidden shadow-[0_8px_30px_-12px_rgba(0,0,0,0.6)]">
+      <div className="flex items-center gap-2 px-4 py-3 border-b border-white/10">
+        <span className="relative flex h-2 w-2">
+          <span className="absolute inline-flex h-full w-full rounded-full bg-[#ff2e4d] opacity-75 animate-ping" />
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-[#ff2e4d]" />
+        </span>
+        <h2 className="text-[#f4f4f5] font-bold text-sm tracking-tight">
+          Live chat
+        </h2>
       </div>
 
-      {/* Messages */}
       <div
         ref={listRef}
         className="flex flex-col overflow-y-auto h-64 md:h-[480px] px-3 py-2 gap-1 scrollbar-hide"
       >
         {messages.length === 0 ? (
-          <p className="text-[#aaaaaa] text-xs text-center mt-4">
+          <p className="text-[#71717a] text-xs text-center mt-4">
             Waiting for messages…
           </p>
         ) : (
@@ -109,24 +112,23 @@ const LiveChat = ({ liveChatId }) => {
 
       {/* Input */}
       <form
-        className="flex items-center gap-2 px-3 py-3 border-t border-[#303030]"
+        className="flex items-center gap-2 px-3 py-3 border-t border-white/10"
         onSubmit={(e) => {
           e.preventDefault();
-          // Sending to live chat requires OAuth — show placeholder
           setLiveMessage("");
         }}
       >
         <input
           type="text"
           aria-label="Send a message"
-          className="flex-1 bg-[#121212] border border-[#303030] rounded-full px-4 py-2 text-[#f1f1f1] placeholder-[#aaaaaa] text-sm focus:outline-none focus:border-[#3ea6ff] transition-colors"
+          className="flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-[#f4f4f5] placeholder-[#71717a] text-sm focus:outline-none focus:border-[#ff2e4d]/60 focus:bg-white/10 transition-colors"
           value={liveMessage}
           onChange={(e) => setLiveMessage(e.target.value)}
           placeholder="Send a message..."
         />
         <button
           type="submit"
-          className="flex-shrink-0 bg-[#3ea6ff] text-[#0f0f0f] text-sm font-semibold rounded-full px-4 py-2 hover:bg-[#65b8ff] transition-colors"
+          className="press flex-shrink-0 bg-gradient-to-br from-[#ff2e4d] to-[#ff5d7a] text-white text-sm font-semibold rounded-full px-4 py-2 shadow-[0_6px_18px_-8px_rgba(255,46,77,0.6)] hover:shadow-[0_8px_22px_-8px_rgba(255,46,77,0.8)] transition-shadow"
         >
           Send
         </button>

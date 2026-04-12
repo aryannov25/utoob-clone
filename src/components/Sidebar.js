@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const NAV_ITEMS = [
@@ -143,16 +143,23 @@ const EXPLORE_ITEMS = [
   },
 ];
 
-const NavItem = ({ label, to, icon, open }) => {
+const NavItem = ({ label, to, icon, open, active }) => {
   const inner = (
     <div
-      className={`flex items-center gap-5 px-3 py-2.5 rounded-xl cursor-pointer text-[#f1f1f1] hover:bg-[#272727] transition-colors ${
+      className={`relative flex items-center gap-5 px-3 py-2.5 my-0.5 rounded-xl cursor-pointer press transition-all ${
         open ? "" : "justify-center"
+      } ${
+        active
+          ? "bg-white/10 text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.05)]"
+          : "text-[#e5e5e7] hover:bg-white/5"
       }`}
       title={!open ? label : undefined}
     >
+      {active && (
+        <span className="absolute left-0 top-2.5 bottom-2.5 w-[3px] rounded-r-full bg-gradient-to-b from-[#ff2e4d] to-[#ff5d7a]" />
+      )}
       <span className="flex-shrink-0">{icon}</span>
-      {open && <span className="text-sm font-medium">{label}</span>}
+      {open && <span className="text-sm font-medium truncate">{label}</span>}
     </div>
   );
 
@@ -162,49 +169,83 @@ const NavItem = ({ label, to, icon, open }) => {
   return inner;
 };
 
+const SectionLabel = ({ children }) => (
+  <p className="px-3 pt-3 pb-1 text-[11px] uppercase tracking-[0.08em] font-semibold text-[#71717a]">
+    {children}
+  </p>
+);
+
 const Sidebar = () => {
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
+  const location = useLocation();
+
+  const isActive = (to) => {
+    if (!to) return false;
+    if (to === "/") return location.pathname === "/";
+    return location.pathname.startsWith(to);
+  };
 
   return (
-    <div
+    <aside
       className={`
-        bg-[#0f0f0f] overflow-y-auto overflow-x-hidden flex-shrink-0 scrollbar-hide
+        glass border-r border-white/5 overflow-y-auto overflow-x-hidden flex-shrink-0 scrollbar-hide
         transition-transform duration-200
         fixed left-0 top-14 h-[calc(100vh-56px)] z-50 w-64
         ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}
         md:sticky md:top-14 md:h-[calc(100vh-3.5rem)] md:translate-x-0
-        ${isMenuOpen ? "md:w-60" : "md:w-[72px]"}
+        ${isMenuOpen ? "md:w-60" : "md:w-[76px]"}
       `}
     >
       <div className="py-3 px-2">
-        {/* Primary nav */}
         {NAV_ITEMS.map((item) => (
-          <NavItem key={item.label} {...item} open={isMenuOpen} />
+          <NavItem
+            key={item.label}
+            {...item}
+            open={isMenuOpen}
+            active={isActive(item.to)}
+          />
         ))}
 
-        <div className="my-3 border-t border-[#303030]" />
+        <div className="my-2 border-t border-white/5" />
 
-        {/* Library */}
-        {isMenuOpen && (
-          <p className="px-3 py-1 text-sm font-semibold text-[#f1f1f1]">You</p>
-        )}
+        {isMenuOpen && <SectionLabel>You</SectionLabel>}
         {LIBRARY_ITEMS.map((item) => (
-          <NavItem key={item.label} {...item} open={isMenuOpen} />
+          <NavItem
+            key={item.label}
+            {...item}
+            open={isMenuOpen}
+            active={isActive(item.to)}
+          />
         ))}
 
-        <div className="my-3 border-t border-[#303030]" />
+        <div className="my-2 border-t border-white/5" />
 
-        {/* Explore */}
-        {isMenuOpen && (
-          <p className="px-3 py-1 text-sm font-semibold text-[#f1f1f1]">
-            Explore
-          </p>
-        )}
+        {isMenuOpen && <SectionLabel>Explore</SectionLabel>}
         {EXPLORE_ITEMS.map((item) => (
-          <NavItem key={item.label} {...item} open={isMenuOpen} />
+          <NavItem
+            key={item.label}
+            {...item}
+            open={isMenuOpen}
+            active={isActive(item.to)}
+          />
         ))}
+
+        {isMenuOpen && (
+          <div className="px-3 pt-4 pb-6 space-y-1.5">
+            <p className="text-[11px] font-semibold text-[#a1a1aa] leading-relaxed">
+              Made for fun · A fan project
+            </p>
+            <p className="text-[10px] text-[#52525b] leading-relaxed">
+              Not affiliated with, endorsed by, or sponsored by YouTube, LLC
+              or Google LLC. All trademarks belong to their respective owners.
+            </p>
+            <p className="text-[10px] text-[#52525b] leading-relaxed pt-1">
+              © 2026 UToob
+            </p>
+          </div>
+        )}
       </div>
-    </div>
+    </aside>
   );
 };
 

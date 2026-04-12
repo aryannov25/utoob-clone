@@ -8,6 +8,7 @@ import {
 import { formatDuration } from "../utils/formatDuration";
 import { relativeTime } from "../utils/relativeTime";
 import { prettifyNumber } from "../utils/number";
+import { videoThumbFromId } from "../utils/thumbnail";
 
 const HistoryPage = () => {
   const navigate = useNavigate();
@@ -25,13 +26,13 @@ const HistoryPage = () => {
   };
 
   return (
-    <div className="bg-[#0f0f0f] min-h-screen px-4 sm:px-6 py-6">
+    <div className="min-h-screen px-4 sm:px-6 pt-8 pb-10">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-[#f1f1f1] text-2xl font-bold">Watch History</h1>
+        <h1 className="text-[#f4f4f5] text-2xl font-bold tracking-tight">Watch History</h1>
         {items.length > 0 && (
           <button
             onClick={handleClear}
-            className="text-sm text-[#3ea6ff] hover:text-[#65b8ff] transition-colors"
+            className="press text-sm font-semibold text-[#ff5d7a] hover:text-[#ff2e4d] hover:bg-white/5 rounded-full px-3 py-1.5 transition-colors"
           >
             Clear all
           </button>
@@ -63,9 +64,15 @@ const HistoryPage = () => {
               {/* Thumbnail */}
               <div className="relative flex-shrink-0 w-[168px] h-[94px] rounded-xl overflow-hidden">
                 <img
-                  src={v.thumbnail}
+                  src={videoThumbFromId(v.id, "hqdefault") || v.thumbnail}
                   alt={v.title}
+                  loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+                  onError={(e) => {
+                    if (v.thumbnail && e.currentTarget.src !== v.thumbnail) {
+                      e.currentTarget.src = v.thumbnail;
+                    }
+                  }}
                 />
                 {v.duration && (
                   <span className="absolute bottom-1 right-1 bg-black/80 text-white text-[10px] font-medium px-1 py-0.5 rounded">

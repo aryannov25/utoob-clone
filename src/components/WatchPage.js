@@ -36,37 +36,41 @@ const WatchPage = () => {
   }, [videoId]);
 
   return (
-    <div className="bg-[#0f0f0f] min-h-screen">
+    <div className="min-h-screen">
       <div
-        className={`flex flex-col md:flex-row gap-6 px-3 md:px-6 pt-5 mx-auto ${theater ? "max-w-none" : "max-w-[1800px]"}`}
+        className={`flex flex-col md:flex-row gap-6 px-3 md:px-6 pt-6 mx-auto ${theater ? "max-w-none" : "max-w-[1800px]"}`}
       >
         {/* Left column */}
-        <div className="flex-1 min-w-0 flex flex-col gap-4">
-          {/* Player + theater toggle */}
+        <div className="flex-1 min-w-0 flex flex-col gap-5">
           <div className="w-full">
-            <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
+            <div
+              className="relative w-full overflow-hidden rounded-2xl ring-1 ring-white/10 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.9)]"
+              style={{ paddingTop: "56.25%" }}
+            >
               <iframe
-                className="absolute inset-0 w-full h-full rounded-xl"
+                className="absolute inset-0 w-full h-full"
                 src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
                 title="YouTube video player"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
               />
             </div>
-            <div className="flex justify-end mt-1.5">
+            <div className="flex justify-end mt-2">
               <button
                 onClick={() => setTheater((t) => !t)}
                 title={theater ? "Default view" : "Theater mode"}
-                className={`p-1.5 rounded transition-colors ${
+                aria-label="Toggle theater mode"
+                className={`press p-2 rounded-full transition-colors ${
                   theater
-                    ? "text-[#f1f1f1] bg-[#272727]"
-                    : "text-[#aaaaaa] hover:text-[#f1f1f1] hover:bg-[#272727]"
+                    ? "text-white bg-white/10 ring-1 ring-white/15"
+                    : "text-[#a1a1aa] hover:text-white hover:bg-white/5"
                 }`}
               >
                 <svg
                   className="w-5 h-5"
                   fill="currentColor"
                   viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
                   <path d="M19 6H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 10H5V8h14v8z" />
                 </svg>
@@ -84,7 +88,7 @@ const WatchPage = () => {
           )}
 
           <div className={theater ? "block" : "md:hidden"}>
-            <h2 className="text-[#f1f1f1] font-semibold text-base mb-3">
+            <h2 className="text-[#f4f4f5] font-bold text-base mb-3 tracking-tight">
               Related Videos
             </h2>
             <WatchPageVideos />
@@ -93,10 +97,10 @@ const WatchPage = () => {
 
         {/* Right sidebar — hidden in theater mode */}
         {!theater && (
-          <div className="hidden md:flex flex-shrink-0 w-[402px] flex-col gap-4">
+          <div className="hidden md:flex flex-shrink-0 w-[402px] flex-col gap-5">
             {liveChecked && liveChatId && <LiveChat liveChatId={liveChatId} />}
             <div>
-              <h2 className="text-[#f1f1f1] font-semibold text-base mb-3">
+              <h2 className="text-[#f4f4f5] font-bold text-base mb-3 tracking-tight">
                 Related Videos
               </h2>
               <WatchPageVideos />
@@ -104,6 +108,7 @@ const WatchPage = () => {
           </div>
         )}
       </div>
+      <div className="h-8" />
     </div>
   );
 };

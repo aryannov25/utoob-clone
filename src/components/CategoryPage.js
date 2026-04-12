@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import VideoCard from "./VideoCard";
 import Shimmer from "./Shimmer";
+import { bestChannelThumb } from "../utils/thumbnail";
 
 const CHUNK_SIZE = 25;
 
@@ -101,7 +102,7 @@ const CategoryPage = () => {
         results.forEach((r) => {
           if (r.status === "fulfilled" && r.value?.items) {
             r.value.items.forEach((ch) => {
-              map[ch.id] = ch.snippet?.thumbnails?.default?.url;
+              map[ch.id] = bestChannelThumb(ch.snippet?.thumbnails);
             });
           }
         });

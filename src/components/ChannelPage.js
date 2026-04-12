@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { prettifyNumber } from "../utils/number";
+import { bestVideoThumb, bestChannelThumb, videoThumbFromId } from "../utils/thumbnail";
 
 const ChannelPage = () => {
   const { channelId } = useParams();
@@ -52,8 +53,7 @@ const ChannelPage = () => {
 
   const { snippet, statistics, brandingSettings } = channel;
   const banner = brandingSettings?.image?.bannerExternalUrl;
-  const avatar =
-    snippet?.thumbnails?.medium?.url || snippet?.thumbnails?.default?.url;
+  const avatar = bestChannelThumb(snippet?.thumbnails);
 
   return (
     <div className="bg-[#0f0f0f] min-h-screen">
@@ -148,8 +148,16 @@ const ChannelPage = () => {
                         <div className="relative w-full aspect-video overflow-hidden rounded-xl">
                           <img
                             className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-105"
-                            src={thumbnails?.medium?.url}
+                            src={
+                              videoThumbFromId(vid, "maxresdefault") ||
+                              bestVideoThumb(thumbnails)
+                            }
                             alt={title}
+                            loading="lazy"
+                            onError={(e) => {
+                              const fb = bestVideoThumb(thumbnails);
+                              if (fb && e.currentTarget.src !== fb) e.currentTarget.src = fb;
+                            }}
                           />
                         </div>
                         <div className="flex gap-3 mt-3">

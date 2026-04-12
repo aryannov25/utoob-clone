@@ -16,52 +16,50 @@ const Comment = ({ item, repliesQty, setVisibleSection, visibleSection }) => {
 
   return (
     <div className="flex gap-3">
-      {/* Avatar */}
       <img
-        className="w-10 h-10 rounded-full flex-shrink-0 object-cover"
+        className="w-10 h-10 rounded-full flex-shrink-0 object-cover ring-1 ring-white/10"
         src={authorProfileImageUrl}
         alt={authorDisplayName}
+        referrerPolicy="no-referrer"
+        loading="lazy"
       />
 
       <div className="flex flex-col gap-1 flex-1 min-w-0">
-        {/* Author + date */}
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-[#f1f1f1] text-sm font-semibold">
+          <span className="text-[#f4f4f5] text-[13px] font-semibold">
             {authorDisplayName}
           </span>
-          <span className="text-[#aaaaaa] text-xs">
+          <span className="text-[#71717a] text-xs">
             {relativeTime(publishedAt)}
           </span>
         </div>
 
-        <p className="text-[#f1f1f1] text-sm leading-relaxed whitespace-pre-line break-words">
+        <p className="text-[#e5e5e7] text-sm leading-relaxed whitespace-pre-line break-words">
           {text}
         </p>
 
-        {/* Like / dislike / reply row */}
-        <div className="flex items-center gap-4 mt-1">
-          <button className="flex items-center gap-1.5 text-[#aaaaaa] hover:text-[#f1f1f1] transition-colors">
+        <div className="flex items-center gap-1 mt-1">
+          <button className="press flex items-center gap-1.5 text-[#a1a1aa] hover:text-white hover:bg-white/5 rounded-full px-2 py-1.5 transition-colors">
             <AiFillLike className="w-4 h-4" />
             {likeCount > 0 && (
-              <span className="text-xs">
+              <span className="text-xs font-medium">
                 {likeCount >= 1000
                   ? `${(likeCount / 1000).toFixed(1)}K`
                   : likeCount}
               </span>
             )}
           </button>
-          <button className="flex items-center gap-1.5 text-[#aaaaaa] hover:text-[#f1f1f1] transition-colors">
+          <button className="press flex items-center gap-1.5 text-[#a1a1aa] hover:text-white hover:bg-white/5 rounded-full p-1.5 transition-colors">
             <AiFillDislike className="w-4 h-4" />
           </button>
-          <button className="text-[#aaaaaa] text-xs font-semibold hover:text-[#f1f1f1] transition-colors">
+          <button className="press text-[#a1a1aa] text-xs font-semibold hover:text-white hover:bg-white/5 rounded-full px-3 py-1.5 transition-colors">
             Reply
           </button>
         </div>
 
-        {/* Expand replies */}
         {repliesQty && (
           <button
-            className="flex items-center gap-2 mt-1 text-[#3ea6ff] text-sm font-semibold hover:bg-[#263850] rounded-full px-2 py-1 w-fit transition-colors"
+            className="press flex items-center gap-2 mt-1 text-[#ff5d7a] text-sm font-semibold hover:bg-[#ff2e4d]/10 rounded-full px-3 py-1.5 w-fit transition-colors"
             onClick={
               item.id !== visibleSection
                 ? () => setVisibleSection(item.id)

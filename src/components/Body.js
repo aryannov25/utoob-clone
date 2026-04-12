@@ -4,30 +4,29 @@ import { Outlet } from "react-router-dom";
 import Head from "./Head";
 import { useSelector, useDispatch } from "react-redux";
 import { closeMenu } from "../utils/appSlice";
+import ScrollToTop from "./ScrollToTop";
 
 const Body = () => {
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
   const dispatch = useDispatch();
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f] text-[#f1f1f1]">
+    <div className="min-h-screen text-[#f4f4f5]">
+      <ScrollToTop />
       <Head />
       <div className="relative flex">
-        {/* Sidebar — on mobile: fixed overlay, on desktop: sticky side column */}
         <Sidebar />
 
-        {/* Backdrop — only on mobile when menu is open */}
         {isMenuOpen && (
           <div
-            className="fixed inset-0 bg-black/50 z-40 md:hidden"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
             onClick={() => dispatch(closeMenu())}
           />
         )}
 
-        {/* Main content — always full width on mobile, fills remaining space on desktop */}
-        <div className="flex-1 min-w-0">
+        <main className="flex-1 min-w-0">
           <Outlet />
-        </div>
+        </main>
       </div>
     </div>
   );

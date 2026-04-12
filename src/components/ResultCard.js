@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { formatDuration } from "../utils/formatDuration";
+import { bestVideoThumb, videoThumbFromId } from "../utils/thumbnail";
 
 const ResultCard = ({ data, isChannel, channelThumb, duration, decodeHtml = (s) => s }) => {
   if (!data) return null;
@@ -47,8 +48,16 @@ const ResultCard = ({ data, isChannel, channelThumb, duration, decodeHtml = (s) 
         <div className="relative w-full aspect-video sm:h-[202px] sm:aspect-auto rounded-xl overflow-hidden">
           <img
             className="w-full h-full object-cover"
-            src={snippet?.thumbnails?.medium?.url}
+            src={
+              videoThumbFromId(id?.videoId, "hqdefault") ||
+              bestVideoThumb(snippet?.thumbnails)
+            }
             alt={title}
+            loading="lazy"
+            onError={(e) => {
+              const fb = bestVideoThumb(snippet?.thumbnails);
+              if (fb && e.currentTarget.src !== fb) e.currentTarget.src = fb;
+            }}
           />
 
           {/* Live badge */}

@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { showSuggestionsContainer } from "../utils/showSearchSuggestionsSlice";
 import { CardShimmer } from "./Shimmer";
 import { capitalizeTheFirstLetterOfEachWord } from "../utils/constants";
+import { bestChannelThumb } from "../utils/thumbnail";
 
 const decodeHtml = (str = "") => {
   const txt = document.createElement("textarea");
@@ -25,7 +26,6 @@ const SearchResults = () => {
     setSearchResults([]);
     setChannelThumbs({});
     setDurations({});
-    window.scrollTo(0, 0);
 
     const fetchSearchResults = async () => {
       const data = await fetch(
@@ -57,7 +57,7 @@ const SearchResults = () => {
       if (chRes) {
         const chJson = await chRes.json();
         const map = {};
-        (chJson.items || []).forEach((ch) => { map[ch.id] = ch.snippet?.thumbnails?.default?.url; });
+        (chJson.items || []).forEach((ch) => { map[ch.id] = bestChannelThumb(ch.snippet?.thumbnails); });
         setChannelThumbs(map);
       }
 
@@ -78,11 +78,11 @@ const SearchResults = () => {
   return searchResults.length === 0 ? (
     <CardShimmer />
   ) : (
-    <div className="bg-[#0f0f0f] min-h-screen px-4 sm:px-6 py-6">
+    <div className="min-h-screen px-4 sm:px-6 pt-8 pb-10">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-[#f1f1f1] text-lg font-semibold mb-5">
-          Results for:{" "}
-          <span className="font-bold">
+        <h1 className="text-[#a1a1aa] text-sm font-medium mb-5">
+          Results for{" "}
+          <span className="text-[#f4f4f5] font-bold tracking-tight">
             {capitalizeTheFirstLetterOfEachWord(query)}
           </span>
         </h1>

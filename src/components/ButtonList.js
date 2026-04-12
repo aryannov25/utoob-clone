@@ -58,34 +58,30 @@ const ButtonList = () => {
     sliderRef.current?.scrollBy({ left: dir * 400, behavior: "smooth" });
 
   return (
-    <div className="bg-[#0f0f0f] border-b border-[#303030] sticky top-14 z-40 flex items-center">
-      {/* Left arrow — zero width when hidden so it doesn't shift layout */}
+    <div className="glass border-b border-white/5 sticky top-14 z-40 flex items-center">
       <button
         onClick={() => slide(-1)}
         aria-label="Scroll left"
-        className={`flex-shrink-0 rounded-full transition-all duration-200 overflow-hidden text-[#f1f1f1] hover:bg-[#272727] ${
-          canLeft
-            ? "w-7 h-7 opacity-100 mx-1"
-            : "w-0 h-7 opacity-0 pointer-events-none"
+        className={`press flex-shrink-0 flex items-center justify-center rounded-full transition-all duration-200 overflow-hidden text-white bg-white/5 hover:bg-white/10 backdrop-blur ${
+          canLeft ? "w-8 h-8 opacity-100 mx-1.5" : "w-0 h-8 opacity-0 pointer-events-none"
         }`}
       >
         <MdChevronLeft size={22} />
       </button>
 
-      {/* Pill row in its own overflow-hidden wrapper — fades are clipped here */}
       <div className="relative flex-1 overflow-hidden">
-        {/* Left fade — inside the pill wrapper so it clips correctly */}
         <div
-          className="pointer-events-none absolute left-0 top-0 h-full w-12 z-10 transition-opacity duration-200"
+          className="pointer-events-none absolute left-0 top-0 h-full w-14 z-10 transition-opacity duration-200"
           style={{
-            background: "linear-gradient(to right, #0f0f0f 40%, transparent)",
+            background:
+              "linear-gradient(to right, rgba(10,10,12,0.95) 20%, transparent)",
             opacity: canLeft ? 1 : 0,
           }}
         />
 
         <div
           ref={sliderRef}
-          className="flex gap-2 overflow-x-auto px-3 py-1.5 scrollbar-hide"
+          className="flex gap-2 overflow-x-auto px-3 py-2.5 scrollbar-hide"
           style={{ WebkitOverflowScrolling: "touch" }}
         >
           {CATEGORIES.map(({ label, query }) => {
@@ -96,10 +92,10 @@ const ButtonList = () => {
             return (
               <Link key={label} to={to} className="flex-shrink-0">
                 <span
-                  className={`inline-block text-sm font-medium rounded-lg px-3 py-1.5 whitespace-nowrap transition-colors cursor-pointer ${
+                  className={`press inline-block text-[13px] font-semibold rounded-full px-4 py-1.5 whitespace-nowrap transition-all cursor-pointer ${
                     isActive
-                      ? "bg-[#f1f1f1] text-[#0f0f0f]"
-                      : "bg-[#272727] text-[#f1f1f1] hover:bg-[#3f3f3f]"
+                      ? "bg-gradient-to-br from-[#ff2e4d] to-[#ff5d7a] text-white shadow-[0_6px_20px_-8px_rgba(255,46,77,0.6)]"
+                      : "bg-white/5 text-[#e5e5e7] hover:bg-white/10 ring-1 ring-white/10"
                   }`}
                 >
                   {label}
@@ -109,24 +105,21 @@ const ButtonList = () => {
           })}
         </div>
 
-        {/* Right fade */}
         <div
-          className="pointer-events-none absolute right-0 top-0 h-full w-12 z-10 transition-opacity duration-200"
+          className="pointer-events-none absolute right-0 top-0 h-full w-14 z-10 transition-opacity duration-200"
           style={{
-            background: "linear-gradient(to left, #0f0f0f 40%, transparent)",
+            background:
+              "linear-gradient(to left, rgba(10,10,12,0.95) 20%, transparent)",
             opacity: canRight ? 1 : 0,
           }}
         />
       </div>
 
-      {/* Right arrow */}
       <button
         onClick={() => slide(1)}
         aria-label="Scroll right"
-        className={`flex-shrink-0 rounded-full transition-all duration-200 overflow-hidden text-[#f1f1f1] hover:bg-[#272727] ${
-          canRight
-            ? "w-7 h-7 opacity-100 mx-1"
-            : "w-0 h-7 opacity-0 pointer-events-none"
+        className={`press flex-shrink-0 flex items-center justify-center rounded-full transition-all duration-200 overflow-hidden text-white bg-white/5 hover:bg-white/10 backdrop-blur ${
+          canRight ? "w-8 h-8 opacity-100 mx-1.5" : "w-0 h-8 opacity-0 pointer-events-none"
         }`}
       >
         <MdChevronRight size={22} />

@@ -4,6 +4,7 @@ import { getWatchLater, toggleWatchLater } from "../utils/localStore";
 import { formatDuration } from "../utils/formatDuration";
 import { relativeTime } from "../utils/relativeTime";
 import { prettifyNumber } from "../utils/number";
+import { videoThumbFromId } from "../utils/thumbnail";
 
 const WatchLaterPage = () => {
   const navigate = useNavigate();
@@ -16,8 +17,8 @@ const WatchLaterPage = () => {
   };
 
   return (
-    <div className="bg-[#0f0f0f] min-h-screen px-4 sm:px-6 py-6">
-      <h1 className="text-[#f1f1f1] text-2xl font-bold mb-6">Watch Later</h1>
+    <div className="min-h-screen px-4 sm:px-6 pt-8 pb-10">
+      <h1 className="text-[#f4f4f5] text-2xl font-bold mb-6 tracking-tight">Watch Later</h1>
 
       {items.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-24 gap-3 text-center">
@@ -44,9 +45,15 @@ const WatchLaterPage = () => {
               {/* Thumbnail */}
               <div className="relative flex-shrink-0 w-[168px] h-[94px] rounded-xl overflow-hidden">
                 <img
-                  src={v.thumbnail}
+                  src={videoThumbFromId(v.id, "hqdefault") || v.thumbnail}
                   alt={v.title}
+                  loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
+                  onError={(e) => {
+                    if (v.thumbnail && e.currentTarget.src !== v.thumbnail) {
+                      e.currentTarget.src = v.thumbnail;
+                    }
+                  }}
                 />
                 {v.duration && (
                   <span className="absolute bottom-1 right-1 bg-black/80 text-white text-[10px] font-medium px-1 py-0.5 rounded">
