@@ -3,25 +3,8 @@ import { Link } from "react-router-dom";
 import { prettifyNumber } from "./../utils/number";
 import { formatDuration } from "../utils/formatDuration";
 import { relativeTime } from "../utils/relativeTime";
+import { avatarColor } from "../utils/avatarColor";
 import { toggleWatchLater, isInWatchLater } from "../utils/localStore";
-
-const avatarColor = (name = "") => {
-  const colors = [
-    "#1e40af",
-    "#7e22ce",
-    "#065f46",
-    "#9f1239",
-    "#92400e",
-    "#0e7490",
-    "#3f6212",
-    "#4c1d95",
-  ];
-  let hash = 0;
-  for (let i = 0; i < name.length; i++) {
-    hash = name.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  return colors[Math.abs(hash) % colors.length];
-};
 
 const VideoCard = ({ info, channelThumb }) => {
   const { snippet, statistics, contentDetails } = info;
@@ -129,4 +112,4 @@ const VideoCard = ({ info, channelThumb }) => {
   );
 };
 
-export default VideoCard;
+export default React.memo(VideoCard);

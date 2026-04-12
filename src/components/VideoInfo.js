@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams, Link } from "react-router-dom";
-import { publishedAt as publishedAtFunc } from "../utils/publisedAt";
+import { relativeTime } from "../utils/relativeTime";
 import { VIDEO_INFO_URL, CHANNEL_INFO_URL } from "../utils/constants";
 import { prettifyNumber } from "./../utils/number";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
@@ -194,7 +194,7 @@ const VideoInfo = () => {
             {prettifyNumber(videoInfo?.items?.[0]?.statistics?.viewCount)} views
           </span>
           <span className="text-[#f1f1f1] text-sm font-semibold">
-            {publishedAtFunc(videoInfo?.items?.[0]?.snippet?.publishedAt)}
+            {relativeTime(videoInfo?.items?.[0]?.snippet?.publishedAt)}
           </span>
         </div>
         <p className="text-[#f1f1f1] text-sm whitespace-pre-line leading-relaxed">

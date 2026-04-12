@@ -18,3 +18,7 @@
 [debug] [2026-04-06T09:45:04.747Z] > authorizing via signed-in user (aryan@rumik.ai)
 [debug] [2026-04-06T09:45:04.747Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
 [debug] [2026-04-06T09:45:04.747Z] > authorizing via signed-in user (aryan@rumik.ai)
+[debug] [2026-04-12T18:02:08.985Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-04-12T18:02:08.987Z] > authorizing via signed-in user (aryan@rumik.ai)
+[debug] [2026-04-12T18:02:08.987Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-04-12T18:02:08.987Z] > authorizing via signed-in user (aryan@rumik.ai)

@@ -61,4 +61,4 @@ const VideoSuggestionsCard = ({ info, isPlaying = false }) => {
   );
 };
 
-export default VideoSuggestionsCard;
+export default React.memo(VideoSuggestionsCard);

@@ -17,8 +17,7 @@ const WatchPage = () => {
 
   useEffect(() => {
     dispatch(closeMenu());
-    // eslint-disable-next-line
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (!videoId) return;

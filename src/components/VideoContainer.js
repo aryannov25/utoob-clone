@@ -43,10 +43,7 @@ const VideoContainer = () => {
       const url = pageToken ? `${BASE_URL}&pageToken=${pageToken}` : BASE_URL;
       const res = await fetch(url);
       const json = await res.json();
-      if (!json.items) {
-        console.error("YouTube API error:", json.error?.message);
-        return;
-      }
+      if (!json.items) return;
 
       setNextPageToken(json.nextPageToken || null);
       const thumbs = await fetchChannelThumbs(json.items);
@@ -59,7 +56,8 @@ const VideoContainer = () => {
 
   useEffect(() => {
     fetchPage(null);
-  }, []); // eslint-disable-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!videos.length) return <Shimmer />;
 

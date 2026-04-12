@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { prettifyNumber } from "../utils/number";
+import { avatarColor } from "../utils/avatarColor";
 
 // ---------------------------------------------------------------------------
 // SVG icon primitives — kept inline to avoid extra asset dependencies
@@ -75,27 +76,6 @@ const ChevronDownIcon = () => (
     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
   </svg>
 );
-
-// ---------------------------------------------------------------------------
-// Deterministic avatar background colour (matches VideoCard convention)
-// ---------------------------------------------------------------------------
-const avatarColor = (name = "") => {
-  const colors = [
-    "#1e40af",
-    "#7e22ce",
-    "#065f46",
-    "#9f1239",
-    "#92400e",
-    "#0e7490",
-    "#3f6212",
-    "#4c1d95",
-  ];
-  let hash = 0;
-  for (let i = 0; i < name.length; i++) {
-    hash = name.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  return colors[Math.abs(hash) % colors.length];
-};
 
 // ---------------------------------------------------------------------------
 // Decode HTML entities (API returns &amp; etc.)
@@ -224,10 +204,9 @@ const CommentsDrawer = ({ videoId, onClose }) => {
                         {new Date(c?.publishedAt).toLocaleDateString()}
                       </span>
                     </div>
-                    <p
-                      className="text-[#f1f1f1] text-sm leading-relaxed break-words [&_a]:text-[#3ea6ff] [&_a]:underline"
-                      dangerouslySetInnerHTML={{ __html: c?.textDisplay }}
-                    />
+                    <p className="text-[#f1f1f1] text-sm leading-relaxed break-words whitespace-pre-line">
+                      {c?.textOriginal || c?.textDisplay}
+                    </p>
                     <div className="flex items-center gap-1 text-[#aaaaaa] text-xs mt-1">
                       <svg
                         className="w-3.5 h-3.5"

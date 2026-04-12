@@ -1,5 +1,5 @@
 import React from "react";
-import { publishedAt as publishedAtFunc } from "../utils/publisedAt";
+import { relativeTime } from "../utils/relativeTime";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
 import { BiDownArrow, BiUpArrow } from "react-icons/bi";
 
@@ -8,9 +8,11 @@ const Comment = ({ item, repliesQty, setVisibleSection, visibleSection }) => {
     authorProfileImageUrl,
     authorDisplayName,
     publishedAt,
+    textOriginal,
     textDisplay,
     likeCount,
   } = item.snippet?.topLevelComment?.snippet;
+  const text = textOriginal || textDisplay || "";
 
   return (
     <div className="flex gap-3">
@@ -28,15 +30,13 @@ const Comment = ({ item, repliesQty, setVisibleSection, visibleSection }) => {
             {authorDisplayName}
           </span>
           <span className="text-[#aaaaaa] text-xs">
-            {publishedAtFunc(publishedAt)}
+            {relativeTime(publishedAt)}
           </span>
         </div>
 
-        {/* Comment text — textDisplay contains HTML entities and <br> tags */}
-        <p
-          className="text-[#f1f1f1] text-sm leading-relaxed"
-          dangerouslySetInnerHTML={{ __html: textDisplay }}
-        />
+        <p className="text-[#f1f1f1] text-sm leading-relaxed whitespace-pre-line break-words">
+          {text}
+        </p>
 
         {/* Like / dislike / reply row */}
         <div className="flex items-center gap-4 mt-1">
@@ -81,4 +81,4 @@ const Comment = ({ item, repliesQty, setVisibleSection, visibleSection }) => {
   );
 };
 
-export default Comment;
+export default React.memo(Comment);

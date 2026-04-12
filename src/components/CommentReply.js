@@ -1,10 +1,16 @@
 import React from "react";
-import { publishedAt as publishedAtFunc } from "../utils/publisedAt";
+import { relativeTime } from "../utils/relativeTime";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
 
 const CommentReply = ({ commentStructure }) => {
-  const { textDisplay, authorProfileImageUrl, authorDisplayName, publishedAt } =
-    commentStructure?.snippet;
+  const {
+    textOriginal,
+    textDisplay,
+    authorProfileImageUrl,
+    authorDisplayName,
+    publishedAt,
+  } = commentStructure?.snippet || {};
+  const text = textOriginal || textDisplay || "";
 
   return (
     <div className="flex gap-3 ml-12 mt-4">
@@ -22,15 +28,13 @@ const CommentReply = ({ commentStructure }) => {
             {authorDisplayName}
           </span>
           <span className="text-[#aaaaaa] text-xs">
-            {publishedAtFunc(publishedAt)}
+            {relativeTime(publishedAt)}
           </span>
         </div>
 
-        {/* Reply text */}
-        <p
-          className="text-[#f1f1f1] text-sm leading-relaxed"
-          dangerouslySetInnerHTML={{ __html: textDisplay }}
-        />
+        <p className="text-[#f1f1f1] text-sm leading-relaxed whitespace-pre-line break-words">
+          {text}
+        </p>
 
         {/* Action row */}
         <div className="flex items-center gap-4 mt-1">
@@ -49,4 +53,4 @@ const CommentReply = ({ commentStructure }) => {
   );
 };
 
-export default CommentReply;
+export default React.memo(CommentReply);

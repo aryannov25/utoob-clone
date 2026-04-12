@@ -11,6 +11,7 @@ import ShortsPage from "./components/ShortsPage";
 import CategoryPage from "./components/CategoryPage";
 import HistoryPage from "./components/HistoryPage";
 import WatchLaterPage from "./components/WatchLaterPage";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 const appRouter = createBrowserRouter([
   {
@@ -30,9 +31,11 @@ const appRouter = createBrowserRouter([
 ]);
 function App() {
   return (
-    <Provider store={store}>
-      <RouterProvider router={appRouter}></RouterProvider>
-    </Provider>
+    <ErrorBoundary>
+      <Provider store={store}>
+        <RouterProvider router={appRouter} />
+      </Provider>
+    </ErrorBoundary>
   );
 }
 

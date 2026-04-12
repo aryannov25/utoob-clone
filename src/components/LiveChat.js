@@ -4,38 +4,48 @@ import ChatMessage from "./ChatMessage";
 const LiveChat = ({ liveChatId }) => {
   const [messages, setMessages] = useState([]);
   const [liveMessage, setLiveMessage] = useState("");
-  const [nextPageToken, setNextPageToken] = useState(null);
   const listRef = useRef(null);
-
-  const fetchMessages = async (pageToken) => {
-    const params = new URLSearchParams({
-      liveChatId,
-      part: "snippet,authorDetails",
-      maxResults: "200",
-    });
-    if (pageToken) params.set("pageToken", pageToken);
-
-    const res = await fetch(`/api/youtube/liveChat/messages?${params}`);
-    const json = await res.json();
-    if (!json.items)
-      return { items: [], pollingInterval: 10000, nextPageToken: null };
-    return {
-      items: json.items,
-      pollingInterval: json.pollingIntervalMillis || 5000,
-      nextPageToken: json.nextPageToken || null,
-    };
-  };
 
   useEffect(() => {
     if (!liveChatId) return;
+
     let timeoutId;
+    let cancelled = false;
+
+    const fetchMessages = async (pageToken) => {
+      const params = new URLSearchParams({
+        liveChatId,
+        part: "snippet,authorDetails",
+        maxResults: "200",
+      });
+      if (pageToken) params.set("pageToken", pageToken);
+
+      const res = await fetch(`/api/youtube/liveChat/messages?${params}`);
+      const json = await res.json();
+      if (!json.items) {
+        return { items: [], pollingInterval: 10000, nextPageToken: null };
+      }
+      return {
+        items: json.items,
+        pollingInterval: json.pollingIntervalMillis || 5000,
+        nextPageToken: json.nextPageToken || null,
+      };
+    };
 
     const poll = async (pageToken) => {
-      const {
-        items,
-        pollingInterval,
-        nextPageToken: next,
-      } = await fetchMessages(pageToken);
+      let result;
+      try {
+        result = await fetchMessages(pageToken);
+      } catch {
+        // network hiccup — back off and retry
+        if (!cancelled) {
+          timeoutId = setTimeout(() => poll(pageToken), 10000);
+        }
+        return;
+      }
+      if (cancelled) return;
+
+      const { items, pollingInterval, nextPageToken: next } = result;
       if (items.length > 0) {
         setMessages((prev) => {
           const newMsgs = items.map((item) => ({
@@ -44,17 +54,21 @@ const LiveChat = ({ liveChatId }) => {
             message: item.snippet?.displayMessage,
             profile: item.authorDetails?.profileImageUrl,
           }));
-          // Keep last 200
           return [...prev, ...newMsgs].slice(-200);
         });
-        setNextPageToken(next);
       }
-      timeoutId = setTimeout(() => poll(next), pollingInterval);
+      // Jitter to avoid thundering-herd polling
+      const jitter = Math.floor(Math.random() * 1000);
+      timeoutId = setTimeout(() => poll(next), pollingInterval + jitter);
     };
 
+    setMessages([]);
     poll(null);
-    return () => clearTimeout(timeoutId);
-    // eslint-disable-next-line
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timeoutId);
+    };
   }, [liveChatId]);
 
   // Auto-scroll to bottom on new messages
@@ -104,6 +118,7 @@ const LiveChat = ({ liveChatId }) => {
       >
         <input
           type="text"
+          aria-label="Send a message"
           className="flex-1 bg-[#121212] border border-[#303030] rounded-full px-4 py-2 text-[#f1f1f1] placeholder-[#aaaaaa] text-sm focus:outline-none focus:border-[#3ea6ff] transition-colors"
           value={liveMessage}
           onChange={(e) => setLiveMessage(e.target.value)}

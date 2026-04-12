@@ -7,28 +7,35 @@ const WatchPageVideos = () => {
   const videoId = searchParams.get("v");
   const [relatedVideoData, setRelatedVideoData] = useState([]);
 
-  const getRelatedVideos = async () => {
-    try {
-      const videoRes = await fetch(
-        `/api/youtube/videos?part=snippet&id=${videoId}`,
-      );
-      const videoData = await videoRes.json();
-      const title = videoData.items?.[0]?.snippet?.title;
-      if (!title) return;
-
-      const searchRes = await fetch(
-        `/api/youtube/search?part=snippet&maxResults=40&q=${encodeURIComponent(title)}&type=video`,
-      );
-      const searchData = await searchRes.json();
-      if (searchData.items) setRelatedVideoData(searchData.items);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   useEffect(() => {
+    if (!videoId) return;
+    let cancelled = false;
+
+    const getRelatedVideos = async () => {
+      try {
+        const videoRes = await fetch(
+          `/api/youtube/videos?part=snippet&id=${videoId}`,
+        );
+        const videoData = await videoRes.json();
+        const title = videoData.items?.[0]?.snippet?.title;
+        if (!title || cancelled) return;
+
+        const searchRes = await fetch(
+          `/api/youtube/search?part=snippet&maxResults=20&q=${encodeURIComponent(title)}&type=video`,
+        );
+        const searchData = await searchRes.json();
+        if (!cancelled && searchData.items) {
+          setRelatedVideoData(searchData.items);
+        }
+      } catch {
+        // swallow — related videos are non-critical
+      }
+    };
+
     getRelatedVideos();
-    // eslint-disable-next-line
+    return () => {
+      cancelled = true;
+    };
   }, [videoId]);
 
   if (!relatedVideoData?.length) {
