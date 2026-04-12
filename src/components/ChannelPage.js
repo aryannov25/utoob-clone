@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { prettifyNumber } from "../utils/number";
 import { bestVideoThumb, bestChannelThumb, videoThumbFromId } from "../utils/thumbnail";
+import { formatDuration } from "../utils/formatDuration";
 
 const ChannelPage = () => {
   const { channelId } = useParams();
   const [channel, setChannel] = useState(null);
   const [videos, setVideos] = useState([]);
+  const [durations, setDurations] = useState({});
   const [tab, setTab] = useState("videos");
   const [loading, setLoading] = useState(true);
 
@@ -14,6 +16,7 @@ const ChannelPage = () => {
     if (!channelId) return;
     setChannel(null);
     setVideos([]);
+    setDurations({});
     setLoading(true);
 
     const fetchAll = async () => {
@@ -27,9 +30,28 @@ const ChannelPage = () => {
       ]);
       const chJson = await chRes.json();
       const vJson = await vRes.json();
+      const vItems = vJson.items || [];
       setChannel(chJson.items?.[0] || null);
-      setVideos(vJson.items || []);
+      setVideos(vItems);
       setLoading(false);
+
+      // Enrich with contentDetails (duration) — the search endpoint doesn't
+      // return contentDetails, so a follow-up /videos call is required.
+      const ids = vItems.map((v) => v.id?.videoId).filter(Boolean);
+      if (ids.length === 0) return;
+      try {
+        const detailsRes = await fetch(
+          `/api/youtube/videos?part=contentDetails&id=${ids.join(",")}`,
+        );
+        const detailsJson = await detailsRes.json();
+        const map = {};
+        (detailsJson.items || []).forEach((it) => {
+          if (it.contentDetails?.duration) map[it.id] = it.contentDetails.duration;
+        });
+        setDurations(map);
+      } catch {
+        // non-critical
+      }
     };
 
     fetchAll();
@@ -142,6 +164,9 @@ const ChannelPage = () => {
                 {videos.map((video) => {
                   const { title, thumbnails, publishedAt } = video.snippet;
                   const vid = video.id?.videoId;
+                  const durationText = durations[vid]
+                    ? formatDuration(durations[vid])
+                    : null;
                   return (
                     <Link key={vid} to={`/watch?v=${vid}`}>
                       <div className="group flex flex-col cursor-pointer">
@@ -159,6 +184,11 @@ const ChannelPage = () => {
                               if (fb && e.currentTarget.src !== fb) e.currentTarget.src = fb;
                             }}
                           />
+                          {durationText && (
+                            <span className="absolute bottom-2 right-2 bg-black/80 backdrop-blur text-white text-[11px] font-semibold px-1.5 py-0.5 rounded-md">
+                              {durationText}
+                            </span>
+                          )}
                         </div>
                         <div className="flex gap-3 mt-3">
                           {avatar ? (

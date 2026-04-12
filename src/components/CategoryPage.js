@@ -31,12 +31,47 @@ const CategoryPage = () => {
     setChannelThumbs({});
     setLoading(true);
 
+    const enrichWithDetails = async (items) => {
+      const ids = items.map((v) => v.id).filter(Boolean);
+      if (ids.length === 0) return items;
+
+      // Chunk ids to stay under the 50-id per-request limit
+      const chunks = [];
+      for (let i = 0; i < ids.length; i += 50) chunks.push(ids.slice(i, i + 50));
+
+      const results = await Promise.allSettled(
+        chunks.map((chunk) =>
+          fetch(
+            `/api/youtube/videos?part=contentDetails,statistics&id=${chunk.join(",")}`,
+          ).then((r) => r.json()),
+        ),
+      );
+
+      const detailsMap = {};
+      results.forEach((r) => {
+        if (r.status === "fulfilled" && r.value?.items) {
+          r.value.items.forEach((it) => {
+            detailsMap[it.id] = {
+              contentDetails: it.contentDetails,
+              statistics: it.statistics,
+            };
+          });
+        }
+      });
+
+      return items.map((v) => ({
+        ...v,
+        contentDetails: detailsMap[v.id]?.contentDetails || v.contentDetails,
+        statistics: detailsMap[v.id]?.statistics || v.statistics,
+      }));
+    };
+
     const fetchVideos = async () => {
       let items = [];
 
       if (config.chart) {
         const params = new URLSearchParams({
-          part: "snippet,statistics",
+          part: "snippet,contentDetails,statistics",
           chart: "mostPopular",
           maxResults: "50",
           regionCode: "IN",
@@ -57,12 +92,12 @@ const CategoryPage = () => {
         });
         const res = await fetch(`/api/youtube/search?${params}`);
         const json = await res.json();
-        // Normalise search results to video shape
         items = (json.items || []).map((i) => ({
           id: i.id?.videoId,
           snippet: i.snippet,
           statistics: {},
         }));
+        items = await enrichWithDetails(items);
       } else if (config.search) {
         const params = new URLSearchParams({
           part: "snippet",
@@ -78,6 +113,7 @@ const CategoryPage = () => {
           snippet: i.snippet,
           statistics: {},
         }));
+        items = await enrichWithDetails(items);
       }
 
       setVideos(items);
